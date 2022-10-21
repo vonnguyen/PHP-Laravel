@@ -1,0 +1,395 @@
+.collection-header{
+    display: flex;
+    justify-content: space-between;
+    background-color: #f2f2f2;
+    border: 0.5px solid #ccc;
+    padding: 10px 0;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.collection-view{
+    padding-left: 15px ;
+}
+.collection-view i{
+    color: #fff;
+    background-color: #571F7C;
+    padding: 10px;
+}
+.collection-view i:hover{
+    background-color: black;
+    cursor: pointer;
+}
+.collection-items-per {
+    font-family: var(--font);
+    display: flex;
+    padding: 10px 20px;
+    background-color: #fff;
+    align-items: center;
+    gap: 0 15px;
+}
+.collection-items-per p,
+.collection-items-per select{
+    align-items: center;
+    margin: 0;
+}
+.collection-items-per select{
+    color: #fff;
+    background-color: #571F7C;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+.collection-items-per option{
+    background-color: #fff;
+    color: #000;
+    left: 0;
+}
+
+.sortby {
+    font-family: var(--font);
+    display: flex;
+    padding: 10px 20px;
+    background-color: #fff;
+    align-items: center;
+    gap: 0 15px;
+}
+.sortby p,
+.sortby select{
+    align-items: center;
+    margin: 0;
+}
+.sortby select{
+    color: #fff;
+    background-color: #571F7C;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+.sortby option{
+    background-color: #fff;
+    color: #000;
+    left: 0;
+}
+
+.about-ctn-product {
+    margin-bottom: 70px;
+}
+.about-ctn-product .item .img-ctn3 {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .nav-product{
+    margin: 0 0 30px;
+}
+.nav-product ul{
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+}
+
+.nav-product li{
+    padding: 0 3px;
+    font-size: 15px;
+    
+}
+.nav-product li a{
+    background-color: #571F7C;
+    color: #fff;
+    padding: 5px;
+    min-width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center  ;
+    height: 100%;
+}
+.nav-product li a:hover
+{
+    background-color: #333;
+}
+.nav-product li i{
+    color: #fff;
+}
+
+.recent-product p {
+    border-bottom: 2px solid #571F7C;
+    margin: 0 0 30px; 
+    color: #000;
+    font-size: 20px;
+    font-family: var(--roboto); 
+    padding-bottom: 20px;
+}
+
+.list-tags h5{
+    margin: 20px 0;
+    color: #333;
+    font-family: var(--font);
+}
+
+.btn-product {
+    text-align: center;
+    margin-bottom: 50px;
+    font-family: var(--font);
+}
+.btn-product span {
+    background-color: #571F7C;
+    border: 1px solid #333;
+    display: inline-block;
+    cursor: pointer;
+    color: #fff;
+    padding: 10px;
+    align-items: center;
+    min-width: 50px;
+    text-align: center;
+}
+  
+  .item-product span:hover {
+    opacity: 0.8;
+    background-color: #333;
+    color: #fff;
+  }
+.check-product{
+    display: flex;
+    align-items: center;
+    gap:0 6px;
+    margin-bottom: 20px;
+}
+.check-box{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border: 2px solid palevioletred;
+    border-radius: 50%;
+}
+
+.btn-availibility{
+    padding: 10px 0;
+    margin-bottom: 30px;
+}
+.btn-availibility-clearall{
+    padding: 10px 0;
+    margin-bottom: 50px;
+}
+.btn-shop-now button:hover,
+.btn-availibility button:hover,
+.btn-availibility-clearall button:hover {
+    background-color: #000;
+}
+.btn-availibility-clearall a button,
+.btn-availibility-clearall a{
+    display: block;
+    width: 80%;
+}
+.btn-availibility button{
+    background-color: #571F7C;
+    color: #fff;
+    padding: 10px 18px;
+}
+.btn-availibility-clearall button {
+    background-color: #571F7C;
+    color: #fff;
+    padding: 20px 25px;
+}
+.cost-product input{
+    padding: 10px;
+    width: 100%;
+}
+
+.btn-shop-now button {
+    margin-top: 20px;
+    background-color: #571F7C;
+    color: #fff;
+    padding: 18px 25px;
+}
+/*  CSS- chi tiet SP -----------------------------------------------*/
+
+.title-heading{
+    font-size: 36px;
+    font-family: var(--roboto);
+    margin: 0 0 50px;
+}
+.ctn__product-left{
+    height: auto;
+}
+.ctn__product-left .title-ctn{
+    font-size: 18px;
+    font-family: var(--roboto);
+}
+.price-shoe span{
+    color: #571F7C;
+    font-weight: 800;
+    font-size: 16px;
+    font-family: var(--font);
+}
+
+.container-info{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap:30px 0;
+}
+.info-detail{
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+}
+.info-detail .info-title{
+    font-size: 18px;
+}
+.info-detail .money{
+    font-size: 18px;
+    font-weight: 800;
+    color: #571F7C;
+    font-family: var(--roboto);
+}
+
+.info-border__material,
+.info-detail .info-border{
+    display: flex;
+    gap: 0 15px ;
+}
+
+.info-detail .info-border span{
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 5px;
+    align-items: center;
+    width: 30px;
+    min-width: 40px;
+    max-width: 30px;
+    text-align: center;
+}
+
+.info-border__material span{
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 0 15px;
+    align-items: center;
+    /* width: 30px; */
+    min-width: 30px;
+    /* max-width: 30px; */
+    text-align: center;
+}
+.info-border__material span:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.info-border.quantity {
+    display: -webkit-inline-box;
+}
+.info-border.quantity span{
+    background-color: #571F7C;
+    color: #fff;
+    cursor: pointer;
+}
+.info-border.quantity span:nth-child(2){
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+.btn-detail{
+    display: flex;
+    gap: 15px;
+}
+.btn-detail button{
+    background-color: #571F7C;
+    padding: 15px 30px;
+    color: #fff;
+    transition: all 1s linear;
+}
+
+.btn-heading-title button:hover,
+.btn-detail button:hover{
+    background-color: #000;
+}
+.btn-detail span{
+    color: #fff;
+}
+
+.btn-heading-title button:nth-child(1){
+    background-color: #000;
+    padding: 15px 40px;
+    font-family: var(--font);
+    color: #fff;
+    margin-top: 30px;
+    transition: all 1s linear;
+}
+.btn-heading-title button{
+    background-color: #571F7C;
+    padding: 15px 40px;
+    font-family: var(--font);
+    color: #fff;
+    margin-top: 30px;
+    transition: all 1s linear;
+}
+
+.container-about{
+    border: 1px solid #ccc;
+}
+
+.container-pd30{
+    padding: 30px;
+}
+
+.contain-text{
+    font-family: var(--font);
+    margin: 0 0 15px;
+    line-height: 1.8;
+}
+.title-contain{
+    font-family: var(--font);
+    margin: 0 0 15px;
+    font-weight: bold;
+}
+
+.dc-sc-title{
+    font-size: 30px;
+    font-family: var(--font);
+    margin: 60px 0;
+    text-align: center;
+}
+/* -----------------------------------Gio Hang------------------------------ */
+
+.ctn-boder{
+    border: 1px solid #ccc;
+    margin-bottom: 50px;
+}
+
+.ctn-boder table{
+    width: 100%;
+}
+
+.ctn-boder table th{
+    padding: 15px;
+    font-weight: bold;
+    text-align: center;
+    background-color:#e4e4e4;
+}
+
+.ctn-boder table tbody{
+    text-align: center;
+}
+
+.product-shoes img{
+    width: 10%;
+    min-width: 130px;
+    max-width: 130px;
+    display: inline-block;
+}
+
+.product-name a {
+    font-family: var(--font);
+    font-weight: bold;
+}
+
+.product-wishlist-cart .dt-sc-btn{
+    background-color: #571F7C;
+    color: #fff;
+    font-family: var(--font);
+    padding: 18px 32px;
+    text-transform: uppercase;
+}
+.product-wishlist-cart .dt-sc-btn:hover {
+    background-color: #000;
+    transition: all 1s linear;
+    cursor: pointer;
+}

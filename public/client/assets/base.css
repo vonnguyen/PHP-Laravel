@@ -1,0 +1,78 @@
+:root{
+    --primaryColor:#000;
+    --font : 'Poppins', sans-serif;
+    --roboto: 'Roboto', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  outline: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+li{
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+a:hover{
+  color: #571F7C;
+}
+
+a i:hover {
+    color: #571F7C;
+}
+button{
+  border: none;
+}
+span {
+  font-family: var(--font);
+}
