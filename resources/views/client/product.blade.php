@@ -8,7 +8,7 @@
 
     <div class="slide-header ">
         <div class="contain-slide">
-            <p>COLLECTION</p>
+            <p>PRODUCTS</p>
             <ul>
                 <li><a href="{{route('home')}}">HOME</a> </li>
                 <li>/</li>

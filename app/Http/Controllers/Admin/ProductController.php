@@ -26,10 +26,14 @@ class ProductController extends Controller
         $product->save();
         return redirect()->route('admin.product.list')->with('msg','Them danh muc thanh cong');
     }
-    function list(){
+    function list(Request $request){
         $listCate = Category::all();
 
-        $listProduct = Product::all();
+        $listProduct = Product::orderBy('created_at', 'desc');
+        if($request->cate){
+            $listProduct = $listProduct->where('cate',$request->cate);
+        }
+        $listProduct = $listProduct->paginate(6)->withQueryString();
         return view('admin.product.list',compact("listProduct","listCate"));  // truyen du lieu vao danh muc
     }
     // Hien thi add
@@ -46,7 +50,7 @@ class ProductController extends Controller
     // xoa
     function delete($id){
         $deleted =Product::where('id', $id)->delete();
-        $listProduct =Product::all();
+        $listProduct = Product::paginate(6);
         return redirect()->route('admin.product.list',compact("listProduct"));  // truyen du lieu vao danh muc
     }
     // update

@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shoe Zone</title>
-    <link rel="icon" type="image/x-icon" href="{{asset('client')}}/assets/img/logo/logo.png">
+    <link rel="icon" type="image/x-icon" href="{{ asset('client') }}/assets/img/logo/logo.png">
     <!-- link Icon -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,12 +28,15 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{asset('client')}}/assets/base.css">
-    <link rel="stylesheet" href="{{asset('client')}}/assets/style.css">
-    <link rel="stylesheet" href="{{asset('client')}}/assets/cart.css">
-    <link rel="stylesheet" href="{{asset('client')}}/assets/reponsive.css">
+    <link rel="stylesheet" href="{{ asset('client') }}/assets/base.css">
+    <link rel="stylesheet" href="{{ asset('client') }}/assets/style.css">
+    <link rel="stylesheet" href="{{ asset('client') }}/assets/cart.css">
+    <link rel="stylesheet" href="{{ asset('client') }}/assets/reponsive.css">
     @yield('css')
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 </head>
 
 <body>
@@ -42,31 +45,38 @@
         <div class="header">
 
             <div class="img-header">
-                <a href="{{route('home')}}"><img src="{{asset('client')}}/assets/img/img-header/shoe-logo-new_300x300.webp" alt=""></a>
+                <a href="{{ route('home') }}"><img
+                        src="{{ asset('client') }}/assets/img/img-header/shoe-logo-new_300x300.webp" alt=""></a>
             </div>
 
             <div class="menu-header">
                 <ul class="subnav-menu">
-                    <li><a href="{{route('home')}}">Home</a></li>
-                    <li class="collection-show"><a href="{{route('collection')}}">Collection <i
+                    <li><a href="{{ route('home') }}">Home</a></li>
+                    <li class="collection-show"><a href="{{ route('collection') }}">Collection <i
                                 class="fa-solid fa-chevron-down"></i></a>
 
 
                         <div class="collection-show-list">
                             <div class="row">
-                                <div class="col col-3 collection-item">
-                                    <img src="{{asset('client')}}/assets/img/img-header/shoe21.webp" alt="">
-                                    <a href="{{route('chitietsp')}}">
-                                        <button class="collection-btn">
-                                            <span class="name-shoes">Ballet shoe</span>
-                                            <span class="cost-shoes">
-                                                <span>$</span>200</span>
-                                        </button>
-                                    </a>
-                                </div>
-                                <div class=" col col-3 collection-item">
+                                @if (!empty($product))
+                                    @foreach ($products as $product)
+                                        <div class="col col-3 collection-item">
+                                            <img src="{{ $product->image }}" alt="">
+                                            <a href="{{ route('product', $product->id) }}">
+                                                <button class="collection-btn">
+                                                    <span class="name-shoes">{{ $product->name }}</span>
+                                                    <span class="cost-shoes">
+                                                        <span>$</span>{{ number_format($product->gia, 2) }}</span>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                @endif
+
+
+                                {{-- <div class=" col col-3 collection-item">
                                     <img src="{{asset('client')}}/assets/img/img-header/shoe11.webp" alt="">
-                                    <a href="{{route('chitietsp')}}">
+                                    <a href="{{route('product',$product->id)}}">
                                         <button class="collection-btn">
                                             <span class="name-shoes">Ballet shoe</span>
                                             <span class="cost-shoes">
@@ -77,7 +87,7 @@
                                 <div class=" col col-3 collection-item">
                                     <img src="{{asset('client')}}/assets/img/img-header/shoe22_48464579-a7fe-40ba-ad66-8c6aa7ef2bb1.webp"
                                         alt="">
-                                        <a href="{{route('chitietsp')}}">
+                                        <a href="{{route('product',$product->id)}}">
                                             <button class="collection-btn">
                                                 <span class="name-shoes">Ballet shoe</span>
                                                 <span class="cost-shoes">
@@ -88,28 +98,28 @@
                                 <div class=" col col-3 collection-item">
                                     <img src="{{asset('client')}}/assets/img/img-header/shoe26_de67b47c-8d95-481f-aa85-268cdc309e4e.webp"
                                         alt="">
-                                        <a href="{{route('chitietsp')}}">
+                                        <a href="{{route('product',$product->id)}}">
                                             <button class="collection-btn">
                                                 <span class="name-shoes">Ballet shoe</span>
                                                 <span class="cost-shoes">
                                                     <span>$</span>620</span>
                                             </button>
                                         </a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
                     </li>
-                    <li><a href="{{route('shoes')}}">Shoes</a></li>
-                    <li><a href="{{route('boots')}}">Boots</a></li>
-                    <li><a href="{{route('boots')}}">Climbing</a></li>
+                    <li><a href="{{ route('shoes') }}">Shoes</a></li>
+                    <li><a href="{{ route('boots') }}">Boots</a></li>
+                    <li><a href="{{ route('boots') }}">Climbing</a></li>
                     <li class="page-show ralative">
-                        <a href="{{route('blog')}}">Pages <i class="fa-solid fa-chevron-down"></i></a>
+                        <a href="{{ route('blog') }}">Pages <i class="fa-solid fa-chevron-down"></i></a>
                         <ul class="page-show-list p-2 absolute top-full">
-                            <li><a href="{{route('about')}}">About us</a></li>
-                            <li><a href="{{route('contact')}}">Contact us</a></li>
-                            <li><a href="{{route('blog')}}">Blog</a></li>
-                            <li><a href="{{route('whish')}}">Wishlist</a></li>
+                            <li><a href="{{ route('about') }}">About us</a></li>
+                            <li><a href="{{ route('contact') }}">Contact us</a></li>
+                            <li><a href="{{ route('blog') }}">Blog</a></li>
+                            <li><a href="{{ route('whish') }}">Wishlist</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -120,43 +130,45 @@
                 <span class="text-menu"> Menu</span>
             </div>
             <!-- end -->
+            {{-- Tìm kiếm sản phẩm --}}
             <div class="icon-header">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+                <form action="{{ route('shoes') }}" method="GET" class="d-flex" role="search">
+                    @csrf
+                    <input name="keyword" class="form-control me-2" type="search" placeholder="Search"
+                        aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit"> <i
+                            class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
-                {{-- <span class="icon-search text-xl  ">
-                    <input type="text">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </span> --}}
+                {{-- End Tìm kiếm sản phẩm --}}
                 <span class="icon-user text-2xl relative  ">
                     <span class="info-user">
                         <i class="fa-solid fa-user"></i>
                     </span>
                     <ul class="w-[200px] bg-white z-[10] absolute p-3 right-0 rounded-lg shadow-lg model-user">
-                        @guest  
-                        @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Đăng nhập</a>
-                        </li>
-                    @endif
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">Đăng nhập</a>
+                                </li>
+                            @endif
 
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Đăng kí</a>
-                        </li>
-                    @endif
-
-
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">Đăng kí</a>
+                                </li>
+                            @endif
                         @else
-                       
-                        @if (Auth()->user()->group_id == 1)
-                            
-                        <li><a href="{{route('admin.trangchu')}}">Admin</a></li>
-                        @endif
-                        <li>   
-                            <a class="" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
+                            @if (Auth()->user()->group_id == 1)
+                            @endif
+                            <li class="fs-5">
+                                <span><a href="{{ route('profile') }} ">Hi! {{ Auth()->user()->name }}</a></span>
+                            <li class="fs-5">
+                                <a href="{{ route('order') }}">
+                                    Đơn hàng
+                                </a>
+                            </li>
+                            <a class="fs-5" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
@@ -164,30 +176,32 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
-                    </li>
-                    @endguest
+
+                            </li>
+
+                        @endguest
                     </ul>
 
                 </span>
                 <span class="icon-cart">
-                 @php
-						$number = 0;
-						if(session('cart')){
-							foreach(session('cart') as $item){
-								$number += (int)$item['number'];
-							}
-						}
-                @endphp
+                    @php
+                        $number = 0;
+                        if (session('cart')) {
+                            foreach (session('cart') as $item) {
+                                $number += (int) $item['number'];
+                            }
+                        }
+                    @endphp
                     <span class="icon-number w-[25px]  h-[25px] p-2 flex justify-center items-center">
-                        {{$number}}
+                        {{ $number }}
                     </span>
                     <i class="text-2xl fa-solid fa-briefcase"></i>
                 </span>
             </div>
 
         </div>
-    @yield('content')
-      
+        @yield('content')
+
         <!-- Footer -->
         <div class="footer">
             <div class="footer-about">
@@ -197,13 +211,14 @@
                         <div class="col-4">
                             <div class="item">
 
-                                <img src="{{asset('client')}}/assets/img/footer/logo.webp" alt="">
+                                <img src="{{ asset('client') }}/assets/img/footer/logo.webp" alt="">
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="item">
 
-                                <input type="text" id="search" class="form-control" placeholder="Your email address">
+                                <input type="text" id="search" class="form-control"
+                                    placeholder="Your email address">
                                 <button><i class="fa-solid fa-chevron-right"></i>
                                 </button>
                             </div>
@@ -335,7 +350,8 @@
 
                 <div class="site-footer__bottom">
                     <div class="end-footer">
-                        <p><i class="fa-regular fa-copyright"></i>2022 Shoes <a href="">Design Von Nguyen</a></p>
+                        <p><i class="fa-regular fa-copyright"></i>2022 Shoes <a href="">Design Von Nguyen</a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -355,49 +371,54 @@
 
                 <div class="container-cart">
                     <!-- Them san pham vao -->
-                  @php
-                      $sum = 0;
-                  @endphp
+                    @php
+                        $sum = 0;
+                    @endphp
                     @if (session('cart'))
                         @foreach (session('cart') as $item)
-                        @php
-                        $sum += $item->total;
-                        @endphp
-                        <div class="product-cart">
-                            <span data-id="{{$item->id}}" data-url="{{route('cart.delete')}}" class="close-item">x</span>
-                            <div class="item-img-cart">
-                                <img src="{{$item->image}}" alt="">
-                            </div>
-                            <div class="detais-cart">
-                                <h6>{{$item->name}}</h6>
-                                <p>7 / yellow / leather</p>
-                                <span>{{$item->gia}}</span>
-                                <div class="dt-sc-cart">
-                                    <span data-url="{{route('cart.add')}}" data-id="{{$item->id}}" class="up-down decre">-</span>
-                                    <input type="text" value="{{$item->number}}">
-                                    <span  data-url="{{route('cart.add')}}" data-id="{{$item->id}}" class="up-down incre">+</span>
+                            @php
+                                $sum += $item->total;
+                            @endphp
+                            <div class="product-cart">
+                                <span data-id="{{ $item->id }}" data-url="{{ route('cart.delete') }}"
+                                    class="close-item">x</span>
+                                <div class="item-img-cart">
+                                    <img src="{{ $item->image }}" alt="">
                                 </div>
+                                <div class="detais-cart">
+                                    <h6>{{ $item->name }}</h6>
+                                    <p>7 / yellow / leather</p>
+                                    <span>{{ $item->gia }}</span>
+                                    <div class="dt-sc-cart">
+                                        <span data-url="{{ route('cart.add') }}" data-id="{{ $item->id }}"
+                                            class="up-down decre">-</span>
+                                        <input type="text" value="{{ $item->number }}">
+                                        <span data-url="{{ route('cart.add') }}" data-id="{{ $item->id }}"
+                                            class="up-down incre">+</span>
+                                    </div>
+                                </div>
+
                             </div>
-                    
-                        </div>
                         @endforeach
-                        
+
                     @endif
                 </div>
 
                 <div class="bottom-cart">
                     <div class="sub-total">
                         <div class="p-title">Total</div>
-                        <span class="money">$<span class="sumMoney">{{$sum}}</span></span>
+                        <span class="money">$<span class="sumMoney">{{ $sum }}</span></span>
                     </div>
                     <div class="p-main">
                         Shipping, taxes, and discounts will be calculated at checkout.
                     </div>
                     <div class="btn-cart">
-                        <button>PRODUCT TO CHECK OUT</button>
+                        <a class="block w-full" href="{{ route('infomation') }}">
+                            <button>PRODUCT TO CHECK OUT</button>
+                        </a>
                     </div>
                     <div class="btn-cart">
-                        <a class="block w-full" href="{{route('whish')}}">
+                        <a class="block w-full" href="{{ route('whish') }}">
                             <button>VIEW CART</button>
                         </a>
                     </div>
@@ -409,19 +430,29 @@
         <!------------------------------------ End-Cart------------------------------------------------------------->
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
         <script>
             AOS.init();
         </script>
-        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.1/toastr.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-        <script src="{{asset('client/js')}}/main.js"></script>
-        <script src="{{asset('client/js')}}/cart.js"></script>
-        {{-- <script src="./responesive.js"></script> --}}
 
+        <!--jQuery-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!--Plugin JavaScript file-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+            integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.1/toastr.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+        <script src="{{ asset('client/js') }}/main.js"></script>
+        <script src="{{ asset('client/js') }}/cart.js"></script>
+        {{-- <script src="./responesive.js"></script> --}}
+        @yield('js')
 
 </body>
 

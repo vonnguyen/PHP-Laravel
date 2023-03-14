@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -27,7 +27,9 @@ class HomeController extends Controller
     {
         $newThreeProduct = Product::orderBy("created_at","desc")->limit(3)->get();
         $newSixProduct = Product::orderBy("created_at","desc")->limit(6)->get();
-        return view('home',compact('newThreeProduct','newSixProduct'));
+        $products = Product::limit(4)->get();
+
+        return view('home',compact('newThreeProduct','newSixProduct','products'));
 
     }
 

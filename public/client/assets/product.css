@@ -305,13 +305,12 @@
     color: #fff;
 }
 
-.btn-heading-title button:nth-child(1){
+.btn-heading-title button.active{
     background-color: #000;
     padding: 15px 40px;
     font-family: var(--font);
     color: #fff;
     margin-top: 30px;
-    transition: all 1s linear;
 }
 .btn-heading-title button{
     background-color: #571F7C;
@@ -319,7 +318,7 @@
     font-family: var(--font);
     color: #fff;
     margin-top: 30px;
-    transition: all 1s linear;
+    transition: all .2s linear;
 }
 
 .container-about{
@@ -328,8 +327,11 @@
 
 .container-pd30{
     padding: 30px;
+    display: none;
 }
-
+.container-pd30.active{
+    display: block;
+}
 .contain-text{
     font-family: var(--font);
     margin: 0 0 15px;

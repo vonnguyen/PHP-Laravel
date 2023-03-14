@@ -873,3 +873,7 @@ li a:hover {
   opacity: 0;
   transition: all 0.2s linear;
 }
+
+.container-fluid {
+  padding-top: 50px;
+}

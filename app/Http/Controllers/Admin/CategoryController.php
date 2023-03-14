@@ -21,7 +21,7 @@ class CategoryController extends Controller
         return redirect()->route('admin.category.listds')->with('msg','Them danh muc thanh cong');
     }
     function list(){
-        $listDanhMuc = Category::all();
+        $listDanhMuc = Category::paginate(6);
         return view('admin.category.listds',compact("listDanhMuc"));  // truyen du lieu vao danh muc
     }
     // Hien thi add
@@ -36,7 +36,7 @@ class CategoryController extends Controller
     // xoa
     function delete($id){
         $deleted = Category::where('id', $id)->delete();
-        $listDanhMuc = Category::all();
+        $listDanhMuc = Category::paginate(5);
         return view('admin.category.listds',compact("listDanhMuc"));  // truyen du lieu vao danh muc
     }
     // update

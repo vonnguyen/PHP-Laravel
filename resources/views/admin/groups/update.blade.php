@@ -1,6 +1,6 @@
-@extends('layouts/admin')
+@extends('layouts/index')
 
-@section('content')
+@section('main')
 <div class="">
     <div class=" frmtitle">
         <H1>THÊM NHÓM NGƯỜI DÙNG</H1>

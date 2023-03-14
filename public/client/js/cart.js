@@ -6,6 +6,64 @@ window.addEventListener('load',function(){
     let iconBag = document.querySelectorAll('.bag-ctn3');
     let modalCart = document.querySelector('.about-cart');
     let sumMoney = document.querySelector('.sumMoney')
+
+
+    //
+    const add_detail = document.querySelector('.detail_add');
+    const number_detail = document.querySelector('.number_detail');
+    add_detail?.addEventListener('click',function(){
+        let id = this.dataset.id;
+        let url = this.dataset.url;
+        let  numberProduct = number_detail.textContent;
+        let urlRemove = this.dataset.remove;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: url,
+            data: JSON.stringify({
+                id,
+                numberProduct
+            }),
+            dataType: 'json',
+            success: function (data) {
+    
+                console.log(data)
+                // let dataNew = JSON.parse(data)
+                let number = 0;
+                let sum = 0;
+
+                containerCart.innerHTML  = "";
+
+                data.forEach(item=>{
+                    number+=+item.number;
+                    renderItemCart(item,urlRemove,url);
+                    sum+=+item.total;
+                })
+                iconNumber.textContent = number;
+                sumMoney.textContent = sum;
+
+                // Hiển thị thông báo thêm sản phẩm
+                Swal.fire({
+                    position: 'center-center',
+                    icon: 'success',
+                    title: 'Thêm sản phẩm thành công !',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+            },
+            error: function (e) {
+                console.log('loi')
+               console.log(e)
+    
+            }
+        });
+    })
+    //
     icon.addEventListener('click',function(e){
         cart.classList.add('active');
     })

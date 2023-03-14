@@ -6,8 +6,7 @@ window.addEventListener('load',function(){
     console.log(modelUser);
 
     window.addEventListener('scroll',function(){
-        // console.log([window])
-        // console.log(window.scrollY);
+        
         if(window.scrollY >= headerHeight){
             header.classList.add('fixed');
         }else{
@@ -16,10 +15,14 @@ window.addEventListener('load',function(){
         }
     })
 
-    iconUser.addEventListener('click', function(){
+    iconUser.addEventListener('click', function(){    
         modelUser.classList.toggle('active');
     })
-
+    const modelUserJS = document.querySelector('.model-user');
+    document.addEventListener('click',function(e){
+        if(!e.target.matches('.info-user') && !e.target.matches('.info-user i') && !modelUser.contains(e.target) ){
+            modelUser.classList. remove('active');
+        }
+    })
     
-
 })

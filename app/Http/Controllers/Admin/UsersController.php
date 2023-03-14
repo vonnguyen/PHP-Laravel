@@ -28,7 +28,7 @@ class UsersController extends Controller
         return redirect()->route('admin.user.list')->with('msg','Thêm nhóm người dùng thành công');
     }
     function list(){
-        $users =User::all();
+        $users =User::paginate(4);;
         return view('admin.user.list',compact("users"));  // truyen du lieu vao danh muc
     }
     // Hien thi add
@@ -63,6 +63,9 @@ class UsersController extends Controller
         }
         if($request->diachi){
             $user->address= $request->diachi;
+        }
+        if($request->group){
+            $user->group_id= $request->group;
         }
         if($request->hasFile('img')){ 
 

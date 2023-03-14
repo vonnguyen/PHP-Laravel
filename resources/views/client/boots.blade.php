@@ -8,7 +8,7 @@
     <div class="pt-[110px]">
         <div class="slide-header">
             <div class="contain-slide">
-                <p>COLLECTION</p>
+                <p>BOOTS</p>
                 <ul>
                     <li><a href="{{route('home')}}">HOME</a> </li>
                     <li>/</li>
@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div class="name-shoe-ctn3">
-                                        <h1> <a href="#">{{$product->name}}</a> </h1>
+                                        <h1> <a href="{{route('product',$product->id)}}">{{$product->name}}</a> </h1>
                                         <div class="cost-ctn3">
                                             <h2><span>$</span>{{number_format($product->gia , 2)}}</h2>
                                         </div>

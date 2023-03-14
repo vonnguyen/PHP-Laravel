@@ -1,7 +1,7 @@
-@extends('layouts/admin')
+@extends('layouts.index')
 
 
-@section('content')
+@section('main')
 <div class="">
     <div class="frmtitle">
         <H1 class="m-0 py-2 fs-5">THÊM MỚI SẢN PHẨM</H1>
@@ -43,7 +43,7 @@
             </div>
             <div class="mb10">
                 Mô tả<br>
-                <textarea name="mota" value="{{$cate->mota}}" cols="30" rows="5"></textarea>
+                <textarea class="form-control" name="mota" value="{{$cate->mota}}" cols="30" rows="5"></textarea>
             </div>
             <div class="mb10">
                 <input type="submit" name="capnhat" value="CẬP NHẬT">

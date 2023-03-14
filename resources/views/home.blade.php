@@ -200,9 +200,9 @@
                                                     alt="">
                                             </div>
                                             <div class="icon-ctn3">
-                                                <a href=""><i class="fa-solid fa-message"></i></a>
+                                                <a href="{{route('product',$product->id)}}"><i class="fa-solid fa-message"></i></a>
                                                 <a href=""><i class="fa-brands fa-gratipay"></i></a>
-                                                <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <a href="{{route('product',$product->id)}}"><i class="fa-solid fa-magnifying-glass"></i></a>
                                             </div>
                                         </div>
                                         <div class="name-shoe-ctn3 h-2/5 mt-4">

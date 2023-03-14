@@ -1,7 +1,7 @@
-@extends('layouts/admin')
+@extends('layouts/index')
 
 
-@section('content')
+@section('main')
 <div class="">
     <div class="frmtitle">
         <H1 class="m-0 py-2 fs-5">THÊM MỚI NGƯỜI DÙNG</H1>

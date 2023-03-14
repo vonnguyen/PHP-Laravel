@@ -1,7 +1,7 @@
-@extends('layouts/admin')
+@extends('layouts/index')
 
 
-@section('content')
+@section('main')
 <div class="">
     <div class="frmtitle">
         <H1 class="m-0 py-2 fs-5">THÊM MỚI NGƯỜI DÙNG</H1>
@@ -32,18 +32,18 @@
             </div>
             <div class="mb10">
                 Số Điện Thoại<br>
-                <input class="form-control" type="text" name="sdt" value="{{$user['sdt']}}">
+                <input class="form-control" type="text" name="sdt" value="{{$user['phone']}}">
             </div>
             <div class="mb10">
                 Địa Chỉ<br>
-                <input class="form-control" type="text" name="diachi" value="{{$user['diachi']}}">
+                <input class="form-control" type="text" name="diachi" value="{{$user['address']}}">
             </div>
             <div class="mb10">
                 Group<br>
                 <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="group" id="">
                     @if ($groups->count() > 0)
                         @foreach ($groups as $group)
-                            <option value="{{$group['id']}}">{{$group['name']}}</option>
+                            <option {{$group['id']==$user->group_id ? 'selected':''}} value="{{$group['id']}}">{{$group['name']}}</option>
                         @endforeach
                         
                     @endif

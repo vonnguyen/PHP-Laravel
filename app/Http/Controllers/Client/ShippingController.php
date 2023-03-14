@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ShippingController extends Controller
 {
     //
     function index(){
-        return view('client.shipping');
+        $products = Product::limit(4)->get();
+        return view('client.shipping',compact('products'));
     }
 }

@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\BillController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CommentController as AdminCommentController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UsersController;
@@ -11,14 +15,17 @@ use App\Http\Controllers\Client\BootsController;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ChitietController;
 use App\Http\Controllers\Client\CollectionController;
+use App\Http\Controllers\Client\CommentController;
 use App\Http\Controllers\Client\ContactController;
 use App\Http\Controllers\Client\InfomationController;
 use App\Http\Controllers\Client\PaymentController;
 use App\Http\Controllers\Client\ProductController as ClientProductController;
+use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\ShippingController;
 use App\Http\Controllers\Client\WishController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,11 +39,15 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
-// Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('admin.index');
-    })->name('trangchu');
+// Admin
+
+Route::get('admin/login', [AdminAuthController::class, 'login'])->name('loginadmin');
+Route::post('/admin/login', [AdminAuthController::class, 'submitLogin'])->name('postloginadmin');
+
+
+Route::prefix('admin')->name('admin.')->middleware('auth', 'isAdmin')->group(function () {
+    Route::get('register', [AdminAuthController::class, 'register'])->name('register');
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
 
     Route::prefix('category')->name('category.')->group(function () {
         Route::post('/add', [CategoryController::class, 'add'])->name('add');
@@ -73,32 +84,56 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::post('/update/{id}', [GroupController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [GroupController::class, 'delete'])->name('delete');
     });
+
+    Route::prefix('bill')->name('bill.')->group(function () {
+        Route::get('/list', [BillController::class, 'list'])->name('list');
+    });
+    Route::prefix('comments')->name('comments.')->group(function () {
+        Route::get('/list', [AdminCommentController::class, 'list'])->name('list');
+        Route::get('/delete/{id}', [AdminCommentController::class, 'delete'])->name('delete');
+    });
 });
 
 //client
 
-    Route::get("/home", [HomeController::class, 'index'])->middleware('auth')->name('home');
-    Route::get("/product", [ClientProductController::class, 'index'])->middleware('auth')->name('shoes');
-    Route::get("/product/{id}", [ClientProductController::class, 'detail'])->middleware('auth')->name('product');
+Route::get("/vnpay_return", [PaymentController::class, 'vnPay_return'])->middleware('auth')->name('vnpay_return');
+Route::get("/payment/vnpay", [PaymentController::class, 'vnPay'])->middleware('auth')->name('vnpay');
 
-    Route::get("/boots", [BootsController::class, 'index'])->middleware('auth')->name('boots');
-    Route::get("/collection", [CollectionController::class, 'index'])->middleware('auth')->name('collection');
-    Route::get("/blog", [BlogController::class, 'index'])->middleware('auth')->name('blog');
-    Route::get("/whish", [WishController::class, 'index'])->middleware('auth')->name('whish');
-    Route::get("/contact", [ContactController::class, 'index'])->middleware('auth')->name('contact');
-    Route::get("/about", [AboutController::class, 'index'])->middleware('auth')->name('about');
-    
-    Route::get("/chitietsp", [ChitietController::class, 'index'])->middleware('auth')->name('chitietsp');
-    Route::get("/infomation", [InfomationController::class, 'index'])->middleware('auth')->name('infomation');
-    Route::get("/shipping", [ShippingController::class, 'index'])->middleware('auth')->name('shipping');
-    Route::get("/payment", [PaymentController::class, 'index'])->middleware('auth')->name('payment');
+Route::get("/home", [HomeController::class, 'index'])->name('home');
+Route::get("/product", [ClientProductController::class, 'index'])->middleware('auth')->name('shoes');
+Route::get("/chitietsp/{id}", [ClientProductController::class, 'detail'])->middleware('auth')->name('product');
+
+Route::get("/boots", [BootsController::class, 'index'])->middleware('auth')->name('boots');
+Route::get("/collection", [CollectionController::class, 'index'])->middleware('auth')->name('collection');
+Route::get("/blog", [BlogController::class, 'index'])->middleware('auth')->name('blog');
+Route::get("/whish", [WishController::class, 'index'])->middleware('auth')->name('whish');
+Route::get("/contact", [ContactController::class, 'index'])->middleware('auth')->name('contact');
+Route::get("/about", [AboutController::class, 'index'])->middleware('auth')->name('about');
+
+Route::get("/chitietsp", [ChitietController::class, 'index'])->middleware('auth')->name('chitietsp');
+Route::get("/infomation", [InfomationController::class, 'index'])->middleware('auth')->name('infomation');
+Route::get("/shipping", [ShippingController::class, 'index'])->middleware('auth')->name('shipping');
+Route::get("/payment/{id}", [PaymentController::class, 'index'])->middleware('auth')->name('payment');
+Route::get("/bill/{id}", [PaymentController::class, 'detail_bill'])->middleware('auth')->name('detail_bill');
+
+Route::get("/order", [PaymentController::class, 'order'])->middleware('auth')->name('order');
+Route::get('/delete/{id}', [PaymentController::class, 'delete'])->middleware('auth')->name('delete');
+
+Route::get("/profile", [ProfileController::class, 'index'])->middleware('auth')->name('profile');
+Route::post("/profile", [ProfileController::class, 'update'])->middleware('auth')->name('update');
 
 
-    Route::get("/", [HomeController::class, 'index'])->middleware('auth');
-    Auth::routes();
+Route::get("/", [HomeController::class, 'index'])->middleware('auth');
+Auth::routes();
 
 // cart
-    Route::prefix('cart')->name('cart.')->group(function () {
-        Route::post('/add', [CartController::class, 'add'])->middleware('auth')->name('add');
-        Route::post('/delete', [CartController::class, 'remove'])->middleware('auth')->name('delete');
+Route::prefix('cart')->name('cart.')->group(function () {
+    Route::post('/add', [CartController::class, 'add'])->middleware('auth')->name('add');
+    Route::post('/delete', [CartController::class, 'remove'])->middleware('auth')->name('delete');
+});
+Route::post("/saveinfo", [PaymentController::class, 'saveInfo'])->middleware('auth')->name('saveinfo');
+Route::post("/postPayment", [PaymentController::class, 'postPayment'])->middleware('auth')->name('postPayment');
+
+Route::prefix('comment')->name('comment.')->group(function () {
+    Route::post('/add', [CommentController::class, 'add'])->name('add');
 });

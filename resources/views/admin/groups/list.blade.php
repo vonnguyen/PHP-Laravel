@@ -1,9 +1,9 @@
-@extends('layouts/admin')
+@extends('layouts/index')
 
-@section('content')
+@section('main')
 <div class="">
     <div class=" frmtitle">
-        <h1>DANH SÁCH NHÓM NGƯỜI DÙNG</h1>
+        <h1 class="m-0 py-2 fs-5">DANH SÁCH NHÓM NGƯỜI DÙNG</h1>
     </div>
     <div class=" frmcontent">
         <div class=" mb10 frmdsloai">
@@ -14,22 +14,22 @@
                     <th class="text-center">TÊN NHÓM</th>
                     <th></th>
                 </tr>
-                <?php
-                if (!empty($groups)) {
-                        foreach ($groups as $item) {
-                        echo '<tr>
-                        <td><input type="checkbox" name="" id="" /></td>
-                        <td>' . $item['id'] . '</td>
-                        <td>' . $item['name'] . '</td>
-                        <td>
-                            <a href="'.route("admin.groups.showupdate", $item["id"]).'"><input type="button" value="Sửa" /></a>
-                            <a href="'.route("admin.groups.delete", $item["id"]).'"><input type="button" value="Xóa" /></a>
-                        </td>
-                    </tr>';
-                    }
-                }
-
-                ?>
+                
+                @if (!empty($groups))
+                    @foreach ($groups as $item)
+                        <tr>
+                            <td><input type="checkbox" name="" id="" /></td>
+                            <td>{{$item->id}}</td>
+                            <td>{{$item->name}}</td>
+                            <td>
+                                <a class="btn btn-warning" href="{{route("admin.groups.showupdate", $item["id"])}}">Sửa</a>
+                                <a class="btn btn-danger" href="{{route("admin.groups.delete", $item["id"])}}">Xóa</a>
+                            </td>
+                        </tr>
+                        
+                    @endforeach
+                    
+                @endif
 
 
             </table>

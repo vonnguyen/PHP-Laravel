@@ -9,8 +9,10 @@
     <!-- CSS only -->
     <!-- CSS only -->
     <title>Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/main_admin.css')}}">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
 </head>
@@ -18,7 +20,7 @@
 <body>
     <div class="boxcenter container">
         <div class="m-0 my-2 py-3 headeradmin align-items-center text-primary 
-                d-flex justify-content-between flex-col">
+                d-flex justify-content-between">
             <h1 class="fw-bold" > Admin </h1>
             <div class="">
          
@@ -50,6 +52,9 @@
                                                  document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
+                                <a  class="dropdown-item" href="{{ route('admin.register') }}">
+                                    Đăng ký NV
+                                </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
@@ -67,8 +72,8 @@
                 <li><a href="{{route('admin.product.list')}}">Hàng hóa</a></li>
                 <li><a href="{{route('admin.user.list')}}">Khách hàng</a></li>
                 <li><a href="{{route('admin.groups.list')}}">Nhóm người dùng</a></li>
-                <li><a href="index.php?act=dsbl">Bình luận</a></li>
-                <li><a href="index.php?act=bill">Đơn hàng</a></li>
+                <li><a href="{{route('admin.comments.list')}}">Bình luận</a></li>
+                <li><a href="{{route('admin.bill.list')}}">Đơn hàng</a></li>
             </ul>
         </div>
         <div class="content">
