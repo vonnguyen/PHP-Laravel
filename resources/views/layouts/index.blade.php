@@ -9,6 +9,7 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
+    <link rel="icon" type="image/x-icon" href="{{ asset('client') }}/assets/img/logo/logo.png">
     <!-- Favicons -->
     <link href="{{ asset('assets/img/logo/logo.png') }}" rel="icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">

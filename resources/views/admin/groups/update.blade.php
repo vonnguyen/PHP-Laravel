@@ -2,8 +2,8 @@
 
 @section('main')
 <div class="">
-    <div class=" frmtitle">
-        <H1>THÊM NHÓM NGƯỜI DÙNG</H1>
+    <div class="frmtitle py-3 bg-info">
+        <h1 class="m-0 py-2 fs-5 text-center fw-bold text-white">CẬP NHẬT NHÓM NGƯỜI DÙNG</h1>
     </div>
     <div class=" frmcontent">
         <?php if (isset($data['thongbao']) && $data['thongbao'] != "") {
@@ -18,7 +18,7 @@
             </div>
             <div class=" mb10">
                 Tên nhóm người dùng<br>
-                <input type="text" required name="tennhom" value="{{$group['name']}}">  {{--truyền dữ liệu củ--}}
+                <input type="text" required name="tennhom" value="{{$group['name']}}"> 
             </div>
             <div class=" mb10">
                 <input type="submit" name="themmoi" value="UPDATE">

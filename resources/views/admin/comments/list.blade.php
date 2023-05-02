@@ -2,20 +2,20 @@
 
 @section('main')
     <div class="">
-        <div class="frmtitle">
-            <h1 class="m-0 py-2 fs-5">DANH SÁCH BÌNH LUẬN</h1>
+        <div class="frmtitle py-3 bg-info">
+            <h1 class="m-0 py-2 fs-5 text-center fw-bold text-white">DANH SÁCH BÌNH LUẬN</h1>
         </div>
         <div class="frmcontent">
-            <div class="mb10 frmdsloai">
+            <div class="table py-3">
                 <table>
-                    <tr class="text-center">
+                    <tr class="table-info text-center">
                         <th></th>
                         <th>#</th>
                         <th>THÔNG TIN CÁ NHÂN</th>
                         <th>BÌNH LUẬN</th>
                         <th>ĐÁNH GIÁ</th>
                         <th>NGÀY</th>
-                        <th>Delete</th>
+                        <th>THAO TÁC</th>
                     </tr>
                     @if (!empty($comments))
                         @foreach ($comments as $item)

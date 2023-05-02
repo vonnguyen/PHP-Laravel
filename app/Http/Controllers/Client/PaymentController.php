@@ -54,7 +54,7 @@ class PaymentController extends Controller
             'address' => $request->address,
             'total' => $total,
             'user_id' => Auth::user()->id,
-            'phuongthucTT'=>'Nhận hàng trả tiền',
+            'phuongthucTT'=> $request->method??'Nhận hàng trả tiền',
             'priceship'=>0,
         ]);
 
@@ -94,6 +94,7 @@ class PaymentController extends Controller
 		return view('client.vnpay');
 	}
 
+    // thanh toan vnpay
 	function vnPay()
 	{
 

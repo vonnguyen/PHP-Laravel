@@ -52,6 +52,18 @@ class DashboardController extends Controller
     foreach ($topThreeProductRatingShort as $item) {
         $item->info_product = Product::where('id', $item->id_pro)->first();
     }
-        return view('admin.index', compact("bills","topThreeProductRating","topThreeProductRatingShort"));
+        $billStatusTwo = bill:: where ('statuss', 2)-> get();
+        foreach ($billStatusTwo as $item){
+        $item->detail_bill = $item->detailBill ;
+        }
+        $TongDoanhThu = 0;
+        foreach ($billStatusTwo as $item){
+            foreach ($item -> detail_bill as $item2 ){
+                $TongDoanhThu += $item2 -> total;
+                }
+            }
+        $cate = DB::table('categories')->select('name')->get();;
+        return view('admin.index', compact("bills","topThreeProductRating","topThreeProductRatingShort", "TongDoanhThu","cate"));
     }
+
 }

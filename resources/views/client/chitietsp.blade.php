@@ -98,7 +98,7 @@
 
                         <div class="btn-detail">
                             <button><span class="detail_add" data-remove="{{route('cart.delete')}}" data-id="{{$product->id}}" data-url="{{route('cart.add')}}" >ADD TO CART</span></button>
-                            <button> <span>BUY IT NOW</span></button>
+                            <button> <a href="{{route('infomation')}}"><span>BUY IT NOW</span></a> </button>
                         </div>
 
                         <div class="btn-detail">

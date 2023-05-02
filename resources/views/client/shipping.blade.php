@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="step-footer d-flex justify-content-sm-between mt-4">
-                        <div class="product-wishlist-cart">
+                        <div class="product-wishlist-cart" style="padding-top: 25px;">
                             <a href="{{route('infomation')}}">
                                 <button class="dt-sc-btn">
                                     Return to infomation
@@ -47,10 +47,10 @@
                         </div>
                         <div class="m-0">
                             <a href="{{route('vnpay')}}">
-                                <img class="vnpay_img" src="{{asset('client/assets/img/logo/th.jpg')}}" alt=""> 
+                                <img class="vnpay_img" width="200px" src="{{asset('client/assets/img/logo/th.jpg')}}" alt=""> 
                             </a>
                         </div>
-                        <div class="product-wishlist-cart">
+                        <div class="product-wishlist-cart" style="padding-top: 25px;">
                             <form action="{{route('postPayment')}}" method="post">
                                 @csrf
                                 <input type="hidden" name="phone" value="{{session('info')['phone']}}">

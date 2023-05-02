@@ -2,13 +2,13 @@
 
 @section('main')
 <div class="">
-    <div class=" frmtitle">
-        <h1 class="m-0 py-2 fs-5">DANH SÁCH NHÓM NGƯỜI DÙNG</h1>
+    <div class="frmtitle py-3 bg-info">
+        <h1 class="m-0 py-2 fs-5 text-center fw-bold text-white">DANH SÁCH NHÓM NGƯỜI DÙNG</h1>
     </div>
     <div class=" frmcontent">
-        <div class=" mb10 frmdsloai">
+        <div class=" mb10 table">
             <table>
-                <tr>
+                <tr class="table-info text-center">
                     <th></th>
                     <th class="text-center">MÃ NHÓM</th>
                     <th class="text-center">TÊN NHÓM</th>

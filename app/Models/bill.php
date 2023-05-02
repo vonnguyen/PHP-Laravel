@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class bill extends Model
 {
@@ -13,6 +14,10 @@ class bill extends Model
     // Lấy tên từ user quan hệ 1 - 1 (1 bill thì chỉ 1 người dùng)
     function user(){
         return $this->belongsTo(User::class,'user_id','id');
+    }
+
+    function detailBill(){
+        return $this->hasMany(detail_bill::class,'id_bill','id');
     }
 
 }

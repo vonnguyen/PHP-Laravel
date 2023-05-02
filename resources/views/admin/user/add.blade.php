@@ -3,8 +3,8 @@
 
 @section('main')
 <div class="">
-    <div class="frmtitle">
-        <H1 class="m-0 py-2 fs-5">THÊM MỚI NGƯỜI DÙNG</H1>
+    <div class="frmtitle py-3 bg-info">
+        <h1 class="m-0 py-2 fs-5 text-center fw-bold text-white">THÊM MỚI NGƯỜI DÙNG</h1>
     </div>
     <div class="row frmcontent">
      
@@ -15,11 +15,11 @@
         <form action="" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb10">
-                Mã Khách Hàng<br>
+                Mã người dùng<br>
                 <input  type="text" name="masp" disabled>
             </div>
             <div class="mb10">
-                Tên Khách Hàng<br>
+                Tên người dùng<br>
                 <input class="form-control" type="text" required name="name">
             </div>
             <div class="mb10">

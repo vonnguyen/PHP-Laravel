@@ -2,8 +2,8 @@
 
 @section('main')
 <div class="">
-    <div class="frmtitle">
-        <h1 class="m-0 py-2 fs-5">DANH SÁCH SẢN PHẨM</h1>
+    <div class="frmtitle py-3 bg-info">
+        <h1 class="m-0 py-2 fs-5 text-center fw-bold text-white">DANH SÁCH SẢN PHẨM</h1>
     </div>
     <div class="frmcontent">
         <form action="{{route('admin.product.list')}}">
@@ -30,9 +30,9 @@
            
         </form>
 
-        <div  class="mb10 frmdsloai text-center">
+        <div  class="table">
             <table>
-                <tr>
+                <tr class="table-info text-center">
                     <th width="1%" ></th>
                     <th width="3%" >MÃ SẢN PHẨM</th>
                     <th width="25%" >TÊN SẢN PHẨM</th>

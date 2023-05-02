@@ -3,8 +3,8 @@
 
 @section('main')
 <div class="">
-    <div class="frmtitle">
-        <H1 class="m-0 py-2 fs-5">THÊM MỚI NGƯỜI DÙNG</H1>
+    <div class="frmtitle py-3 bg-info">
+        <h1 class="m-0 py-2 fs-5 text-center fw-bold text-white">CẬP NHẬT THÔNG TIN NGƯỜI DÙNG</h1>
     </div>
     <div class="row frmcontent">
      

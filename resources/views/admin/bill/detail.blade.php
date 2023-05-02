@@ -36,6 +36,10 @@
                 </div>
 
 {{-- Cập nhật trạng thái giao hàng --}}
+                @if ($data->statuss == 2)
+                <br>
+                    <h3 class="text-success">ĐƠN HÀNG ĐÃ HOÀN THÀNH</h3>
+                @else
                 <form action="">
                     @csrf
 
@@ -51,6 +55,7 @@
                                                 bg-blue-500 mt-3  rounded-lg text-white">Cập nhật</button>
                     </div>
                 </form>
+                @endif
             </div>
 
             <div class="col-sm-6">

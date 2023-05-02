@@ -3,22 +3,22 @@
 
 @section('main')
 <div class="">
-    <div class="frmtitle">
-        <h1 class="m-0 py-2 fs-5">DANH SÁCH KHÁCH HÀNG</h1>
+    <div class="frmtitle py-3 bg-info">
+        <h1 class="m-0 py-2 fs-5 text-center fw-bold text-white">DANH SÁCH NGƯỜI DÙNG</h1>
     </div>
     <div class="frmcontent">
-        <div class="mb10 frmdsloai">
+        <div class="table py-3">
             <table>
-                <tr class="text-center">
+                <tr class="text-center table-info">
                     <th></th>
-                    <th width="3%">MÃ KHÁCH HÀNG</th>
-                    <th width="15%">TÊN KHÁCH HÀNG</th>
-                    <th width="20%">EMAIL</th>
+                    <th width="5%">MÃ KHÁCH HÀNG</th>
+                    <th width="10%">TÊN KHÁCH HÀNG</th>
+                    <th width="22%">EMAIL</th>
                     <th width="10%">SỐ ĐIỆN THOẠI</th>
                     <th width="20%">ĐỊA CHỈ</th>
-                    <th width="2%">ROLE</th>
+                    <th width="10%">ROLE</th>
                     <th width="10%">HÌNH</th>
-                    <th width="20%">THAO TÁC</th>
+                    <th width="12%">THAO TÁC</th>
                 </tr>
 
                 @if (!empty($users))
@@ -31,13 +31,7 @@
                             <td>{{$item->email}}</td>
                             <td>{{$item->phone}}</td>
                             <td>{{$item->address}}</td>
-                            <td> @if ($item['group_id'] == 1) 
-                                {{$role = "ADMIN"}}
-                                @elseif(($item['group_id'] == 2))
-                                    {{$role = "STAFF"}}
-                                    @else
-                                    {{$role = "CLIENT"}}
-                            @endif</td>
+                            <td>{{$item->group_id}}</td>
                             <td><img src="{{$item['img']}}" /></td>
                             <td>
                                 <a class="btn btn-warning" href="{{route('admin.user.showupdate',$item['id'])}}">Sửa</a>

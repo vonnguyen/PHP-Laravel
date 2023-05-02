@@ -28,7 +28,16 @@ class UsersController extends Controller
         return redirect()->route('admin.user.list')->with('msg','Thêm nhóm người dùng thành công');
     }
     function list(){
-        $users =User::paginate(4);;
+        $users =User::paginate(4);
+        $groups = Groups::all();
+        // dd($groups[0]);
+        foreach ($users as $user) {
+            foreach($groups as $group){
+                if($user->group_id == $group['id'] ){
+                    $user->group_id = $group['name'];
+                }
+            }
+        }
         return view('admin.user.list',compact("users"));  // truyen du lieu vao danh muc
     }
     // Hien thi add

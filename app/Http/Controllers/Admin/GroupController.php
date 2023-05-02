@@ -24,8 +24,8 @@ class GroupController extends Controller
     }
     // Hien thi add
     function showadd(){
-
-        return view('admin.groups.add');
+        $groups = Groups::all();
+        return view('admin.groups.add',compact("groups"));
     }
     function showupdate($id){
 

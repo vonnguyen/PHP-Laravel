@@ -47,19 +47,19 @@
                                 <div class="col">
                                     <h2 class="fs-5 mb-3 "> Name</h2>
                                     <input type="text" class="form-control p-3" name="name" placeholder="Name"
-                                        value="{{ $user->name }}" aria-label="First name">
+                                        value="{{ $user->name }}" readonly aria-label="First name">
                                 </div>
                                 <div class="col">
                                     <h2 class="fs-5 mb-3 ">Number phone</h2>
                                     <input type="text" class="form-control p-3" name="phone" placeholder="phone"
-                                        value="{{ $user->phone }}" aria-label="Last name">
+                                        value="{{ $user->phone }}" readonly aria-label="Last name">
                                 </div>
                             </div>
                         </div>
                         <div class="mb-4">
                             <h2 class="fs-5 mb-3"> Address</h2>
                             <input type="text" name="address" class="form-control p-3" id="exampleFormControlInput1"
-                                placeholder="Address" value="{{ $user->address }}">
+                                placeholder="Address" value="{{ $user->address }}" readonly>
                         </div>
 
                         <div class="mb-3">
