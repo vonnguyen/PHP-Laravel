@@ -62,8 +62,19 @@ class DashboardController extends Controller
                 $TongDoanhThu += $item2 -> total;
                 }
             }
+        $TongSoHang = 0;
+        foreach ($billStatusTwo as $item){
+            foreach ($item -> detail_bill as $item2 ){
+                $TongSoHang += $item2 -> number;
+                }
+            }
+            $TongDonHang = 0;
+        foreach ($billStatusTwo as $item){          
+                $TongDonHang++ ;           
+            }
         $cate = DB::table('categories')->select('name')->get();;
-        return view('admin.index', compact("bills","topThreeProductRating","topThreeProductRatingShort", "TongDoanhThu","cate"));
+        return view('admin.index', compact("bills","topThreeProductRating","topThreeProductRatingShort", 
+                                            "TongDoanhThu","cate","TongSoHang","TongDonHang"));
     }
 
 }

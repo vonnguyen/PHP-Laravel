@@ -8,11 +8,11 @@
      {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
      <title>Admin</title>
      <link rel="icon" type="image/x-icon" href="{{ asset('client') }}/assets/img/logo/logo.png">
-    <!-- link Icon -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <!-- link Icon -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
  </head>
 
  <body>
@@ -75,36 +75,40 @@
     </script> --}}
 
      <div class="container" id="container">
-        <div class="form-container sign-up-container">
-            <form action="#">
-                <h1>Create Account</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your email for registration</span>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <input type="password" placeholder="Confirm Password" />
+         <div class="form-container sign-up-container">
+             <form action="#">
+                 <h1>Create Account</h1>
+                 <div class="social-container">
+                     <a href="#" class="social"><i class="fa-brands fa-facebook"></i></a>
+                     <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                 </div>
+                 <span>or use your email for registration</span>
+                 <input type="text" placeholder="Name" />
+                 <input type="email" placeholder="Email" />
+                 <input type="password" placeholder="Password" />
+                 <input type="password" placeholder="Confirm Password" />
 
-                <button>Sign Up</button>
-            </form>
-        </div>
+                 <button>Sign Up</button>
+             </form>
+         </div>
          <div class="form-container sign-in-container">
-            <form method="POST" action="{{ route('postloginadmin') }}">
-                @csrf
-                <h1>Sign in</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your account</span>
-                <input type="email" name="email" placeholder="Email" />
-                <input type="password" name="password" placeholder="Password" />
-                <a href="#">Forgot your password?</a>
+             
+             <form method="POST" action="{{ route('postloginadmin') }}">
+                 @csrf
+                 <h1>Sign in</h1>
+                 <div class="social-container">
+                     <a href="#" class="social"><i class="fa-brands fa-facebook"></i></a>
+                     <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                 </div>
+                 <span>or use your account</span>
+                 <input type="email" name="email" placeholder="Email" />
+                 <input type="password" name="password" placeholder="Password" />
+                 @if (session('msg'))
+                 <div class="alert alert-danger">{{ session('msg') }}</div>
+             @endif
+                 <a href="#">Forgot your password?</a>
                  <button>Sign In</button>
              </form>
          </div>

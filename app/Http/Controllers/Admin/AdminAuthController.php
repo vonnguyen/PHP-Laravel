@@ -27,13 +27,12 @@ class AdminAuthController extends Controller
                     Auth::login($user);
                     return redirect()->route('admin.index');
                 }else{
-                    return back()->with('msg','Khong phai admin???');
+                    return back()->with('msg','Không phải admin !!');
                 }
                 
             } else {
-                return response()->json([
-                    "error" => 'Nguoi dung khon ton tai !!!'
-                ]);
+                return back()->with('msg','Không tồn tại tài khoản !!');
+            
             }
     }
 

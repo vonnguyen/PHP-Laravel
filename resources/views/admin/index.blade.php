@@ -19,11 +19,12 @@
                     function drawChart() {
                         var data = google.visualization.arrayToDataTable([
                             ['Task', 'Hours per Day'],
-                            ['Giày', 11],
-                            ['Eat', 2],
-                            ['Commute', 2],
-                            ['Watch TV', 2],
-                            ['Sleep', 7]
+                            ['Giày Joden', 11],
+                            ['Adidas Kampung', 2],
+                            ['Giày Adidas', 2],
+                            ['Giày Nike', 2],
+                            ['Giày Boot', 7]
+
                         ]);
 
                         var options = {
@@ -42,7 +43,12 @@
             </body>
         </div>
         <div class="col-4">
-            <div class="fw-bold fs-3" style="padding-top:150px">Tổng Doanh Thu: <span class="fs-3">$</span> {{$TongDoanhThu}}</div>
+            <ul>
+                <li class="fw-bold fs-4" style="padding-top:150px">Tổng doanh thu: <span class="fs-3">$</span> {{$TongDoanhThu}}</li>
+                <li class="fw-bold fs-4 py-3">Tổng SL hàng đã bán:  {{$TongSoHang}}</li>
+                <li class="fw-bold fs-4">SL đơn hàng xuất kho:  {{$TongDonHang}} </li>
+            </ul>
+              
         </div>
     </div>
 
