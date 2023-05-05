@@ -89,9 +89,9 @@
                         <div class="info-detail">
                             <span class="info-title">Size:</span>
                             <div class="info-border quantity">
-                                <span>-</span>
+                                <span class="iconMinus">-</span>
                                 <span class="number_detail">1</span>
-                                <span>+</span>
+                                <span class="iconAdd">+</span>
                             </div>
 
                         </div>
