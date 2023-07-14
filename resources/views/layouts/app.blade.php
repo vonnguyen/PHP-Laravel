@@ -161,10 +161,10 @@
                             @if (Auth()->user()->group_id == 1)
                             @endif
                             <li class="fs-5">
-                                <span><a href="{{ route('profile') }} ">Hi! {{ Auth()->user()->name }}</a></span>
+                                <span><a href="{{ route('profile') }} ">{{ Auth()->user()->name }}</a></span>
                             <li class="fs-5">
                                 <a href="{{ route('order') }}">
-                                    Đơn hàng
+                                    Order
                                 </a>
                             </li>
                             <a class="fs-5" href="{{ route('logout') }}"
@@ -186,9 +186,9 @@
                 <span class="icon-cart">
                     @php
                         $number = 0;
-                        if (session('cart')) {
-                            foreach (session('cart') as $item) {
-                                $number += (int) $item['number'];
+                        if (getCart()) {
+                            foreach (getCart() as $item) {
+                                $number += (int) $item->number;
                             }
                         }
                     @endphp
@@ -374,8 +374,8 @@
                     @php
                         $sum = 0;
                     @endphp
-                    @if (session('cart'))
-                        @foreach (session('cart') as $item)
+                    @if (getCart())
+                        @foreach (getCart() as $item)
                             @php
                                 $sum += $item->total;
                             @endphp

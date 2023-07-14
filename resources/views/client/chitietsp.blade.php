@@ -87,7 +87,7 @@
 
                         </div>
                         <div class="info-detail">
-                            <span class="info-title">Size:</span>
+                            <span class="info-title">Quantity:</span>
                             <div class="info-border quantity">
                                 <span class="iconMinus">-</span>
                                 <span class="number_detail">1</span>

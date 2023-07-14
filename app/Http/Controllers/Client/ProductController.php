@@ -17,9 +17,11 @@ class ProductController extends Controller
         if( $request -> query('keyword')){
             $products = $products->where('name', "like", "%" . $request->query('keyword') . "%");
         }
-        $products = $products->paginate(self::_PER_PAGE)->withQueryString();
+        $product_test = $products;
+        $products = $products->paginate(4)->withQueryString();
+        $productshow = $product_test->paginate(self::_PER_PAGE)->withQueryString();
 
-        return view('client.product',compact('products'));
+        return view('client.product',compact('products', 'productshow'));
     }
 
     function detail($id){

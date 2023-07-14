@@ -34,8 +34,8 @@
                             </tr>
                         </thead>
                         <tbody >
-                            @if (session('cart'))
-                            @foreach (session('cart') as $item)
+                            @if ( getCart())
+                            @foreach ( getCart() as $item)
                             <tr class="row_info-shoes ">
                                
                                 <td class="product-shoes">

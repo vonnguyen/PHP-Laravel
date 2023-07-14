@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('client') }}/assets/product.css">
@@ -72,4 +72,4 @@
 
         </div>
     </div>
-@endsection
+@endsection --}}

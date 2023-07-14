@@ -49,13 +49,13 @@ window.addEventListener('load', function () {
             success: function (data) {
 
                 console.log(data)
-                // let dataNew = JSON.parse(data)
+                let dataNew = JSON.parse(data.cart)
                 let number = 0;
                 let sum = 0;
 
                 containerCart.innerHTML = "";
 
-                data.forEach(item => {
+                dataNew.forEach(item => {
                     number += +item.number;
                     renderItemCart(item, urlRemove, url);
                     sum += +item.total;
@@ -125,7 +125,9 @@ window.addEventListener('load', function () {
 
                     let number = 0;
                     let sum = 0;
-                    data.forEach(item => {
+                    let dataNew = JSON.parse(data.cart)
+                    
+                    dataNew.forEach(item => {
                         number += +item.number;
                         sum += +item.total;
                     })
@@ -223,13 +225,13 @@ window.addEventListener('load', function () {
                 success: function (data) {
 
                     console.log(data)
-                    // let dataNew = JSON.parse(data)
+                    let dataNew = JSON.parse(data.cart)
                     let number = 0;
                     let sum = 0;
 
                     containerCart.innerHTML = "";
 
-                    data.forEach(item => {
+                    dataNew.forEach(item => {
                         number += +item.number;
                         renderItemCart(item, urlRemove, url);
                         sum += +item.total;
@@ -292,12 +294,12 @@ window.addEventListener('load', function () {
                 success: function (data) {
 
                     console.log(data)
-                    // let dataNew = JSON.parse(data)
+                    let dataNew = JSON.parse(data.cart)
                     let number = 0;
                     let sum = 0;
 
 
-                    data.forEach(item => {
+                    dataNew.forEach(item => {
                         number += +item.number;
 
                         sum += +item.total;
@@ -344,12 +346,12 @@ window.addEventListener('load', function () {
                     success: function (data) {
 
                         console.log(data)
-                        // let dataNew = JSON.parse(data)
+                        let dataNew = JSON.parse(data.cart)
                         let number = 0;
                         let sum = 0;
 
 
-                        data.forEach(item => {
+                        dataNew.forEach(item => {
                             number += +item.number;
 
                             sum += +item.total;
@@ -409,10 +411,11 @@ window.addEventListener('load', function () {
 
                         })
                         item.remove();
+                        let dataNew = JSON.parse(data.cart)
 
                         let number = 0;
                         let sum = 0;
-                        data.forEach(item => {
+                        dataNew.forEach(item => {
                             number += +item.number;
                             sum += +item.total;
                         })

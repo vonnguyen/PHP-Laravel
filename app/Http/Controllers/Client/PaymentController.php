@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\bill;
 use App\Models\detail_bill;
 use App\Models\Product;
+use App\Models\user_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,8 +42,8 @@ class PaymentController extends Controller
     public function postPayment(Request $request){
         
         $total = 0;
-        if (session('cart')) {
-            foreach (session('cart') as $item) {
+        if ( getCart()) {
+            foreach ( getCart() as $item) {
                 $total += (float)$item->total;
             }
         }
@@ -58,8 +59,8 @@ class PaymentController extends Controller
             'priceship'=>0,
         ]);
 
-        if (session('cart')) {
-            foreach (session('cart') as $item) {
+        if ( getCart()) {
+            foreach ( getCart() as $item) {
                 $detailBill = new detail_bill();
                 $detailBill->id_bill = $bill->id;
                 $detailBill->id_pro = $item->id;
@@ -72,9 +73,9 @@ class PaymentController extends Controller
             }
         }
 
-        $request->session()->forget('cart');
-
-
+        $cart_user = user_cart::where('user_id', Auth::user()->id)->first();
+        $cart_user->cart = json_encode([]);
+        $cart_user->save();
         return redirect()->route('payment', $bill->id);
     }
     function order(){
@@ -100,8 +101,8 @@ class PaymentController extends Controller
 
 		// $sum = $_POST['sum'];
         $total = 0;
-        if (session('cart')) {
-            foreach (session('cart') as $item) {
+        if ( getCart()) {
+            foreach ( getCart() as $item) {
                 $total += (float)$item->total;
             }
         }

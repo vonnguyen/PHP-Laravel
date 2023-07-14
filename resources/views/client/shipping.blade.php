@@ -71,8 +71,8 @@
                             @php
                                 $sum = 0;
                             @endphp
-                            @if (session('cart'))
-                                @foreach (session('cart') as $item)
+                            @if ( getCart())
+                                @foreach ( getCart() as $item)
                                     @php
                                         $sum += $item->total;
                                     @endphp
@@ -82,7 +82,7 @@
                                             <div class="image w-fit relative " >
                                                 {{-- duong dan anh --}}
                                                 <img
-                                                    src="{{$item['image']}}"
+                                                    src="{{$item->image}}"
                                                     class="w-[80px] border rounded-2xl" alt=""><span
                                                     class="absolute top-[-8px] p-1 bg-gray-500 rounded-full leading-none  text-white right-[-8px] min-w-[20px] min-h-[20px] max-w-[20px] max-h-[20px] flex justify-center items-center">{{$item->number}}</span>
                                             </div>

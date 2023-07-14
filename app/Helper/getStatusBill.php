@@ -2,6 +2,8 @@
 
 <?php
 
+use App\Models\user_cart;
+use Illuminate\Support\Facades\Auth;
 
 function getStatusBill($status)
 {
@@ -32,3 +34,8 @@ function getStatusBill($status)
         "color"=>$type
     ];
 }
+function getCart(){
+    if(empty(Auth::user()->id)) return [];
+    $cart_user = user_cart::where('user_id', Auth::user()->id)->first();
+    return json_decode($cart_user->cart,false);
+}   

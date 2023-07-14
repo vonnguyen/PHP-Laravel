@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\user_cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -13,14 +15,24 @@ class CartController extends Controller
     function add(Request $request){
 
         $item = Product::find($request->id);
-        $cart = Session::get('cart');
-        if (is_null($cart) || empty($cart)) {
+        $cartUser =user_cart::where('user_id', Auth::user()->id)->first();
+        if (empty($cartUser)) {
+            $cartUser = new user_cart();
+            $cartUser->user_id = Auth::user()->id;
+            $item->number = $request->numberProduct;
+            $item->total = (int)($request->numberProduct) * (float)($item->gia);
+            $cart = [];
+            array_push($cart, $item);
+        } else if (empty(json_decode($cartUser->cart))) {
+            $cartUser->user_id = Auth::user()->id;
             $item->number = $request->numberProduct;
             $item->total = (int)($request->numberProduct) * (float)($item->gia);
             $cart = [];
             array_push($cart, $item);
         } else {
+
             $check = 0;
+            $cart = json_decode($cartUser->cart);
             if (!empty($cart)) {
                 $itemNew = null;
                 $keyNew = null;
@@ -28,7 +40,13 @@ class CartController extends Controller
 
                     if ((int)($itemChild->id) === (int)($request->id)) {
                         $itemChild->number = (int)($itemChild->number) + (int)$request->numberProduct;
+                        if ((int)($itemChild->number) <= 0) {
+                            array_splice($cart, $key, 1);
+                            $check = 2;
+                            break;
+                        }
                         $itemChild->total = (int)($itemChild->number) * (float)($item->gia);
+
                         $itemNew = $itemChild;
                         $keyNew = $key;
                         $check = 1;
@@ -38,7 +56,7 @@ class CartController extends Controller
                 if ($check === 1) {
                     $cart[$keyNew] = [];
                     $cart[$keyNew] = $itemNew;
-                } else {
+                } else if ($check == 0) {
                     $item->number = $request->numberProduct;
                     $item->total = (int)($request->numberProduct) * $item->gia;
                     array_push($cart, $item);
@@ -46,21 +64,23 @@ class CartController extends Controller
             }
         }
 
-        Session::put('cart', $cart);
-        $cart = Session::get('cart');
-        return response()->json($cart);  // trả dữ liệu về client
+
+        $cartUser->cart =  json_encode($cart);
+        $cartUser->save();
+        return response()->json($cartUser);  // trả dữ liệu về client
     }
 
     // xóa 
     public function remove(Request $request)
     {
-        $cart = Session::get('cart');
-        if (is_null($cart)) {
+        $cartUser = user_cart::where('user_id', Auth::user()->id)->first();
+        if (is_null($cartUser)) {
         } else {
-            if (!empty($cart)) {
+            if (!empty($cartUser->cart)) {
+                $cart = json_decode($cartUser->cart);
                 $keyRemove = -1;
                 foreach ($cart as $key => $item) {
-                    if ($item->id == $request->id) {
+                    if ((int)($item->id) === (int)($request->id_pro)) {
                         $keyRemove = $key;
                     }
                 }
@@ -69,8 +89,8 @@ class CartController extends Controller
                 }
             }
         }
-        Session::put('cart', $cart);
-        $cart = Session::get('cart');
-        return response()->json($cart);
+        $cartUser->cart =  json_encode($cart);
+        $cartUser->save();
+        return response()->json($cartUser);
     }
 }
