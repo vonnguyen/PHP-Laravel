@@ -36,41 +36,41 @@
                             <div class="pb-sm-3 mt-3">
                                 <select name="country" class="form-select p-3" aria-label="Default select example">
                                     <option selected value="Viet Nam">Viet Nam</option>
-                                  
+
                                 </select>
                             </div>
                             <div class="name-info pb-sm-3">
                                 <div class="row">
                                     <div class="col">
-                                        <input type="text" class="form-control p-3" name="firstName"
+                                        <input required type="text" class="form-control p-3" name="firstName"
                                             placeholder="First name" aria-label="First name">
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control p-3" name="lastName"
+                                        <input required type="text" class="form-control p-3" name="lastName"
                                             placeholder="Last name" aria-label="Last name">
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3">
-                          
-                                    <div class="col">
-                                        <input type="text" class="form-control p-3" name="phone" placeholder="phone"
-                                            aria-label="">
-                                    </div>
+
+                                <div class="col">
+                                    <input required type="text" class="form-control p-3" name="phone"
+                                        placeholder="phone" aria-label="">
+                                </div>
                             </div>
 
                             <div class="name-info pb-sm-3">
                                 <div class="row">
                                     <div class="col-4">
-                                        <select class="form-control p-3" name="province" placeholder="City"
+                                        <select required class="form-control p-3" name="province" placeholder="City"
                                             aria-label=""></select>
                                     </div>
                                     <div class="col-4">
-                                        <select class="form-control p-3" name="district" placeholder="District"
+                                        <select required class="form-control p-3" name="district" placeholder="District"
                                             aria-label=""></select>
-                                    </div>  
+                                    </div>
                                     <div class="col-4">
-                                        <select class="form-control p-3" name="ward" placeholder="Ward"
+                                        <select required class="form-control p-3" name="ward" placeholder="Ward"
                                             aria-label=""></select>
                                     </div>
                                 </div>
@@ -78,13 +78,13 @@
                             <div class="name-info pb-sm-3">
                                 <div class="row">
                                     <div class="col">
-                                        <input type="text" name="address" class="form-control p-3" id="exampleFormControlInput1"
-                                        placeholder="Address">
+                                        <input type="text" name="address" class="form-control p-3"
+                                            id="exampleFormControlInput1" placeholder="Address">
                                     </div>
-                                  
+
                                 </div>
                             </div>
-                        
+
                             <div class="form-check pb-sm-4">
                                 <input class="form-check-input p-md-2" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
@@ -119,8 +119,8 @@
                             @php
                                 $sum = 0;
                             @endphp
-                            @if ( getCart())
-                                @foreach ( getCart() as $item)
+                            @if (getCart())
+                                @foreach (getCart() as $item)
                                     @php
                                         $sum += $item->total;
                                     @endphp
@@ -172,7 +172,9 @@
 
 
 @section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         window.addEventListener('load', function(
 
@@ -182,7 +184,7 @@
             const img_vnpay = document.querySelector('.vnpay_img');
             const formPayment = document.querySelector('.getInfo')
 
-            formPayment?.addEventListener('submit', function(e) {
+            formPayment?.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 const firstName = document.querySelector('input[name="firstName"]').value;
                 const lastName = document.querySelector('input[name="lastName"]').value;
@@ -190,26 +192,77 @@
                 const phone = document.querySelector('input[name="phone"]').value;
                 const email = document.querySelector('input[name="email"]').value;
                 const address = document.querySelector('input[name="address"]').value;
-                const city = document.querySelector('input[name="city"]').value;
+                const select_province = JSON.parse(JSON.stringify(localStorage.getItem('province_text'))) || null;
+                const select_district = JSON.parse(JSON.stringify(localStorage.getItem('district_text'))) || null;
+                const select_ward = JSON.parse(JSON.stringify(localStorage.getItem('ward_text'))) || null;
                 const total = document.querySelector(".total").textContent;
                 console.log(formPayment.getAttribute('action'));
 
 
-                if (!fullname || !phone || !email || !address || !city || !total) {
+                if (!fullname || !phone || !email || !address || !total || !select_province || !
+                    select_district || !select_ward) {
                     alert("Thông tin chưa hợp lệ!!!")
                 } else {
+                    const id_district = JSON.parse(JSON.stringify(localStorage.getItem('district')));
+                    const service = await axios({
+                        method: "POST",
+                        url: "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/available-services",
+
+                        headers: {
+                            "Content-Type": "application/json",
+                            token: "07e3022f-225e-11ee-96dc-de6f804954c9",
+                        },
+                        data: JSON.stringify({
+                            shop_id: 3809178,
+                            from_district: 2050,
+                            to_district: +id_district,
+                        }),
+                    });
+
+                    localStorage.setItem(
+                        "service_id",
+                        JSON.stringify(service.data.data[0].service_id)
+                    );
+                    //
+                    const total_price = +document.querySelector('.total').textContent;
+                    const {data} = await axios({
+                        method: "POST",
+                        url: "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee",
+
+                        headers: {
+                            "Content-Type": "application/json",
+                            token: "8909150e-3f24-11ed-b824-262f869eb1a7",
+                            ShopId: "3299752",
+                        },
+                        data: JSON.stringify({
+                            service_id: +service.data.data[0].service_id,
+                            insurance_value: parseInt(total_price * 23000),
+                            coupon: null,
+                            to_ward_code: localStorage.getItem('code_ward'),
+                            to_district_id: +id_district,
+                            from_district_id: 2050,
+                            height: 50,
+                            length: 20,
+                            weight: 100,
+                            width: 20,
+                        }),
+                    });
+                    console.log(data);
                     const data_payment = {
                         method: "Vn_pay",
                         fullname,
                         email,
                         phone,
-                        address,
-                        city,
+                        address: address + ", " + select_ward + ", " + select_district + ", " +
+                            select_province,
                         total,
+                        fee: Number.parseFloat((data.data.total)/23000).toFixed(2)
                     }
+                   
                     localStorage.setItem('data_payment', JSON.stringify(data_payment));
 
-                    localStorage.setItem('url_payment', JSON.stringify(formPayment.getAttribute('action')));
+                    localStorage.setItem('url_payment', JSON.stringify(formPayment.getAttribute(
+                        'action')));
                     formPayment.submit()
 
                 }
@@ -222,96 +275,127 @@
             const select_district = document.querySelector('select[name="district"]');
             const select_ward = document.querySelector('select[name="ward"]');
 
-            const getProvince =async ()=>{
-                try{
-                    const {data} = await axios({
-                            method: "GET",
-                            url: "https://online-gateway.ghn.vn/shiip/public-api/master-data/province",
+            const getProvince = async () => {
+                try {
+                    const {
+                        data
+                    } = await axios({
+                        method: "GET",
+                        url: "https://online-gateway.ghn.vn/shiip/public-api/master-data/province",
 
-                            headers: {
-                                "Content-Type": "application/json",
-                                token: "07e3022f-225e-11ee-96dc-de6f804954c9",
-                            },
+                        headers: {
+                            "Content-Type": "application/json",
+                            token: "07e3022f-225e-11ee-96dc-de6f804954c9",
+                        },
                     });
                     const html = `<option selected class="province" value="0">Chọn tỉnh</option>`;
 
-                    select_province.insertAdjacentHTML('beforeend',html);
+                    select_province.insertAdjacentHTML('beforeend', html);
 
-                    localStorage.setItem('province',0);
+                    localStorage.setItem('province', 0);
 
-                    JSON.parse(JSON.stringify(data)).data.forEach(item=>{
+                    JSON.parse(JSON.stringify(data)).data.forEach(item => {
                         console.log(item);
-                        const html = `<option class="province" value="${item.ProvinceID}">${item.ProvinceName}</option>`;
-                        select_province.insertAdjacentHTML('beforeend',html);
+                        const html =
+                            `<option data-value="${item.ProvinceName}" class="province" value="${item.ProvinceID}">${item.ProvinceName}</option>`;
+                        select_province.insertAdjacentHTML('beforeend', html);
 
                     })
-                        select_province.addEventListener('change',function(){
-                            localStorage.setItem('province',select_province.value);
-                            getDistrict();
-                        })
-                }catch(e){
+                    select_province.addEventListener('change', function(e) {
+                        localStorage.setItem('province', select_province.value);
+                        localStorage.setItem(
+                          "province_text",
+                          JSON.stringify(
+                            e.target.options[e.target.selectedIndex].text
+                          )
+                        );
+                        getDistrict();
+                    })
+                } catch (e) {
                     console.log(e);
                 }
             }
-            const getDistrict =async ()=>{
-                try{
-                    const {data} = await axios({
-                            method: "POST",
-                            url: "https://online-gateway.ghn.vn/shiip/public-api/master-data/district",
+            const getDistrict = async () => {
+                try {
+                    const {
+                        data
+                    } = await axios({
+                        method: "POST",
+                        url: "https://online-gateway.ghn.vn/shiip/public-api/master-data/district",
 
-                            headers: {
-                                "Content-Type": "application/json",
-                                token: "07e3022f-225e-11ee-96dc-de6f804954c9",
-                            },
-                            data: JSON.stringify({
-                                province_id:+JSON.parse(JSON.stringify(localStorage.getItem('province'))),
-                            }),
+                        headers: {
+                            "Content-Type": "application/json",
+                            token: "07e3022f-225e-11ee-96dc-de6f804954c9",
+                        },
+                        data: JSON.stringify({
+                            province_id: +JSON.parse(JSON.stringify(localStorage.getItem(
+                                'province'))),
+                        }),
                     });
-                    localStorage.setItem('district',0);
+                    localStorage.setItem('district', 0);
 
                     select_district.innerHTML = "";
                     const html = `<option value="0">Chọn huyện</option>`;
 
-                    select_district.insertAdjacentHTML('beforeend',html);
-                    JSON.parse(JSON.stringify(data)).data.forEach(item=>{
+                    select_district.insertAdjacentHTML('beforeend', html);
+                    JSON.parse(JSON.stringify(data)).data.forEach(item => {
                         console.log(item);
-                        const html = `<option value="${item.DistrictID}">${item.DistrictName}</option>`;
-                        select_district.insertAdjacentHTML('beforeend',html);
+                        const html =
+                            `<option data-value="${item.DistrictName}" value="${item.DistrictID}">${item.DistrictName}</option>`;
+                        select_district.insertAdjacentHTML('beforeend', html);
 
                     })
-                    select_district.addEventListener('change',function(){
-                            localStorage.setItem('district',select_district.value);
-                            getWard();
+                    select_district.addEventListener('change', function(e) {
+                        localStorage.setItem('district', select_district.value);
+                        localStorage.setItem(
+                          "district_text",
+                          JSON.stringify(
+                            e.target.options[e.target.selectedIndex].text
+                          )
+                        );
+                        getWard();
                     })
-                }catch(e){
+                } catch (e) {
                     console.log(e);
                 }
             }
-            const getWard =async ()=>{
-                try{
-                    const {data} = await axios({
-                            method: "POST",
-                            url: "https://online-gateway.ghn.vn/shiip/public-api/master-data/ward",
+            const getWard = async () => {
+                try {
+                    const {
+                        data
+                    } = await axios({
+                        method: "POST",
+                        url: "https://online-gateway.ghn.vn/shiip/public-api/master-data/ward",
 
-                            headers: {
-                                "Content-Type": "application/json",
-                                token: "07e3022f-225e-11ee-96dc-de6f804954c9",
-                            },
-                            data: JSON.stringify({
-                                district_id: +JSON.parse(JSON.stringify(localStorage.getItem('district'))),
-                            }),
-                         }); 
+                        headers: {
+                            "Content-Type": "application/json",
+                            token: "07e3022f-225e-11ee-96dc-de6f804954c9",
+                        },
+                        data: JSON.stringify({
+                            district_id: +JSON.parse(JSON.stringify(localStorage.getItem(
+                                'district'))),
+                        }),
+                    });
                     select_ward.innerHTML = "";
                     const html = `<option value="0">Chọn Xã/Phường</option>`;
 
-                    select_ward.insertAdjacentHTML('beforeend',html);
-                    JSON.parse(JSON.stringify(data)).data.forEach(item=>{
+                    select_ward.insertAdjacentHTML('beforeend', html);
+                    JSON.parse(JSON.stringify(data)).data.forEach(item => {
                         console.log(item);
-                        const html = `<option value="${item.WardID}">${item.WardName}</option>`;
-                        select_ward.insertAdjacentHTML('beforeend',html);
+                        const html = `<option data-value="${item.WardName}" value="${item.WardCode}">${item.WardName}</option>`;
+                        select_ward.insertAdjacentHTML('beforeend', html);
 
                     })
-                }catch(e){
+                    select_ward.addEventListener('change', function(e) {
+                        localStorage.setItem('code_ward', select_ward.value);
+                        localStorage.setItem(
+                          "ward_text",
+                          JSON.stringify(
+                            e.target.options[e.target.selectedIndex].text
+                          )
+                        );
+                    })
+                } catch (e) {
                     console.log(e);
                 }
             }

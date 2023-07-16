@@ -80,7 +80,7 @@ class CartController extends Controller
                 $cart = json_decode($cartUser->cart);
                 $keyRemove = -1;
                 foreach ($cart as $key => $item) {
-                    if ((int)($item->id) === (int)($request->id_pro)) {
+                    if ((int)($item->id) === (int)($request->id)) {
                         $keyRemove = $key;
                     }
                 }

@@ -21,7 +21,7 @@
               </li>
               <li>
                 <a href="{{route('admin.category.listds')}}">
-                  <i class="bi bi-circle"></i><span>Loại sản phẩm</span>
+                  <i class="bi bi-circle"></i><span>Danh mục sản phẩm</span>
                 </a>
               </li>
             </ul>

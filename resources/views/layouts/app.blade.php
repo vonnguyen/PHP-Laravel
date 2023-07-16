@@ -112,7 +112,7 @@
                     </li>
                     <li><a href="{{ route('shoes') }}">Shoes</a></li>
                     <li><a href="{{ route('boots') }}">Boots</a></li>
-                    <li><a href="{{ route('boots') }}">Climbing</a></li>
+                    {{-- <li><a href="{{ route('boots') }}">Climbing</a></li> --}}
                     <li class="page-show ralative">
                         <a href="{{ route('blog') }}">Pages <i class="fa-solid fa-chevron-down"></i></a>
                         <ul class="page-show-list p-2 absolute top-full">
@@ -132,14 +132,49 @@
             <!-- end -->
             {{-- Tìm kiếm sản phẩm --}}
             <div class="icon-header">
-                <form action="{{ route('shoes') }}" method="GET" class="d-flex" role="search">
+                <form action="{{ route('boots') }}" method="GET" class="d-flex search-micro" role="search">
                     @csrf
-                    <input name="keyword" class="form-control me-2" type="search" placeholder="Search"
+                    {{-- <input name="keyword" class="form-control me-2" type="search" placeholder="Search"
                         aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit"> <i
+                        <i class="fa-solid fa-microphone"></i> --}}
+                    <div class="search-mic" style="position: relative;">
+                        <input id="transcript"
+                            class="py-2 px-4 h-[44px] outline-none border-1 rounded-3xl w-[300px] rounded-r-none"
+                            type="text" name="keyword" placeholder="Find the best for your best" value=""
+                            fdprocessedid="uxx3au">
+                        <span
+                            class="micro absolute top-1/2 -translate-y-1/2 hover:bg-slate-400 rounded-full cursor-pointer hover:text-slate-50 transition-all p-2 text-slate-900 right-0 "><svg
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z">
+                                </path>
+                            </svg></span>
+                            <span
+                            class="cancel-micro absolute top-1/2 -translate-y-1/2 hover:bg-slate-400 rounded-full cursor-pointer hover:text-slate-50 transition-all p-2 text-slate-900 left-0 "><svg
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z">
+                                </path>
+                            </svg></span>
+                    </div>
+
+                    <button class="btn btn-outline-secondary" type="submit"> <i
                             class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 {{-- End Tìm kiếm sản phẩm --}}
+                <div class="relative ml-4">
+                    <span
+                        class="absolute top-[-8px] right-0 bg-black p-2 w-[20px] h-[20px] rounded-full flex justify-center items-center text-light">0
+                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-8 h-8 cursor-pointer">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0">
+                        </path>
+                    </svg>
+                </div>
                 <span class="icon-user text-2xl relative  ">
                     <span class="info-user">
                         <i class="fa-solid fa-user"></i>
@@ -451,6 +486,94 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
         <script src="{{ asset('client/js') }}/main.js"></script>
         <script src="{{ asset('client/js') }}/cart.js"></script>
+        <script>
+            let SpeechRecognition =
+                window.SpeechRecognition || window.webkitSpeechRecognition,
+                recognition,
+                recording = false;
+            const recordBtn = document.querySelector('.micro')
+            const cancel_micro = document.querySelector('.cancel-micro')
+            const search_micro = document.querySelector('.search-micro')
+
+            
+            const result = document.querySelector('#transcript')
+            function speechToText() {
+                try {
+                    recognition = new SpeechRecognition();
+                    recognition.lang ='vi';
+                    recognition.interimResults = true;
+                    recordBtn.classList.add("recording");
+                    // recordBtn.querySelector("p").innerHTML = "Listening...";
+                    recognition.start();
+                    recognition.onresult = (event) => {
+                        const speechResult = event.results[0][0].transcript;
+                        //detect when intrim results
+                        if (event.results[0].isFinal) {
+                            result.value = " " + speechResult;
+                            search_micro.submit();
+                        } else {
+                            //creative p with class interim if not already there
+                            // if (!document.querySelector(".interim")) {
+                            //     const interim = document.createElement("p");
+                            //     interim.classList.add("interim");
+                            //     result.appendChild(interim);
+                            // }
+                            // //update the interim p with the speech result
+                            // document.querySelector(".interim").innerHTML = " " + speechResult;
+                        }
+                        // downloadBtn?.disabled = false;
+                    };
+                    recognition.onspeechend = () => {
+                        speechToText();
+                    };
+                    recognition.onerror = (event) => {
+                        console.log(event);
+                        stopRecording();
+                        if (event.error === "no-speech") {
+                            alert("No speech was detected. Stopping...");
+                        } else if (event.error === "audio-capture") {
+                            alert(
+                                "No microphone was found. Ensure that a microphone is installed."
+                            );
+                        } else if (event.error === "not-allowed") {
+                            alert("Permission to use microphone is blocked.");
+                        } else if (event.error === "aborted") {
+                            alert("Listening Stopped.");
+                        } else {
+                            alert("Error occurred in recognition: " + event.error);
+                        }
+                    };
+                } catch (error) {
+                    recording = false;
+
+                    console.log(error);
+                }
+            }
+            recordBtn.addEventListener("click", () => {
+                console.log('micro');
+                if (!recording) {
+                    speechToText();
+                    recording = true;
+                } else {
+                    stopRecording();
+                }
+            });
+
+            function stopRecording() {
+                recognition.stop();
+                recordBtn.classList.remove("recording");
+                recording = false;
+            }
+            cancel_micro.addEventListener("click", () => {
+                console.log('cancel micro');
+                if (!recording) {
+                    speechToText();
+                    recording = true;
+                } else {
+                    stopRecording();
+                }
+            });
+        </script>
         {{-- <script src="./responesive.js"></script> --}}
         @yield('js')
 

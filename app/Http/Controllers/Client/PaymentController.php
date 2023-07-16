@@ -56,7 +56,7 @@ class PaymentController extends Controller
             'total' => $total,
             'user_id' => Auth::user()->id,
             'phuongthucTT'=> $request->method??'Nhận hàng trả tiền',
-            'priceship'=>0,
+            'priceship'=> $request->fee??0,
         ]);
 
         if ( getCart()) {

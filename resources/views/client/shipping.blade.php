@@ -23,8 +23,8 @@
                     <div class="border border-2 rounded-lg p-3 mt-4">
                         <p class="flex gap-5 border-b pb-2"><span class="text-gray-500">Contact</span><span
                                 class="font-semibold">{{session('info')['phone']}}</span></p>
-                        <p class="flex gap-5 m-0"><span class="text-gray-500">Ship to</span><span
-                                class="font-semibold">{{session('info')['address'].' - '.session('info')['city'].' - '.session('info')['country']}}</span></p>
+                        <p class="flex gap-5 mt-3"><span class="text-gray-500">Ship to</span><span
+                                class="font-semibold fullAddress"></span></p>
                     </div>
 
                     <div class="method">
@@ -53,9 +53,11 @@
                         <div class="product-wishlist-cart" style="padding-top: 25px;">
                             <form action="{{route('postPayment')}}" method="post">
                                 @csrf
-                                <input type="hidden" name="phone" value="{{session('info')['phone']}}">
-                                <input type="hidden" name="address" value="{{session('info')['address'].'-'.session('info')['city'].'-'.session('info')['country']}}">
-                                <button type="submit" class="dt-sc-btn">
+                               <input type="hidden" name="fee" value="">
+                               <input type="hidden" name="phone" value={{session('info')['phone']}}>
+                               <input type="hidden" name="address" value="">
+
+                                <button type="submit" class="dt-sc-btn alert alert-success" role="alert">
                                     pay now
                                 </button>
                             </form>
@@ -96,13 +98,15 @@
                         <div class="subtotal py-3 border-b m-0">
                             <p class="flex justify-between"><span class="text-gray-600">Subtotal</span><span
                                     class="font-semibold"> $ {{number_format($sum,2)}}</span></p>
+                                    <p class="flex justify-between"><span class="text-gray-600">Fee</span><span
+                                        class="font-semibold fee"></span></p>
                             <p class="flex justify-between items-center m-0"><span
                                     class="text-gray-600">Shipping</span><span class="text-xs">Calculated at next
                                     step</span></p>
                         </div>
                         <div class="total py-3">
                             <p class="flex justify-between items-center"><span class="text-xl">Total</span><span
-                                    class="font-semibold text-3xl"> $ {{number_format($sum,2)}}</span></p>
+                                   data-price={{number_format($sum,2)}} class="font-semibold text-3xl total_price"> </span></p>
                         </div>
                     </div>
                 </div>
@@ -114,3 +118,27 @@
 
  @endsection 
 
+ @section('js')
+ <script>
+    const fullAddress = document.querySelector('.fullAddress');
+    const fee = document.querySelector('.fee');
+    const total_price = document.querySelector('.total_price');
+    const input_address = document.querySelector('input[name="address"]');
+    const input_fee= document.querySelector('input[name="fee"]');
+
+
+
+
+    console.log({fullAddress});
+    const data_payment = JSON.parse((localStorage.getItem('data_payment')));
+    console.log({data_payment});
+
+    fullAddress.textContent  = data_payment.address.replaceAll("\"","");
+    input_address.value  = data_payment.address.replaceAll("\"","");
+    input_fee.value  =data_payment.fee
+
+    fee.textContent = "$ "+data_payment.fee
+    total_price.textContent = "$ "+(+total_price.dataset.price + Number(data_payment.fee))
+
+ </script>
+@endsection

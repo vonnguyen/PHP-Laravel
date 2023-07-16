@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CollectionController extends Controller
 {
     //
-    const  _PER_PAGE = 6;
+    const  _PER_PAGE = 12;
     function index(){
         $products = Product::paginate(self::_PER_PAGE)->withQueryString();
 

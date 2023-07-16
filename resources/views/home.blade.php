@@ -300,7 +300,7 @@
                                                         </i><i class="fa-solid fa-star"></i><i
                                                             class="fa-solid fa-star"></i>
                                                     </div>
-                                                    <<div class="bag-ctn3" data-urlremove="{{route('cart.delete')}}"
+                                                    <div class="bag-ctn3" data-urlremove="{{route('cart.delete')}}"
                                                             data-url="{{route('cart.add')}}" data-id="{{$product->id}}"><i class="cursor-pointer fa-solid fa-bag-shopping"></i>
                                                     </div>
 

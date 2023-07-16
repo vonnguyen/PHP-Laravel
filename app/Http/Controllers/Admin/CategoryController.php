@@ -36,7 +36,7 @@ class CategoryController extends Controller
     // xoa
     function delete($id){
         $deleted = Category::where('id', $id)->delete();
-        $listDanhMuc = Category::paginate(5);
+        $listDanhMuc = Category::paginate(12);
         return view('admin.category.listds',compact("listDanhMuc"));  // truyen du lieu vao danh muc
     }
     // update

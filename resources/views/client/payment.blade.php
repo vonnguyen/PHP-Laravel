@@ -73,13 +73,16 @@
                     <div class="subtotal py-3 border-b m-0">
                         <p class="flex justify-between"><span class="text-gray-600">Subtotal</span><span
                                 class="font-semibold"> $ {{number_format($data->total,2)}}</span></p>
+                                <p class="flex justify-between items-center m-0"><span
+                                    class="text-gray-600">Fee</span><span class="text-xs">$ {{number_format($data->priceship,2)}}
+                                    </span></p>
                         <p class="flex justify-between items-center m-0"><span
                                 class="text-gray-600">Shipping</span><span class="text-xs">Calculated at next
                                 step</span></p>
                     </div>
                     <div class="total py-3">
                         <p class="flex justify-between items-center"><span class="text-xl">Total</span><span
-                                class="font-semibold text-3xl"> $ {{number_format($data->total,2)}}</span></p>
+                                class="font-semibold text-3xl"> $ {{number_format($data->total+ $data->priceship,2)}}</span></p>
                     </div>
                 </div>
             </div>

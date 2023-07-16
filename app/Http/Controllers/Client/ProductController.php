@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
 
-    const  _PER_PAGE = 6;
+    const  _PER_PAGE = 12;
     function index(Request $request){
     
         $products = Product:: orderBy('created_at', 'desc');
