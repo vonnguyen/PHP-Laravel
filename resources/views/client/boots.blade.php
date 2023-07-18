@@ -36,7 +36,7 @@
                             <option value="">16</option>
                         </select>
                     </div> --}}
-                  
+
                 </div>
 
                 <div class="about-ctn-product" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
@@ -112,76 +112,86 @@
                 </div>
 
             </div>
+
             <div class="col-3" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500">
                 <div class="sidebar-product">
                     <div class="recent-product">
 
-                        <p>Search by brand</p>
+                        <p>Tìm kiếm theo thương hiệu</p>
                         <form action="">
                             @csrf
                             <div class="search d-flex">
-                                <input name="keyword" value="{{request()->keyword}}" class="form-control me-2" type="search" aria-label="Search">
+                                <input name="keyword" value="{{ request()->keyword }}" class="form-control me-2"
+                                    type="search" aria-label="Search">
                                 {{-- <button class="btn-primary p-2" style="background-color: #571F7C;">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </button> --}}
                             </div>
                             <div class="sortby">
-                                <p>Sort by</p>
+                                <p>Sắp xếp</p>
                                 <select name="sort" id="">
-                                    <option value="asc" {{request()->sort == "asc" ? "selected":""}}>Alphabetically, A-Z</option>
-                                    <option value="desc" {{request()->sort == "desc" ? "selected":""}}>Alphabetically, Z-A</option>
+                                    <option value="asc" {{ request()->sort == 'asc' ? 'selected' : '' }}>Theo thứ tự bảng chữ cái,
+                                        A-Z</option>
+                                    <option value="desc" {{ request()->sort == 'desc' ? 'selected' : '' }}>
+                                        Theo thứ tự bảng chữ cái,
+                                        Z-A</option>
                                 </select>
                             </div>
                             @if ($listCate->count() > 0)
-                            <div class="menu-cate">
-                                <div class="menu-search py-2 d-flex gap-3">
-                                    <input {{request()->cate == 'all' ?"checked":""}} type="radio" name="cate" value="all"  id="danhmucall"> 
-                                    <label for="danhmucall">All</label>
+                                <div class="menu-cate">
+                                    <div class="menu-search py-2 d-flex gap-3">
+                                        <input {{ request()->cate == 'all' ? 'checked' : '' }} type="radio"
+                                            name="cate" value="all" id="danhmucall">
+                                        <label for="danhmucall">Tất cả</label>
+                                    </div>
                                 </div>
-                            </div>
                                 @foreach ($listCate as $item)
                                     <div class="menu-cate">
                                         <div class="menu-search py-2 d-flex gap-3">
-                                            <input {{request()->cate == $item->id ?"checked":""}} type="radio" name="cate" value="{{$item->id}}"  id="danhmuc{{$item->id}}"> 
-                                            <label for="danhmuc{{$item->id}}">{{$item->name}}</label>
+                                            <input {{ request()->cate == $item->id ? 'checked' : '' }} type="radio"
+                                                name="cate" value="{{ $item->id }}"
+                                                id="danhmuc{{ $item->id }}">
+                                            <label for="danhmuc{{ $item->id }}">{{ $item->name }}</label>
                                         </div>
                                     </div>
                                 @endforeach
                             @endif
-    
-                            <p>Price</p>
+
+                            <p class="pt-3">Lọc theo giá sản phẩm</p>
                             <div class="list-tags">
                                 <h5>
-                                    The highest price is <span class="money">$900.00</span> Rest
+                                    Giá cao nhất là <span class="money">$1000.00</span>
                                 </h5>
                                 <div class="cost-product">
-                                    <h6>From $</h6>
-                                    <input name="from" class="border-1" type="number" value="{{request()->from ?? 1}}">
+                                    <h6>Từ $</h6>
+                                    <input name="from" class="border-1" type="number"
+                                        value="{{ request()->from ?? 1 }}">
                                 </div>
                                 <div class="cost-product pt-2">
-                                    <h6>To $</h6>
-                                    <input name="to" class="border-1" type="number" value="{{request()->to ?? 1000}}">
+                                    <h6>Đến $</h6>
+                                    <input name="to" class="border-1" type="number"
+                                        value="{{ request()->to ?? 1000 }}">
                                 </div>
                             </div>
-    
-                            <div class="btn-availibility">
-                               
-                                    <span class="clear btn btn-primary">
-                                        CLEAR
-                                    </span>
-                                    <button type="submit">
-APPLY
-                                    </button>
+
+                            <div>
+
+                                <span class="clear btn btn-primary" style="background-color: #571F7C">
+                                    Xóa
+                                </span>
+                                <button class="btn btn-primary" type="submit" style="background-color: #571F7C">
+                                    Tìm kiếm
+                                </button>
                             </div>
                         </form>
 
-                     
 
-                        <p>Hot Deals</p>
+
+                        <p class="pt-3">Hot Deals</p>
                         <div class="img-ctn3">
                             <img src="./assets/img/slide-header/breadcrumb-4.webp" alt="">
                         </div>
-                       
+
 
                     </div>
 
@@ -202,7 +212,7 @@ APPLY
 @section('js')
     <script>
         const clear = document.querySelector('.clear');
-        clear.addEventListener('click',function(){
+        clear.addEventListener('click', function() {
             window.history.replaceState({}, document.title, "/" + "boots?keyword=&cate=all&from=1&to=1000");
             window.location.reload();
         })

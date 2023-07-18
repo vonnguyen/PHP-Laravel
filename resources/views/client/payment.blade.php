@@ -15,31 +15,31 @@
 
                 <div class="navbar mt-5">
                         <ul class="d-flex gap-2 p-0">
-                            <li><a href="{{route('whish')}}">Cart ></a> </li>
-                            <li><a href="{{route('infomation')}}">Infomation ></a> </li>
-                            <li><a href="{{route('shipping')}}">Shipping ></a> </li>
-                            <li>Payment</li>
+                            <li><a href="{{route('whish')}}">Giỏ hàng ></a> </li>
+                            <li><a href="{{route('infomation')}}">Thông tin liên lạc ></a> </li>
+                            <li><a href="{{route('shipping')}}">Đang chuyển hàng ></a> </li>
+                            <li>Thanh toán</li>
                         </ul>
                     </div>
 
                 <div class="border border-2 rounded-lg p-3 mt-4">
-                    <p class="flex gap-5 border-b pb-2"><span class="text-gray-500">Contact</span><span
+                    <p class="flex gap-5 border-b pb-2"><span class="text-gray-500">Liên hệ</span><span
                         class="font-semibold">{{$data->sdt}}</span></p>
-                        <p class="flex gap-5 m-0"><span class="text-gray-500">Ship to</span><span
+                        <p class="flex gap-5 m-0"><span class="text-gray-500">Địa chỉ người nhận</span><span
                             class="font-semibold">{{$data->address}}</span></p>
-                    <p class="flex  gap-5 py-2 m-0 border-b py-2"><span class="text-gray-500">Method</span><span
-                            class="font-semibold">Standard Shipping</span><span>${{$data->priceship}}</span></p>
-                    <p class="flex gap-5 py-2 m-0"><span class="text-gray-500">Payment Method</span><span
+                    <p class="flex  gap-5 py-2 m-0 border-b py-2"><span class="text-gray-500">Phương thức</span><span
+                            class="font-semibold">Phí vận chuyển</span><span>${{$data->priceship}}</span></p>
+                    <p class="flex gap-5 py-2 m-0"><span class="text-gray-500">Phương thức thanh toán</span><span
                             class="font-semibold">{{$data->phuongthucTT}}</span></p>
                 </div>
 
                 <div class="method">
-                    <p class="mt-5 text-xl">Shipping Method</p>
+                    <p class="mt-5 text-xl">Phương thức vận chuyển</p>
                     <div class="border border-2 rounded-lg p-3 flex justify-between items-center w-full">
                         <p class="m-0 flex gap-3 items-center"><span
                                 class="p-[10px] flex justify-center items-center block w-[5px] h-[5px] max-w-[5px] max-h-[5px] bg-blue-600 rounded-full"><span
                                     class="p-[3px] block w-[3px] h-[3px] max-w-[3px] max-h-[3px] rounded-full leading-none bg-white"></span></span><span>
-                                Standard Shipping</span></p><span class="font-semibold">${{$data->priceship}}</span>
+                                Phí vận chuyển</span></p><span class="font-semibold">${{$data->priceship}}</span>
                     </div>
                 </div>
 
@@ -71,17 +71,16 @@
                         @endif
                     </div>
                     <div class="subtotal py-3 border-b m-0">
-                        <p class="flex justify-between"><span class="text-gray-600">Subtotal</span><span
+                        <p class="flex justify-between"><span class="text-gray-600">Tổng phụ thu</span><span
                                 class="font-semibold"> $ {{number_format($data->total,2)}}</span></p>
                                 <p class="flex justify-between items-center m-0"><span
-                                    class="text-gray-600">Fee</span><span class="text-xs">$ {{number_format($data->priceship,2)}}
+                                    class="text-gray-600">Phí Ship</span><span class="text-xs">$ {{number_format($data->priceship,2)}}
                                     </span></p>
                         <p class="flex justify-between items-center m-0"><span
-                                class="text-gray-600">Shipping</span><span class="text-xs">Calculated at next
-                                step</span></p>
+                                class="text-gray-600">Đang chuyển hàng</span><span class="text-xs">Tính toán ở bước tiếp theo</span></p>
                     </div>
                     <div class="total py-3">
-                        <p class="flex justify-between items-center"><span class="text-xl">Total</span><span
+                        <p class="flex justify-between items-center"><span class="text-xl">Tổng cộng</span><span
                                 class="font-semibold text-3xl"> $ {{number_format($data->total+ $data->priceship,2)}}</span></p>
                     </div>
                 </div>

@@ -13,16 +13,15 @@
 
                     <div class="navbar mt-5">
                         <ul class="d-flex gap-2 p-0">
-                            <li><a href="{{ route('whish') }}">Cart ></a> </li>
-                            <li><a href="{{ route('infomation') }}">Infomation ></a> </li>
-                            <li><a href="{{ route('shipping') }}">Shipping ></a> </li>
-                            <li>Payment </li>
+                            <li><a href="{{ route('whish') }}">Giỏ hàng ></a> </li>
+                            <li><a href="{{ route('infomation') }}">Thông tin liên lạc ></a> </li>
+                            <li><a href="{{ route('shipping') }}">Đang chuyển hàng ></a> </li>
+                            <li>Thanh toán </li>
                         </ul>
                     </div>
 
                     <div class="contact-info d-flex justify-content-between pb-3 mt-5">
-                        <h5 class="fs-3">Contact information</h5>
-                        <span>Already have an account? <a href="">Log in</a></span>
+                        <h5 class="fs-3">Thông tin liên lạc</h5>
                     </div>
                     <form action="{{ route('saveinfo') }}" class="getInfo" method="post">
 
@@ -32,10 +31,10 @@
                                 readonly value="{{ Auth::user()->email }}">
                         </div>
                         <div class="address-info pb-4">
-                            <h5 class="fs-3">Shipping address</h5>
+                            <h5 class="fs-3">Địa chỉ giao hàng</h5>
                             <div class="pb-sm-3 mt-3">
                                 <select name="country" class="form-select p-3" aria-label="Default select example">
-                                    <option selected value="Viet Nam">Viet Nam</option>
+                                    <option selected value="Viet Nam">Việt Nam</option>
 
                                 </select>
                             </div>
@@ -43,11 +42,11 @@
                                 <div class="row">
                                     <div class="col">
                                         <input required type="text" class="form-control p-3" name="firstName"
-                                            placeholder="First name" aria-label="First name">
+                                            placeholder="Họ" aria-label="First name">
                                     </div>
                                     <div class="col">
                                         <input required type="text" class="form-control p-3" name="lastName"
-                                            placeholder="Last name" aria-label="Last name">
+                                            placeholder="Tên" aria-label="Last name">
                                     </div>
                                 </div>
                             </div>
@@ -55,22 +54,22 @@
 
                                 <div class="col">
                                     <input required type="text" class="form-control p-3" name="phone"
-                                        placeholder="phone" aria-label="">
+                                        placeholder="số điện thoại" aria-label="">
                                 </div>
                             </div>
 
                             <div class="name-info pb-sm-3">
                                 <div class="row">
                                     <div class="col-4">
-                                        <select required class="form-control p-3" name="province" placeholder="City"
+                                        <select required class="form-control p-3" name="province" placeholder="Thành phố/Tỉnh"
                                             aria-label=""></select>
                                     </div>
                                     <div class="col-4">
-                                        <select required class="form-control p-3" name="district" placeholder="District"
+                                        <select required class="form-control p-3" name="district" placeholder="Phường/Huyện"
                                             aria-label=""></select>
                                     </div>
                                     <div class="col-4">
-                                        <select required class="form-control p-3" name="ward" placeholder="Ward"
+                                        <select required class="form-control p-3" name="ward" placeholder="Thôn/Xã"
                                             aria-label=""></select>
                                     </div>
                                 </div>
@@ -79,7 +78,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <input type="text" name="address" class="form-control p-3"
-                                            id="exampleFormControlInput1" placeholder="Address">
+                                            id="exampleFormControlInput1" placeholder="ví dụ số 20/A Ninh Kiều CT">
                                     </div>
 
                                 </div>
@@ -88,7 +87,7 @@
                             <div class="form-check pb-sm-4">
                                 <input class="form-check-input p-md-2" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    Save this information for next time
+                                    Lưu thông tin này cho lần sau
                                 </label>
                             </div>
 
@@ -96,13 +95,13 @@
                                 <div class="product-wishlist-cart">
                                     <a href="{{ route('whish') }}">
                                         <button class="dt-sc-btn">
-                                            Return Cart
+                                            Trở về
                                         </button>
                                     </a>
                                 </div>
                                 <div class="product-wishlist-cart">
                                     <button type="submit" class="dt-sc-btn">
-                                        continue to shipping
+                                        Tiếp tục
                                     </button>
                                 </div>
                             </div>
@@ -141,14 +140,13 @@
                             @endif
                         </div>
                         <div class="subtotal py-3 border-b m-0">
-                            <p class="flex justify-between"><span class="text-gray-600">Subtotal</span><span
+                            <p class="flex justify-between"><span class="text-gray-600">Tổng phụ thu</span><span
                                     class="font-semibold"> $ {{ number_format($sum, 2) }}</span></p>
                             <p class="flex justify-between items-center m-0"><span
-                                    class="text-gray-600">Shipping</span><span class="text-xs">Calculated at next
-                                    step</span></p>
+                                    class="text-gray-600">Đang chuyển hàng</span><span class="text-xs">Tính toán ở bước tiếp theo</span></p>
                         </div>
                         <div class="py-3">
-                            <p class="flex justify-between items-center"><span class="text-xl">Total</span>
+                            <p class="flex justify-between items-center"><span class="text-xl">Tổng cộng</span>
                                 <span>
                                     <span class="font-semibold text-3xl"> $
                                     </span>

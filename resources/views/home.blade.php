@@ -23,8 +23,10 @@
                                 alt="...">
                             <div class="contain-1-text">
                                 <h1 class="title">ZEN VIVID 15</h1>
-                                <p>The best sellers from $99.00</p>
-                                <button class="contain-btn">SHOP NOW</button>
+                                <p>Bán chạy nhất từ ​​$42.00</p>
+                                <a href="{{route('boots')}}">
+                                    <button class="contain-btn">Mua Ngay</button>
+                                </a>
                             </div>
                         </div>
 
@@ -35,7 +37,9 @@
                             <div class="contain-2-text">
                                 <h2 class="title">STARTS FROM </h2>
                                 <p>$745.00</p>
-                                <button class="contain-btn">VIEW COLLECTION</button>
+                                <a href="{{ route('collection') }}">
+                                    <button class="contain-btn">Xem sản phẩm</button>
+                                </a>
                             </div>
                         </div>
                         <div class="carousel-item slide-3">
@@ -48,7 +52,10 @@
                                     Ullamcorper eget nulla facilisi etiam dignissim. Quis eleifend quam adipiscing
                                     vitae proin sagittis nisl rhoncus mattis. Scelerisque eu ultrices
                                 </p>
-                                <button class="contain-btn">SHOP NOW</button>
+                                <a href="{{ route('boots') }}">
+                                    <button class="contain-btn">Mua Ngay</button>
+                                </a>
+                                
                             </div>
                         </div>
                     </div>
@@ -78,34 +85,34 @@
                         <div class="col-sm-6">
                             <div class="product">
                                 <div class="ctn2-img"><img
-                                        src="{{ asset('client') }}/assets/img/img-ctn2/collection3_large.webp"
+                                        src="{{ asset('client') }}/assets/img/img-ctn2/adidas5-1.webp"
                                         alt="">
                                 </div>
-                                <p class="picture">GYM SNEACKERS</p>
+                                <p class="picture">ADIDASS</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="product">
                                 <div class="ctn2-img"><img
-                                        src="{{ asset('client') }}/assets/img/img-ctn2/collection2_6fd1e403-7021-427d-8be1-8bf857c8aacf_large.webp"
+                                        src="{{ asset('client') }}/assets/img/img-ctn2/nike3.jpg"
                                         alt=""></div>
-                                <p class="picture">WORKING BOOT</p>
+                                <p class="picture">NIKE</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="product">
                                 <div class="ctn2-img"><img
-                                        src="{{ asset('client') }}/assets/img/img-ctn2/collection4_1d1d931a-3265-4eae-ac45-7e8a9cb3702e_large.webp"
+                                        src="{{ asset('client') }}/assets/img/img-ctn2/convers5-1.jpg"
                                         alt=""></div>
-                                <p class="picture">CHUKKAS</p>
+                                <p class="picture">CONVERS</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="product">
                                 <div class="ctn2-img"><img
-                                        src="{{ asset('client') }}/assets/img/img-ctn2/collection5_47277ffa-efcf-413d-a764-b4b5be9e4e99_large.webp"
+                                        src="{{ asset('client') }}/assets/img/img-ctn2/bitis3-1.webp"
                                         alt=""></div>
-                                <p class="picture">HIKING BOOTS</p>
+                                <p class="picture">BITI'S</p>
                             </div>
                         </div>
 
@@ -173,8 +180,8 @@
             <div class="contain-3">
                 <div class="head-cnt3">
                     <div class="title-ctn3" data-aos="fade-up-right">
-                        <h1>NEW ARRIVALS </h1>
-                        <p>Just in now</p>
+                        <h1>Sản phẩm mới nhất </h1>
+                        <p>Hiện tại</p>
                     </div>
                     <div class="icon-ctn3">
                         <span><i class="fa-solid fa-chevron-left"></i></span>
@@ -236,31 +243,95 @@
             <div class="contain-4">
                 <div class="title-cnt4">
 
-                    <p>THE SEASON BEGINGS</p>
-                    <h3>PROMOTION <span class="red">SALE OFF 50%</span> </h3>
+                    <p class="py-2">Mùa hè bắt đầu</p>
+                    <h3>KHUYẾN MÃI <span class="red">SALE OFF 50%</span> </h3>
                     <div class="btn-ctn4">
-                        <a href=""><button>SHOP NOW</button></a>
-                        <span>HURRY</span>
-                        <p>BEFORE OFFER ENDS</p>
+                        <a href="{{ route('boots') }}"><button>MUA NGAY</button></a>
+                        <span>LEST GO</span>
+                        <p>TRƯỚC KHI ƯU ĐÃI KẾT THÚC</p>
 
                     </div>
 
                 </div>
             </div>
 
+            
+            <div class="contain-3">
+                <div class="head-cnt3">
+                    <div class="title-ctn3" data-aos="fade-up-right">
+                        <h1>Sản phẩm đang sale </h1>
+                        <p>Hiện tại</p>
+                    </div>
+                    <div class="icon-ctn3">
+                        <span><i class="fa-solid fa-chevron-left"></i></span>
+                        <span><i class="fa-solid fa-chevron-right"></i></span>
+                    </div>
+
+                </div>
+
+                <div class="about-ctn3">
+
+                    <div class="row">
+                        @if ($newThreeProduct->count() > 0)
+                            @foreach ($newThreeProduct as $product)
+                                <div class="col-md-4 picture-3" data-aos-duration="500" data-aos="fade-up-right">
+                                    <div class="item h-full">
+
+                                        <div class="img-ctn3 h-3/5">
+                                            <div class="groups-img h-full">
+                                                <img class="w-full h-full object-cover" src="{{ $product->image }}"
+                                                    alt="">
+                                                <img class="w-full h-full object-cover"
+                                                    src="{{ asset('client') }}/assets/img/img-ctn3/shoe12_968efbaa-1956-4621-93d2-1f1f8fdc3d11_600x.webp"
+                                                    alt="">
+                                            </div>
+                                            <div class="icon-ctn3">
+                                                <a href="{{route('product',$product->id)}}"><i class="fa-solid fa-message"></i></a>
+                                                <a href=""><i class="fa-brands fa-gratipay"></i></a>
+                                                <a href="{{route('product',$product->id)}}"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="name-shoe-ctn3 h-2/5 mt-4">
+                                            <h1> <a href="{{route('product',$product->id)}}">{{ $product->name}}</a> </h1>
+                                            <div class="cost-ctn3">
+                                                <h2> <span>$</span> {{number_format($product->gia,2)}}</h2>
+                                            </div>
+                                            <div class="icon-ctn3">
+                                                <div class="icon-start">
+                                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                                        class="fa-solid fa-star">
+                                                    </i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                                </div>
+                                                <div class="bag-ctn3" data-urlremove="{{route('cart.delete')}}"
+                                                    data-url="{{route('cart.add')}}" data-id="{{$product->id}}"><i class="cursor-pointer fa-solid fa-bag-shopping"></i>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            @endforeach
+                        @endif
+
+                    </div>
+                </div>
+
+            </div>
+
             <div class="contain-5">
                 <div class="header-ctn5">
 
                     <div class="tilte-ctn5">
-                        <h4>BEST SELLERS</h4>
-                        <p>Just in Now</p>
+                        <h4>Bán Chạy Nhất</h4>
+                        <p>Hiện tại</p>
                     </div>
                     <div class="list-ctn5">
                         <ul>
-                            <li><a href="">ALL</a></li>
+                            <li><a href="">Tất cả</a></li>
                             <li><a href="">SALE</a></li>
-                            <li><a href="">BEST</a></li>
-                            <li><a href="">NEW</a></li>
+                            {{-- <li><a href="">BEST</a></li>
+                            <li><a href="">NEW</a></li> --}}
                         </ul>
                     </div>
 
@@ -320,35 +391,36 @@
 
             </div>
 
-            <div class="contain-6">
-                <div class="container-fluid">
-
-                    <div class="row">
-                        <div class="col-md-3 group-icon-ctn6">
-                            <i class="fa-solid fa-plane-departure"></i>
-                            <p>Free
-                                Delivery</p>
-                        </div>
-                        <div class="col-md-3 group-icon-ctn6">
-                            <i class="fa-solid fa-headphones"></i>
-                            <p>Clients
-                                Discounts</p>
-                        </div>
-                        <div class="col-md-3 group-icon-ctn6">
-                            <i class="fa-solid fa-right-left"></i>
-                            <p>Return of goods</p>
-
-                        </div>
-                        <div class="col-md-3 group-icon-ctn6">
-                            <i class="fa-brands fa-bandcamp"></i>
-                            <p>Many
-                                Brands</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+           
 
         </div>
+    </div>
+    <div class="contain-6">
+        <div style="text-align: center;">
+
+            <div class="row">
+                <div class="col-md-3 group-icon-ctn6">
+                    <i class="fa-solid fa-plane-departure"></i>
+                    <p>Free
+                        Delivery</p>
+                </div>
+                <div class="col-md-3 group-icon-ctn6">
+                    <i class="fa-solid fa-headphones"></i>
+                    <p>Clients
+                        Discounts</p>
+                </div>
+                <div class="col-md-3 group-icon-ctn6">
+                    <i class="fa-solid fa-right-left"></i>
+                    <p>Return of goods</p>
+
+                </div>
+                <div class="col-md-3 group-icon-ctn6">
+                    <i class="fa-brands fa-bandcamp"></i>
+                    <p>Many
+                        Brands</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 @endsection

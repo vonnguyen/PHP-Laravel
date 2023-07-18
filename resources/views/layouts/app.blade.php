@@ -51,8 +51,8 @@
 
             <div class="menu-header">
                 <ul class="subnav-menu">
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li class="collection-show"><a href="{{ route('collection') }}">Collection <i
+                    <li><a href="{{ route('home') }}">Trang chủ</a></li>
+                    <li class="collection-show"><a href="{{ route('collection') }}">Tất cả sản phẩm<i
                                 class="fa-solid fa-chevron-down"></i></a>
 
 
@@ -110,16 +110,16 @@
                         </div>
 
                     </li>
-                    <li><a href="{{ route('shoes') }}">Shoes</a></li>
-                    <li><a href="{{ route('boots') }}">Boots</a></li>
+                    <li><a href="{{ route('shoes') }}">SP mới nhất</a></li>
+                    <li><a href="{{ route('boots') }}">SP chính hãng</a></li>
                     {{-- <li><a href="{{ route('boots') }}">Climbing</a></li> --}}
                     <li class="page-show ralative">
-                        <a href="{{ route('blog') }}">Pages <i class="fa-solid fa-chevron-down"></i></a>
+                        <a href="{{ route('blog') }}">Liên hệ <i class="fa-solid fa-chevron-down"></i></a>
                         <ul class="page-show-list p-2 absolute top-full">
-                            <li><a href="{{ route('about') }}">About us</a></li>
-                            <li><a href="{{ route('contact') }}">Contact us</a></li>
+                            <li><a href="{{ route('about') }}">Giới thiệu</a></li>
+                            <li><a href="{{ route('contact') }}">Liên hệ</a></li>
                             <li><a href="{{ route('blog') }}">Blog</a></li>
-                            <li><a href="{{ route('whish') }}">Wishlist</a></li>
+                            <li><a href="{{ route('whish') }}">Giỏ hàng</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -140,7 +140,7 @@
                     <div class="search-mic" style="position: relative;">
                         <input id="transcript"
                             class="py-2 px-4 h-[44px] outline-none border-1 rounded-3xl w-[300px] rounded-r-none"
-                            type="text" name="keyword" placeholder="Find the best for your best" value=""
+                            type="text" name="keyword" placeholder="Tìm kiếm từ khóa" value=""
                             fdprocessedid="uxx3au">
                         <span
                             class="micro absolute top-1/2 -translate-y-1/2 hover:bg-slate-400 rounded-full cursor-pointer hover:text-slate-50 transition-all p-2 text-slate-900 right-0 "><svg
@@ -150,14 +150,14 @@
                                     d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z">
                                 </path>
                             </svg></span>
-                            <span
+                            {{-- <span
                             class="cancel-micro absolute top-1/2 -translate-y-1/2 hover:bg-slate-400 rounded-full cursor-pointer hover:text-slate-50 transition-all p-2 text-slate-900 left-0 "><svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z">
                                 </path>
-                            </svg></span>
+                            </svg></span> --}}
                     </div>
 
                     <button class="btn btn-outline-secondary" type="submit"> <i
@@ -177,7 +177,7 @@
                 </div>
                 <span class="icon-user text-2xl relative  ">
                     <span class="info-user">
-                        <i class="fa-solid fa-user"></i>
+                        <i class="fa-regular fa-user"></i>
                     </span>
                     <ul class="w-[200px] bg-white z-[10] absolute p-3 right-0 rounded-lg shadow-lg model-user">
                         @guest
@@ -199,13 +199,13 @@
                                 <span><a href="{{ route('profile') }} ">{{ Auth()->user()->name }}</a></span>
                             <li class="fs-5">
                                 <a href="{{ route('order') }}">
-                                    Order
+                                    Đơn hàng
                                 </a>
                             </li>
                             <a class="fs-5" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                                Logout
+                                Đăng xuất
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -273,12 +273,12 @@
 
                 <div class="footer-contact">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="footer-list">
-                                <div class="footer-title">Contact us</div>
+                                <div class="footer-title">KẾT NỐI VỚI CHÚNG TÔI</div>
                                 <ul>
                                     <li><i class="fa-solid fa-house-chimney-user"></i>
-                                        <span>No: 58 A, East Madison Street, Baltimore, MD, USA 4508</span>
+                                        <span>ĐHCT, Xuân Khánh, Ninh Kiều, Cần Thơ</span>
                                     </li>
                                     <li><i class="fa-solid fa-phone"></i>
                                         <span>+84 969400633</span>
@@ -292,22 +292,22 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="footer-list">
-                                <div class="footer-title">Info</div>
+                                <div class="footer-title">CÁC CHÍNH SÁCH</div>
                                 <ul>
                                     <li><i class="fa-solid fa-angle-right"></i>
-                                        <span><a href="">Search Term</a></span>
+                                        <span><a href="">Chính sách bảo mật của ShoeZone</a></span>
                                     </li>
                                     <li><i class="fa-solid fa-angle-right"></i>
-                                        <span><a href="">Advanced Search</a></span>
+                                        <span><a href="">Chính sách bảo hành của ShoeZone</a></span>
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-angle-right"></i>
-                                        <span><a href="">Oders and Returns</a></span>
+                                        <span><a href="">Chính sách đổi trả hoàn tiền của ShoeZone</a></span>
                                     </li>
                                     <li><i class="fa-solid fa-angle-right"></i>
-                                        <span><a href="">Consutant</a></span>
+                                        <span><a href="">Phương thức thanh toán của ShoeZone</a></span>
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-angle-right"></i>
@@ -318,57 +318,37 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="footer-list">
-                                <div class="footer-title">Help</div>
+                                <div class="footer-title">HỖ TRỢ KHÁCH HÀNG</div>
                                 <ul>
                                     <li><i class="fa-solid fa-angle-right"></i>
-                                        <span><a href="">About</a></span>
+                                        <span><a href="">Giới thiệu</a></span>
                                     </li>
                                     <li><i class="fa-solid fa-angle-right"></i>
-                                        <span><a href="">Contact</a></span>
+                                        <span><a href="">Liên hệ</a></span>
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-angle-right"></i>
-                                        <span><a href="">Privacy Policy</a></span>
+                                        <span><a href="">Tác giả</a></span>
                                     </li>
                                     <li><i class="fa-solid fa-angle-right"></i>
-                                        <span><a href="">Best Sellers</a></span>
+                                        <span><a href="">Google News Tyhisneaker.com</a></span>
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-angle-right"></i>
-                                        <span><a href="">Support</a></span>
+                                        <span>Mua hàng: 
+                                            <strong>
+                                                <a href="tel:+84969400633">0969400633</a>
+                                                </strong> (7h30-22h)
+
+                                        </span>
                                     </li>
                                 </ul>
 
                             </div>
                         </div>
 
-                        <div class="col-md-3">
-                            <div class="footer-list">
-                                <div class="footer-title">Support</div>
-                                <ul>
-                                    <li><i class="fa-solid fa-angle-right"></i>
-                                        <span><a href="">Search Term</a></span>
-                                    </li>
-                                    <li><i class="fa-solid fa-angle-right"></i>
-                                        <span><a href="">Advanced Search</a></span>
-                                    </li>
-                                    <li>
-                                        <i class="fa-solid fa-angle-right"></i>
-                                        <span><a href="">Oders and Returns</a></span>
-                                    </li>
-                                    <li><i class="fa-solid fa-angle-right"></i>
-                                        <span><a href="">Consutant</a></span>
-                                    </li>
-                                    <li>
-                                        <i class="fa-solid fa-angle-right"></i>
-                                        <span><a href="">Help & FAQs</a></span>
-                                    </li>
-                                </ul>
-
-                            </div>
-                        </div>
 
                     </div>
                 </div>
@@ -385,7 +365,7 @@
 
                 <div class="site-footer__bottom">
                     <div class="end-footer">
-                        <p><i class="fa-regular fa-copyright"></i>2022 Shoes <a href="">Design Von Nguyen</a>
+                        <p><i class="fa-regular fa-copyright"></i>2023 Shoes <a href="">Design Von Nguyen</a>
                         </p>
                     </div>
                 </div>
@@ -400,7 +380,7 @@
                 <div class="heading-cart">
                     <span class="close"><i class="fa-solid fa-xmark"></i></span>
                     <div class="header-cart">
-                        <h4>Your Cart</h4>
+                        <h4>Giỏ hàng của bạn</h4>
                     </div>
                 </div>
 
@@ -441,20 +421,20 @@
 
                 <div class="bottom-cart">
                     <div class="sub-total">
-                        <div class="p-title">Total</div>
+                        <div class="p-title">Tổng cộng</div>
                         <span class="money">$<span class="sumMoney">{{ $sum }}</span></span>
                     </div>
                     <div class="p-main">
-                        Shipping, taxes, and discounts will be calculated at checkout.
+                        Vận chuyển, thuế và chiết khấu sẽ được tính khi thanh toán.
                     </div>
                     <div class="btn-cart">
                         <a class="block w-full" href="{{ route('infomation') }}">
-                            <button>PRODUCT TO CHECK OUT</button>
+                            <button>THANH TOÁN</button>
                         </a>
                     </div>
                     <div class="btn-cart">
                         <a class="block w-full" href="{{ route('whish') }}">
-                            <button>VIEW CART</button>
+                            <button>XEM GIỎ HÀNG</button>
                         </a>
                     </div>
                 </div>

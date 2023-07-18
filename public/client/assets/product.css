@@ -387,7 +387,7 @@
     background-color: #571F7C;
     color: #fff;
     font-family: var(--font);
-    padding: 18px 32px;
+    padding: 10px 16px;
     text-transform: uppercase;
 }
 .product-wishlist-cart .dt-sc-btn:hover {

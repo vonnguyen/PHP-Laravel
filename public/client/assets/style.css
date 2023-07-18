@@ -288,7 +288,7 @@ span.carousel-control-next-icon
  {
   background-color: #333;
     border-radius: 50%;
-    padding: 20px;
+    padding: 15px;
     align-items: center;
 }
 .carousel-control-prev {
@@ -322,6 +322,9 @@ span.carousel-control-next-icon
 
 .ctn2-img {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.ctn2-img img {
+  height: 100%;
 }
 .slide-picture{ 
   align-self:inherit;  
@@ -587,7 +590,7 @@ i.fa-solid.fa-bag-shopping {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 45px;
+  bottom: 85px;
 }
 
 .btn-ctn4 p {
@@ -694,7 +697,7 @@ i.fa-solid.fa-bag-shopping {
 
 /* -------------------------------- */
 .contain-6 {
-  background: #fbfbfb;
+  background: #ccc;
   padding: 50px 0;
 }
 

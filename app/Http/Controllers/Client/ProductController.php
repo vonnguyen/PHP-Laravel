@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -20,8 +21,8 @@ class ProductController extends Controller
         $product_test = $products;
         $products = $products->paginate(4)->withQueryString();
         $productshow = $product_test->paginate(self::_PER_PAGE)->withQueryString();
-
-        return view('client.product',compact('products', 'productshow'));
+        $listCate = Category::all();
+        return view('client.product',compact('products', 'productshow','listCate'));
     }
 
     function detail($id){

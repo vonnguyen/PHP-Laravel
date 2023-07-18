@@ -8,11 +8,11 @@
     <div class="pt-[110px]">
         <div class="slide-header">
             <div class="contain-slide">
-                <p>WISHLIST</p>
+                <p>Giỏ Hàng</p>
                 <ul>
-                    <li><a href="{{route('home')}}">HOME</a> </li>
+                    <li><a href="{{route('home')}}">Trang chủ</a> </li>
                     <li>/</li>
-                    <li>Wishlist</li>
+                    <li>Giỏ hàng</li>
                 </ul>
             </div>
         </div>
@@ -24,13 +24,13 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>IMAGE</th>
-                                <th>PRODUCT</th>
-                                <th>PRICE</th>
-                                <th>NUMBER</th>
-                                <th>TOTAL</th>
-                                <th>PURCHASE</th>
-                                <th>REMOVE</th>
+                                <th>Hình ảnh</th>
+                                <th>Tên</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng cộng</th>
+                                <th>Xem</th>
+                                <th>Xóa</th>
                             </tr>
                         </thead>
                         <tbody >
@@ -59,14 +59,14 @@
                                 <td class="product-wishlist-cart">
                                     <a href="{{route('product',$item->id)}}">
                                         <button class="dt-sc-btn">
-                                            Select Options
+                                            Chi tiết
                                         </button>
                                     </a>
                                 </td>
                                 <td class="remove">
                                         <div class="item-remove" data-urlremove="{{route('cart.delete')}}"
                                             data-url="{{route('cart.add')}}" data-id="{{$item->id}}">
-                                            <i class="cursor-pointer fa-solid fa-trash-can"></i>
+                                            <i class="cursor-pointer fa-solid fa-trash-can" style="color: red"></i>
                                         </div>
                                 </td>
                             
@@ -82,14 +82,14 @@
                     <div class="product-wishlist-cart">
                         <a href="{{route('shoes')}}">
                             <button class="dt-sc-btn">
-                                Countinue Shopping
+                                Tiếp tục mua sắm
                             </button>
                         </a>
                     </div>
                     <div class="product-wishlist-cart">
                         <a href="{{route('infomation')}}">
                             <button class="dt-sc-btn">
-                                proceed to checkout
+                                tiến hành kiểm tra
                             </button>
                         </a>
                     </div>

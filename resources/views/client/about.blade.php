@@ -189,7 +189,7 @@
                     </div>
 
                     <div class="dt-sc-btn">
-                        <button><a href="">SHOP NOW</a></button>
+                        <button><a href="">Mua ngay</a></button>
                     </div>
                 </div>
             </div>

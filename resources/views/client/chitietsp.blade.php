@@ -59,7 +59,7 @@
                             </div>
 
                         </div>
-                        <div class="info-detail">
+                        {{-- <div class="info-detail">
                             <span class="info-title">Material:</span>
                             <div class="info-border__material">
                                 <span>Leather</span>
@@ -67,13 +67,13 @@
                                 <span>Leather</span>
                             </div>
 
-                        </div>
-                        <div class="info-detail">
+                        </div> --}}
+                        {{-- <div class="info-detail">
                             <span class="info-title">Vendor:</span>
                             <div>
                                 <a href=""><span>Geox</span></a>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="info-detail">
                             <span class="info-title">Type:</span>
                             <div>

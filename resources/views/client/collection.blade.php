@@ -35,7 +35,7 @@
                                     </p>
                                     <a href="{{ route('shoes') }}" class="collection-btn">
                                         <button>
-                                            SHOP NOW
+                                            Mua ngay
                                         </button>
                                     </a>
                                 </div>
