@@ -33,7 +33,7 @@
                             <p class="m-0 flex gap-3 items-center"><span
                                     class="p-[10px] flex justify-center items-center block w-[5px] h-[5px] max-w-[5px] max-h-[5px] bg-blue-600 rounded-full"><span
                                         class="p-[3px] block w-[3px] h-[3px] max-w-[3px] max-h-[3px] rounded-full leading-none bg-white"></span></span><span>
-                                    Phí vận chuyển</span></p><span class="font-semibold">$ 0</span>
+                                    Phí vận chuyển</span></p><span class="font-semibold">0₫</span>
                         </div>
                     </div>
 
@@ -88,16 +88,21 @@
                                                     class="w-[80px] border rounded-2xl" alt=""><span
                                                     class="absolute top-[-8px] p-1 bg-gray-500 rounded-full leading-none  text-white right-[-8px] min-w-[20px] min-h-[20px] max-w-[20px] max-h-[20px] flex justify-center items-center">{{$item->number}}</span>
                                             </div>
-                                            <p class="font-semibold">{{$item->name}}</p>
+                                            <div class="flex flex-col">
+
+                                                <p class="font-semibold"><span style="font-size: 15px">Tên sản phẩm: </span>{{ $item->name }}</p>
+                                                <p class="font-semibold"><span style="font-size: 15px">Màu sắc: </span> {{ $item->color }}</p>
+                                                <p class="font-semibold"><span style="font-size: 15px">Kích thước: </span> {{ $item->size }}</p>
+                                            </div>
                                         </div>
-                                        <p class="flex-end font-semibold"> $ {{number_format($item->gia ,2)}}</p>
+                                        <p class="flex-end font-semibold"> {{number_format($item->gia ,2)}} ₫</p>
                                     </div>
                                 @endforeach
                             @endif
                         </div>
                         <div class="subtotal py-3 border-b m-0">
                             <p class="flex justify-between"><span class="text-gray-600">Tổng phụ thu</span><span
-                                    class="font-semibold"> $ {{number_format($sum,2)}}</span></p>
+                                    class="font-semibold"> {{number_format($sum,2)}} ₫</span></p>
                                     <p class="flex justify-between"><span class="text-gray-600">Phí Ship</span><span
                                         class="font-semibold fee"></span></p>
                             <p class="flex justify-between items-center m-0"><span
@@ -137,8 +142,8 @@
     input_address.value  = data_payment.address.replaceAll("\"","");
     input_fee.value  =data_payment.fee
 
-    fee.textContent = "$ "+data_payment.fee
-    total_price.textContent = "$ "+(+total_price.dataset.price + Number(data_payment.fee))
+    fee.textContent = data_payment.fee+" ₫"
+    total_price.textContent = (+total_price.dataset.price + Number(data_payment.fee))+ " ₫"
 
  </script>
 @endsection

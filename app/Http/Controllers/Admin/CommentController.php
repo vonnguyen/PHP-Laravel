@@ -22,7 +22,7 @@ class CommentController extends Controller
         return redirect()->route('admin.comments.list')->with('msg','Thêm nhóm người dùng thành công');
     }
     function list(){
-        $comments =Comment::paginate(6);
+        $comments =Comment::all();
         return view('admin.comments.list',compact("comments"));  // truyen du lieu vao danh muc
     }
     function delete($id){

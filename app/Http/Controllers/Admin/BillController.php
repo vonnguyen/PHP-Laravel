@@ -23,7 +23,7 @@ class BillController extends Controller
         return redirect()->route('admin.bill.list')->with('msg','Thêm nhóm người dùng thành công');
     }
     function list(){
-        $bills =bill::orderBy("id","desc")->paginate(4);
+        $bills =bill::orderBy("id","desc")->get();
         return view('admin.bill.list',compact("bills"));  // truyen du lieu vao danh muc
     }
     // Hien thi add

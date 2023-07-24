@@ -8,11 +8,11 @@
     <div class="pt-[110px]">
         <div class="slide-header">
             <div class="contain-slide">
-                <p>BOOTS</p>
+                <p>Sản Phẩm Chính Hãng</p>
                 <ul>
-                    <li><a href="{{ route('home') }}">HOME</a> </li>
+                    <li><a href="{{ route('home') }}">Trang chủ</a> </li>
                     <li>/</li>
-                    <li>Hiking Boots</li>
+                    <li>Sản phẩm chính hãng</li>
                 </ul>
             </div>
         </div>
@@ -59,14 +59,14 @@
                                             <div class="icon-ctn3">
                                                 <a href=""><i class="fa-solid fa-message"></i></a>
                                                 <a href=""><i class="fa-brands fa-gratipay"></i></a>
-                                                <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <a href="{{route('product', $product->id)}}"><i class="fa-solid fa-magnifying-glass"></i></a>
                                             </div>
                                         </div>
                                         <div class="name-shoe-ctn3">
                                             <h1> <a href="{{ route('product', $product->id) }}">{{ $product->name }}</a>
                                             </h1>
                                             <div class="cost-ctn3">
-                                                <h2><span>$</span>{{ number_format($product->gia, 2) }}</h2>
+                                                <h2>{{ number_format($product->gia, 2) }}<span>₫</span></h2>
                                             </div>
                                             <div class="icon-ctn3">
                                                 <div class="icon-start">
@@ -160,17 +160,17 @@
                             <p class="pt-3">Lọc theo giá sản phẩm</p>
                             <div class="list-tags">
                                 <h5>
-                                    Giá cao nhất là <span class="money">$1000.00</span>
+                                    Giá cao nhất là <span class="money">500000₫</span>
                                 </h5>
                                 <div class="cost-product">
-                                    <h6>Từ $</h6>
+                                    <h6>Từ:</h6>
                                     <input name="from" class="border-1" type="number"
-                                        value="{{ request()->from ?? 1 }}">
+                                        value="{{ request()->from ?? 100000 }}">
                                 </div>
                                 <div class="cost-product pt-2">
-                                    <h6>Đến $</h6>
+                                    <h6>Đến:</h6>
                                     <input name="to" class="border-1" type="number"
-                                        value="{{ request()->to ?? 1000 }}">
+                                        value="{{ request()->to ?? 5000000 }}">
                                 </div>
                             </div>
 
@@ -187,10 +187,38 @@
 
 
 
-                        <p class="pt-3">Hot Deals</p>
-                        <div class="img-ctn3">
-                            <img src="./assets/img/slide-header/breadcrumb-4.webp" alt="">
+                        <p class="pt-3">Sale lớn</p>
+                        {{-- <div class="img-ctn3">
+                            <div class="groups-img">
+                                <img src="{{ $product->image }}">
+                                <img src="{{ asset('client') }}/assets/img/img-ctn2/adidas5-1.webp" alt="">
+                            </div>
+                            <div class="icon-ctn3">
+                                <a href=""><i class="fa-solid fa-message"></i></a>
+                                <a href=""><i class="fa-brands fa-gratipay"></i></a>
+                                <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                            </div>
                         </div>
+
+                        <div class="name-shoe-ctn3">
+                            <h1> <a href="{{ route('product', $product->id) }}">{{$product->name}}</a> </h1>
+                            <div class="cost-ctn3">
+                                <h2>{{$product->gia}}</h2>
+                            </div>
+                            <div class="icon-ctn3">
+                                <div class="icon-start">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                        class="fa-solid fa-star">
+                                    </i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="bag-ctn3"><i class="fa-solid fa-bag-shopping"></i></div>
+
+                            </div>
+                        </div>
+                        <div class="item-blog">
+                            <span><i class="fa-solid fa-chevron-left"></i></span>
+                            <span><i class="fa-solid fa-chevron-right"></i></span>
+                        </div> --}}
 
 
                     </div>

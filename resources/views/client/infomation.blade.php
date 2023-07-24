@@ -132,25 +132,32 @@
                                                     alt=""><span
                                                     class="absolute top-[-8px] p-1 bg-gray-500 rounded-full leading-none  text-white right-[-8px] min-w-[20px] min-h-[20px] max-w-[20px] max-h-[20px] flex justify-center items-center">{{ $item->number }}</span>
                                             </div>
-                                            <p class="font-semibold">{{ $item->name }}</p>
+                                            <div class="flex flex-col">
+
+                                                <p class="font-semibold"><span style="font-size: 15px">Tên sản phẩm: </span>{{ $item->name }}</p>
+                                                <p class="font-semibold"><span style="font-size: 15px">Màu sắc: </span> {{ $item->color }}</p>
+                                                <p class="font-semibold"><span style="font-size: 15px">Kích thước: </span> {{ $item->size }}</p>
+                                            </div>
+
                                         </div>
-                                        <p class="flex-end font-semibold"> $ {{ number_format($item->gia, 2) }}</p>
+                                        
+                                        <p class="flex-end font-semibold">{{ number_format($item->gia, 2)}} ₫</p>
                                     </div>
                                 @endforeach
                             @endif
                         </div>
                         <div class="subtotal py-3 border-b m-0">
                             <p class="flex justify-between"><span class="text-gray-600">Tổng phụ thu</span><span
-                                    class="font-semibold"> $ {{ number_format($sum, 2) }}</span></p>
+                                    class="font-semibold"> {{ number_format($sum, 2)}} ₫</span></p>
                             <p class="flex justify-between items-center m-0"><span
                                     class="text-gray-600">Đang chuyển hàng</span><span class="text-xs">Tính toán ở bước tiếp theo</span></p>
                         </div>
                         <div class="py-3">
                             <p class="flex justify-between items-center"><span class="text-xl">Tổng cộng</span>
                                 <span>
-                                    <span class="font-semibold text-3xl"> $
-                                    </span>
                                     <span class="font-semibold text-3xl total">{{ number_format($sum, 2) }}
+                                    </span>
+                                    <span class="font-semibold text-3xl"> ₫
                                     </span>
                                 </span>
 
@@ -234,7 +241,7 @@
                         },
                         data: JSON.stringify({
                             service_id: +service.data.data[0].service_id,
-                            insurance_value: parseInt(total_price * 23000),
+                            insurance_value: parseInt(total_price),
                             coupon: null,
                             to_ward_code: localStorage.getItem('code_ward'),
                             to_district_id: +id_district,
@@ -254,7 +261,7 @@
                         address: address + ", " + select_ward + ", " + select_district + ", " +
                             select_province,
                         total,
-                        fee: Number.parseFloat((data.data.total)/23000).toFixed(2)
+                        fee: Number.parseFloat((data.data.total))
                     }
                    
                     localStorage.setItem('data_payment', JSON.stringify(data_payment));

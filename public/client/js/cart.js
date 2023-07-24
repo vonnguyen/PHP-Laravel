@@ -30,6 +30,9 @@ window.addEventListener('load', function () {
     add_detail?.addEventListener('click', function () {
         let id = this.dataset.id;
         let url = this.dataset.url;
+        let color = localStorage.getItem('color');
+        let size = localStorage.getItem('size');
+
         let numberProduct = number_detail.textContent;
         let urlRemove = this.dataset.remove;
         $.ajaxSetup({
@@ -43,7 +46,9 @@ window.addEventListener('load', function () {
             url: url,
             data: JSON.stringify({
                 id,
-                numberProduct
+                numberProduct,
+                color,
+                size
             }),
             dataType: 'json',
             success: function (data) {
@@ -176,8 +181,8 @@ window.addEventListener('load', function () {
         </div>
         <div class="detais-cart">
             <h6>${item.name}</h6>
-            <p>7 / yellow / leather</p>
-            <span>${item.gia}</span>
+            <p>${item.color} / ${item.size}</p>
+            <span>${item.gia} ₫</span>
             <div class="dt-sc-cart">
                 <span data-url="${url}" data-id="${item.id}" class="up-down decre">-</span>
                 <input type="text" value="${item.number}">
@@ -245,7 +250,7 @@ window.addEventListener('load', function () {
                         icon: 'success',
                         title: 'Thêm sản phẩm thành công !',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 1300
                     })
                 },
                 error: function (e) {

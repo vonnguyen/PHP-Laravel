@@ -3,8 +3,8 @@
 
 @section('main')
 <div class="">
-    <div class="frmtitle">
-        <H1 class="m-0 py-2 fs-5">THÊM MỚI LOẠI HÀNG HÓA</H1>
+    <div class="frmtitle py-3 bg-info">
+        <h1 class="m-0 py-2 fs-5 text-center fw-bold text-white">Cập nhật danh mục sản phẩm</h1>
     </div>
     <div class="row frmcontent">
      
@@ -23,9 +23,9 @@
                 <input type="text" value="{{$cate->name}}"  name="name">
             </div>
             <div class="mb10">
-                <input type="submit" name="themmoi" value="CẬP NHẬT">
-                <input type="reset" value="NHẬP LẠI">
-                <a href="{{route('admin.category.listds')}}"><input type="button" value="DANH SÁCH"></a>
+                <button class="btn btn-info" type="submit" name="themmoi">CẬP NHẬT</button>
+                <button class="btn btn-info" type="reset">NHẬP LẠI</button>
+                <a href="{{ route('admin.category.listds') }}"><button class="btn btn-info">DANH SÁCH</button></a>
             </div>
 
         </form>

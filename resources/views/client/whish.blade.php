@@ -47,14 +47,14 @@
                                     <a href="">{{$item->name}}</a>
                                 </td>
                                 <td class="product-price-cart">
-                                    <span>$</span> 
                                     <span>{{number_format($item->gia , 2)}}</span>
+                                    <span>₫</span> 
                                 </td>
                                 <td class="product-number">
                                     <span>{{$item->number}}</span>
                                 </td>
                                 <td class="product-total">
-                                    <span><span>$ </span>{{number_format($item->total , 2)}}</span>
+                                    <span>{{number_format($item->total , 2)}}<span>₫</span></span>
                                 </td>
                                 <td class="product-wishlist-cart">
                                     <a href="{{route('product',$item->id)}}">

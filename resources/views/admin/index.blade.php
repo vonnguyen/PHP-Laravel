@@ -44,7 +44,7 @@
         </div>
         <div class="col-4">
             <ul>
-                <li class="fw-bold fs-4" style="padding-top:150px">Tổng doanh thu: <span class="fs-3">$</span> {{$TongDoanhThu}}</li>
+                <li class="fw-bold fs-4" style="padding-top:150px">Tổng doanh thu:{{$TongDoanhThu}}<span class="fs-3">₫</span> </li>
                 <li class="fw-bold fs-4 py-3">Tổng SL hàng đã bán:  {{$TongSoHang}}</li>
                 <li class="fw-bold fs-4">SL đơn hàng xuất kho:  {{$TongDonHang}} </li>
             </ul>
@@ -64,14 +64,14 @@
                             <th class="w-35" scope="col">Tên SP</th>
                             <th class="w-15" scope="col">Giá</th>
                             <th class="w-25" scope="col">Số lượng</th>
-                            <th class="w-25" scope="col">Image</th>
+                            <th class="w-25" scope="col">Hình ảnh</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($topThreeProductRating as $item)
                             <tr class="table-success">
                                 <td>{{ $item->info_product->name }}</td>
-                                <td><span>$</span>{{ $item->info_product->gia }}</td>
+                                <td>{{ $item->info_product->gia }}<span>₫</span></td>
                                 <td>{{ $item->total }}</td>
                                 <td><img class="w-50" src="{{ $item->info_product->image }}" alt=""></td>
                             </tr>
@@ -90,7 +90,7 @@
                             <th class="w-35" scope="col">Tên SP</th>
                             <th class="w-15" scope="col">Giá</th>
                             <th class="w-25" scope="col">Số lượng</th>
-                            <th class="w-25" scope="col">Image</th>
+                            <th class="w-25" scope="col">Hình ảnh</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -115,16 +115,19 @@
             <h5 class="text-center text-info fw-bold">THỐNG KÊ DANH SÁCH NGƯỜI MUA</h5>
         </div>
         <div class="frmcontent">
-            <div class="">
-                <table class="table">
-                    <tr class="table-info text-center">
-                        <th>ID</th>
-                        <th>THÔNG TIN CÁ NHÂN</th>
-                        <th>TỔNG TIỀN</th>
-                        <th>TRẠNG THÁI</th>
-                        <th>NGÀY</th>
-                        <th>VIEW</th>
-                    </tr>
+            <div class="table">
+                <table class="display" id="table_products">
+                    <thead class="table-info">
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">THÔNG TIN CÁ NHÂN</th>
+                            <th class="text-center">TỔNG TIỀN</th>
+                            <th class="text-center">TRẠNG THÁI</th>
+                            <th class="text-center">NGÀY</th>
+                            <th class="text-center">THAO TÁC</th>
+                        </tr>
+
+                    </thead>
                     @if (!empty($bills))
                         @foreach ($bills as $item)
                             <tr>
@@ -145,7 +148,7 @@
 
 
                                 </td>
-                                <td> <span> $ {{ $item->total }} </span></td>
+                                <td> <span>{{ $item->total }}₫ </span></td>
                                 <td><span class="text-{{ getStatusBill($item->statuss)['color'] }}">
                                         {{ getStatusBill($item->statuss)['message'] }}
                                     </span> </td>
@@ -161,32 +164,16 @@
 
                 </table>
 
-                {{-- phan trang --}}
-                <style>
-                    .page-item.active .page-link {
-                        background-color: gray !important;
-                    }
-
-                    .page-link {
-                        width: 50px;
-                        height: 50px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-
-                        padding: 8px;
-                        font-size: 20px;
-                    }
-                </style>
-                <div class="flex justify-end my-5">
-
-
-                    {{ $bills->links() }}
-                </div>
-                {{-- end phan trang --}}
-
-
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+
+    <script type="module">
+$(document).ready(function() {
+    $('#table_products').DataTable();
+})
+</script>
 @endsection

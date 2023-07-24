@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Product;
+use App\Models\product_property;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -24,6 +27,14 @@ class ProductController extends Controller
         $product->cate = $request->cate;
          
         $product->save();
+
+        $product_property  = new product_property();
+
+        $product_property->product_id = $product->id;
+        $product_property->sizes = json_encode($request->input('sizes'));
+        $product_property->colors =  json_encode($request->input('colors'));
+        $product_property->save();
+
         return redirect()->route('admin.product.list')->with('msg','Them danh muc thanh cong');
     }
     function list(Request $request){
@@ -33,29 +44,48 @@ class ProductController extends Controller
         if($request->cate){
             $listProduct = $listProduct->where('cate',$request->cate);
         }
-        $listProduct = $listProduct->paginate(6)->withQueryString();
+        $listProduct = $listProduct->get();
         return view('admin.product.list',compact("listProduct","listCate"));  // truyen du lieu vao danh muc
     }
     // Hien thi add
     function showadd(){
         $listCate = Category::all();
-        return view('admin.product.add', compact("listCate"));
+        $sizes = Size::all();
+        $colors = Color::all();
+
+
+        return view('admin.product.add', compact("listCate","sizes","colors"));
     }
     function showupdate($id){
         $listCate = Category::all();
-
-        $cate =Product::find($id);
-        return view('admin.product.update',compact('cate','listCate')); // truyen du lieu vao danh muc
+        $sizes = Size::all();
+        $colors = Color::all();
+        $product =Product::find($id);
+        return view('admin.product.update',compact('product','listCate','sizes','colors')); // truyen du lieu vao danh muc
     }
     // xoa
     function delete($id){
         $deleted =Product::where('id', $id)->delete();
-        $listProduct = Product::paginate(6);
+        $listProduct = Product::get();
         return redirect()->route('admin.product.list',compact("listProduct"));  // truyen du lieu vao danh muc
     }
     // update
     function sua($id,Request $request){
        $product =Product::find($id);
+       $property = product_property::where('product_id',$id)->first();
+       if(!empty($property)){
+
+           $property->sizes = json_encode($request->input('sizes'));
+            $property->colors =  json_encode($request->input('colors'));
+            $property->update();
+       }else{
+        $product_property  = new product_property();
+
+        $product_property->product_id = $product->id;
+        $product_property->sizes = json_encode($request->input('sizes'));
+        $product_property->colors =  json_encode($request->input('colors'));
+        $product_property->save();
+       }
         if($request->name){
             $product->name= $request->name;
         }

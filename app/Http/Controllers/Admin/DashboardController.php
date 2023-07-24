@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $bills = bill::orderBy("id", "desc")->paginate(4); //lay ra danh sach bill
+        $bills = bill::orderBy("id", "desc")->get(); //lay ra danh sach bill
         $billsNew = DB::table('bills')
             ->select('id')
             ->where('statuss', 2)

@@ -1,47 +1,49 @@
 @extends('layouts.index')
 @section('main')
 
-<div class="">
-    <div class="frmtitle py-3 bg-info">
-        <h1 class="m-0 py-2 fs-5 text-center fw-bold text-white">DANH SÁCH LOẠI HÀNG</h1>
-    </div>
-    <div class="frmcontent">
-        <div class="table">
-            <table>
-                <tr class="table-info text-center">
-                    <th></th>
-                    <th>MÃ LOẠI</th>
-                    <th>TÊN LOẠI</th>
-                    <th></th>
-                </tr>
+    <div class="">
+        <div class="frmtitle py-3 bg-info">
+            <h1 class="m-0 py-2 fs-5 text-center fw-bold text-white">DANH MỤC SẢN PHẨM</h1>
+        </div>
 
-                @if (!empty($listDanhMuc))
+        <div class="pt-5">
+            <a href="{{ route('admin.category.add') }}"><button class="btn bg-info">Nhập thêm</button></a>
+        </div>
 
-                    @foreach ($listDanhMuc as $item)
-                        <tr>
-                            <td><input type="checkbox" name="" id="" /></td>
-                            <td>{{$item->id}}</td>
-                            <td>{{$item->name}}</td>
-                            <td>
-                                <a class="btn btn-warning" href="{{route('admin.category.showupdate',$item['id'])}}">Sửa</a>
-                                <a class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa !!')" href="{{ route('admin.category.delete',$item['id'])}}">Xóa</a>
-                            </td>
+        <div class="frmcontent">
+            <div class="table">
+                <table class="display" id="table_category">
+                    <thead>
+                        <tr class="table-info">
+                            <th class="text-center">MÃ LOẠI</th>
+                            <th class="text-center">TÊN LOẠI</th>
+                            <th class="text-center">THAO TÁC</th>
                         </tr>
-                    @endforeach
-                    
-                @endif
+                    </thead>
+                    <tbody>
+                        @if (!empty($listDanhMuc))
+                            @foreach ($listDanhMuc as $item)
+                                <tr>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>
+                                        <a class="btn btn-warning"
+                                            href="{{ route('admin.category.showupdate', $item['id']) }}">Sửa</a>
+                                        <a class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa !!')"
+                                            href="{{ route('admin.category.delete', $item['id']) }}">Xóa</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
 
-            </table>
-        </div>
-        <div class=" mb10">
-            <input type="button" value="Chọn tất cả" />
-            <input type="button" value="Bỏ chọn tất cả" />
-            <input type="button" value="Xóa các mục đã chọn" />
-            <a href="{{route('admin.category.add')}}"><input type="button" value="Nhập thêm" /></a>
-        </div>
 
-         {{-- phan trang --}}
-         <style>
+
+                </table>
+            </div>
+           
+            {{-- phan trang --}}
+            {{-- <style>
             .page-item.active .page-link{
                 background-color: gray !important; 
             }
@@ -60,10 +62,18 @@
 
 
             {{ $listDanhMuc->links() }}
-        </div>
-        {{--end phan trang --}}
+        </div> --}}
+            {{-- end phan trang --}}
 
-        
+
+        </div>
     </div>
-</div>
+@endsection
+
+@section('script')
+    <script type="module">
+$(document).ready(function() {
+    $('#table_category').DataTable();
+})
+</script>
 @endsection

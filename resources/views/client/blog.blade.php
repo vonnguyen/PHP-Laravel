@@ -139,7 +139,7 @@
             <div class="col-3">
                 <div class="sidebar-blog">
                     <div class="recent-blog">
-                        <p> Recent Articles</p>
+                        <p> Bài viết gần đây</p>
                         <div class="img-sidebar">
                             <div class="img">
                                 <div class="item-sidebar">

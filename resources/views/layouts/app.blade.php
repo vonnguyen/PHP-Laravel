@@ -402,8 +402,8 @@
                                 </div>
                                 <div class="detais-cart">
                                     <h6>{{ $item->name }}</h6>
-                                    <p>7 / yellow / leather</p>
-                                    <span>{{ $item->gia }}</span>
+                                    <p>Color: {{$item->color}}  / Size: {{$item->size}}</p>
+                                    <span>{{ $item->gia }} ₫</span>
                                     <div class="dt-sc-cart">
                                         <span data-url="{{ route('cart.add') }}" data-id="{{ $item->id }}"
                                             class="up-down decre">-</span>
@@ -422,7 +422,7 @@
                 <div class="bottom-cart">
                     <div class="sub-total">
                         <div class="p-title">Tổng cộng</div>
-                        <span class="money">$<span class="sumMoney">{{ $sum }}</span></span>
+                        <span class="money"><span class="sumMoney">{{ $sum }}</span>₫</span>
                     </div>
                     <div class="p-main">
                         Vận chuyển, thuế và chiết khấu sẽ được tính khi thanh toán.
@@ -544,7 +544,7 @@
                 recordBtn.classList.remove("recording");
                 recording = false;
             }
-            cancel_micro.addEventListener("click", () => {
+            cancel_micro?.addEventListener("click", () => {
                 console.log('cancel micro');
                 if (!recording) {
                     speechToText();
@@ -554,6 +554,7 @@
                 }
             });
         </script>
+         <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
         {{-- <script src="./responesive.js"></script> --}}
         @yield('js')
 

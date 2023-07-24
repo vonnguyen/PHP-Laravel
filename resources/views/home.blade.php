@@ -23,7 +23,7 @@
                                 alt="...">
                             <div class="contain-1-text">
                                 <h1 class="title">ZEN VIVID 15</h1>
-                                <p>Bán chạy nhất từ ​​$42.00</p>
+                                <p>Bán chạy nhất từ ​​42.00₫</p>
                                 <a href="{{route('boots')}}">
                                     <button class="contain-btn">Mua Ngay</button>
                                 </a>
@@ -36,7 +36,7 @@
                                 alt="...">
                             <div class="contain-2-text">
                                 <h2 class="title">STARTS FROM </h2>
-                                <p>$745.00</p>
+                                <p>745.00₫</p>
                                 <a href="{{ route('collection') }}">
                                     <button class="contain-btn">Xem sản phẩm</button>
                                 </a>
@@ -215,7 +215,7 @@
                                         <div class="name-shoe-ctn3 h-2/5 mt-4">
                                             <h1> <a href="{{route('product',$product->id)}}">{{ $product->name}}</a> </h1>
                                             <div class="cost-ctn3">
-                                                <h2> <span>$</span> {{number_format($product->gia,2)}}</h2>
+                                                <h2> {{number_format($product->gia,2)}}<span>₫</span></h2>
                                             </div>
                                             <div class="icon-ctn3">
                                                 <div class="icon-start">
@@ -294,7 +294,7 @@
                                         <div class="name-shoe-ctn3 h-2/5 mt-4">
                                             <h1> <a href="{{route('product',$product->id)}}">{{ $product->name}}</a> </h1>
                                             <div class="cost-ctn3">
-                                                <h2> <span>$</span> {{number_format($product->gia,2)}}</h2>
+                                                <h2> {{number_format($product->gia,2)}} <span>₫</span></h2>
                                             </div>
                                             <div class="icon-ctn3">
                                                 <div class="icon-start">
@@ -362,7 +362,7 @@
                                             <div class="name-shoe-ctn3 h-1/4 mt-4">
                                                 <h1> <a href="{{route('product',$product->id)}}">{{ $product->name }}</a> </h1>
                                                 <div class="cost-ctn3">
-                                                    <h2> <span>$</span>{{number_format($product->gia,2)}}</h2>
+                                                    <h2> {{number_format($product->gia,2)}}<span>₫</span></h2>
                                                 </div>
                                                 <div class="icon-ctn3">
                                                     <div class="icon-start">

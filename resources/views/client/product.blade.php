@@ -8,11 +8,11 @@
 
         <div class="slide-header ">
             <div class="contain-slide">
-                <p>PRODUCTS</p>
+                <p>Sản Phẩm Mới</p>
                 <ul>
-                    <li><a href="{{ route('home') }}">HOME</a> </li>
+                    <li><a href="{{ route('home') }}">Trang chủ</a> </li>
                     <li>/</li>
-                    <li>Product</li>
+                    <li>Sản phẩm mới</li>
                 </ul>
             </div>
         </div>
@@ -49,14 +49,14 @@
                                             <div class="icon-ctn3">
                                                 <a href=""><i class="fa-solid fa-message"></i></a>
                                                 <a href=""><i class="fa-brands fa-gratipay"></i></a>
-                                                <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <a href="{{route('product', $product->id)}}"><i class="fa-solid fa-magnifying-glass"></i></a>
                                             </div>
                                         </div>
                                         <div class="name-shoe-ctn3 h-2/5 mt-4">
                                             <h1> <a href="{{ route('product', $product->id) }}">{{ $product->name }}</a>
                                             </h1>
                                             <div class="cost-ctn3">
-                                                <h2><span>$</span>{{ number_format($product->gia, 2) }}</h2>
+                                                <h2>{{ number_format($product->gia, 2) }}<span>₫</span></h2>
                                             </div>
                                             <div class="icon-ctn3">
                                                 <div class="icon-start">
@@ -76,7 +76,7 @@
                                 </div>
                             @endforeach
                         @endif
-                        
+
 
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                 <div class="sidebar-product">
                     <div class="recent-product">
 
-                        <p>Search by brand</p>
+                        <p>Lọc theo giá sản phẩm</p>
                         <form action="">
                             @csrf
                             <div class="search d-flex">
@@ -121,12 +121,13 @@
                                 </button> --}}
                             </div>
                             <div class="sortby">
-                                <p>Sort by</p>
+                                <p>Sắp xếp</p>
                                 <select name="sort" id="">
-                                    <option value="asc" {{ request()->sort == 'asc' ? 'selected' : '' }}>Alphabetically,
+                                    <option value="asc" {{ request()->sort == 'asc' ? 'selected' : '' }}>Theo thứ tự
+                                        bảng chữ cái,
                                         A-Z</option>
                                     <option value="desc" {{ request()->sort == 'desc' ? 'selected' : '' }}>
-                                        Alphabetically,
+                                        Theo thứ tự bảng chữ cái,
                                         Z-A</option>
                                 </select>
                             </div>
@@ -135,7 +136,7 @@
                                     <div class="menu-search py-2 d-flex gap-3">
                                         <input {{ request()->cate == 'all' ? 'checked' : '' }} type="radio"
                                             name="cate" value="all" id="danhmucall">
-                                        <label for="danhmucall">All</label>
+                                        <label for="danhmucall">Tất cả</label>
                                     </div>
                                 </div>
                                 @foreach ($listCate as $item)
@@ -150,30 +151,30 @@
                                 @endforeach
                             @endif
 
-                            <p class="pt-3">Price Search</p>
+                            <p class="pt-3">Lọc theo giá sản phẩm</p>
                             <div class="list-tags">
                                 <h5>
-                                    The highest price is <span class="money">$900.00</span> Rest
+                                    Giá cao nhất là <span class="money">5000000₫</span> 
                                 </h5>
                                 <div class="cost-product">
-                                    <h6>From $</h6>
+                                    <h6>Từ:</h6>
                                     <input name="from" class="border-1" type="number"
-                                        value="{{ request()->from ?? 1 }}">
+                                        value="{{ request()->from ?? 100000 }}">
                                 </div>
                                 <div class="cost-product pt-2">
-                                    <h6>To $</h6>
+                                    <h6>Đến:</h6>
                                     <input name="to" class="border-1" type="number"
-                                        value="{{ request()->to ?? 1000 }}">
+                                        value="{{ request()->to ?? 5000000 }}">
                                 </div>
                             </div>
 
                             <div>
 
                                 <span class="clear btn btn-primary" style="background-color: #571F7C">
-                                    CLEAR
+                                    Xóa
                                 </span>
                                 <button class="btn btn-primary" type="submit" style="background-color: #571F7C">
-                                    APPLY
+                                    Tìm kiếm
                                 </button>
                             </div>
                         </form>

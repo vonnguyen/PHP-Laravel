@@ -15,11 +15,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="{{ asset('https://fonts.gstatic.com') }}" rel="preconnect">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/main_admin.css')}}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/main_admin.css') }}">
     <link
         href="{{ asset('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i') }}"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
     @yield('link')
 
     <!-- Vendor CSS Files -->
@@ -34,7 +35,17 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style1.css') }}" rel="stylesheet">
     {{-- <link href="{{ asset('assets/css/jquery-ui.min.css') }}" rel="stylesheet"> --}}
-    
+    <link href="{{ asset('vendor/select2') }}/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-selection__choice {
+            background-color: #000 !important;
+            color: #fff !important
+        }
+
+        .select2-container {
+            width: 100% !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,7 +67,7 @@
     </header><!-- End Header -->
 
     <!-- ======= Sidebar ======= -->
-  @include('layouts.slidebar')
+    @include('layouts.slidebar')
 
     <main id="main" class="main">
         <div class="container">
@@ -64,7 +75,7 @@
         </div>
     </main>
 
-   {{-- @include('layouts.footer') --}}
+    {{-- @include('layouts.footer') --}}
     <!-- Vendor JS Files -->
     <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -77,7 +88,9 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
+    @yield('script')
     {{-- <script pt src="{{ asset('assets/js/jquery-ui.min.js') }}"></script> --}}
 </body>
 

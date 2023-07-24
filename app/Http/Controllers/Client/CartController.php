@@ -21,12 +21,17 @@ class CartController extends Controller
             $cartUser->user_id = Auth::user()->id;
             $item->number = $request->numberProduct;
             $item->total = (int)($request->numberProduct) * (float)($item->gia);
+            $item->color =($request->color);
+            $item->size =($request->size) ;
+
             $cart = [];
             array_push($cart, $item);
         } else if (empty(json_decode($cartUser->cart))) {
             $cartUser->user_id = Auth::user()->id;
             $item->number = $request->numberProduct;
             $item->total = (int)($request->numberProduct) * (float)($item->gia);
+            $item->color =($request->color);
+            $item->size =($request->size) ;
             $cart = [];
             array_push($cart, $item);
         } else {
@@ -46,7 +51,8 @@ class CartController extends Controller
                             break;
                         }
                         $itemChild->total = (int)($itemChild->number) * (float)($item->gia);
-
+                        $itemChild->color =($request->color);
+                        $itemChild->size =($request->size) ;
                         $itemNew = $itemChild;
                         $keyNew = $key;
                         $check = 1;
@@ -59,6 +65,8 @@ class CartController extends Controller
                 } else if ($check == 0) {
                     $item->number = $request->numberProduct;
                     $item->total = (int)($request->numberProduct) * $item->gia;
+                    $item->color =($request->color);
+                    $item->size =($request->size) ;
                     array_push($cart, $item);
                 }
             }

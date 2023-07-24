@@ -37,5 +37,5 @@ function getStatusBill($status)
 function getCart(){
     if(empty(Auth::user()->id)) return [];
     $cart_user = user_cart::where('user_id', Auth::user()->id)->first();
-    return json_decode($cart_user->cart,false);
+    return json_decode(!empty($cart_user->cart) ?$cart_user->cart: json_encode([]),false);
 }   
