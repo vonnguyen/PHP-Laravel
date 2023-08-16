@@ -27,37 +27,29 @@
                                 <th>Hình ảnh</th>
                                 <th>Tên</th>
                                 <th>Giá</th>
-                                <th>Số lượng</th>
-                                <th>Tổng cộng</th>
                                 <th>Xem</th>
                                 <th>Xóa</th>
                             </tr>
                         </thead>
                         <tbody >
-                            @if ( getCart())
-                            @foreach ( getCart() as $item)
+                            @if ( $products->count() > 0)
+                            @foreach ( $products as $item)
                             <tr class="row_info-shoes ">
                                
                                 <td class="product-shoes">
                                     <a href="">
-                                        <img src="{{$item->image}}">
+                                        <img src="{{$item->product->image}}">
                                     </a>
                                 </td>
                                 <td class="product-name">
-                                    <a href="">{{$item->name}}</a>
+                                    <a href="">{{$item->product->name}}</a>
                                 </td>
                                 <td class="product-price-cart">
-                                    <span>{{number_format($item->gia , 2)}}</span>
+                                    <span>{{number_format($item->product->gia , 0)}}</span>
                                     <span>₫</span> 
                                 </td>
-                                <td class="product-number">
-                                    <span>{{$item->number}}</span>
-                                </td>
-                                <td class="product-total">
-                                    <span>{{number_format($item->total , 2)}}<span>₫</span></span>
-                                </td>
                                 <td class="product-wishlist-cart">
-                                    <a href="{{route('product',$item->id)}}">
+                                    <a href="{{route('product',$item->product->id)}}">
                                         <button class="dt-sc-btn">
                                             Chi tiết
                                         </button>
@@ -65,7 +57,7 @@
                                 </td>
                                 <td class="remove">
                                         <div class="item-remove" data-urlremove="{{route('cart.delete')}}"
-                                            data-url="{{route('cart.add')}}" data-id="{{$item->id}}">
+                                            data-url="{{route('cart.add')}}" data-id="{{$item->product->id}}">
                                             <i class="cursor-pointer fa-solid fa-trash-can" style="color: red"></i>
                                         </div>
                                 </td>

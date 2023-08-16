@@ -294,7 +294,7 @@
                                         <div class="name-shoe-ctn3 h-2/5 mt-4">
                                             <h1> <a href="{{route('product',$product->id)}}">{{ $product->name}}</a> </h1>
                                             <div class="cost-ctn3">
-                                                <h2> {{number_format($product->gia,2)}} <span>₫</span></h2>
+                                                <h2> {{number_format($product->gia,0)}} <span>₫</span></h2>
                                             </div>
                                             <div class="icon-ctn3">
                                                 <div class="icon-start">
@@ -302,9 +302,8 @@
                                                         class="fa-solid fa-star">
                                                     </i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                                                 </div>
-                                                <div class="bag-ctn3" data-urlremove="{{route('cart.delete')}}"
-                                                    data-url="{{route('cart.add')}}" data-id="{{$product->id}}"><i class="cursor-pointer fa-solid fa-bag-shopping"></i>
-                                                </div>
+                                                <a   href="{{route('product',$product->id)}}" ><i class="cursor-pointer fa-solid fa-bag-shopping"></i>
+                                                </a>
 
                                             </div>
                                         </div>
@@ -371,9 +370,8 @@
                                                         </i><i class="fa-solid fa-star"></i><i
                                                             class="fa-solid fa-star"></i>
                                                     </div>
-                                                    <div class="bag-ctn3" data-urlremove="{{route('cart.delete')}}"
-                                                            data-url="{{route('cart.add')}}" data-id="{{$product->id}}"><i class="cursor-pointer fa-solid fa-bag-shopping"></i>
-                                                    </div>
+                                                    <a href="{{route('product',$product->id)}}"  ><i class="cursor-pointer fa-solid fa-bag-shopping"></i>
+                                                    </a>
 
                                                 </div>
                                             </div>

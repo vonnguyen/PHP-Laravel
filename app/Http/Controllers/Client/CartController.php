@@ -43,7 +43,7 @@ class CartController extends Controller
                 $keyNew = null;
                 foreach ($cart as $key => $itemChild) {
 
-                    if ((int)($itemChild->id) === (int)($request->id)) {
+                    if ((int)($itemChild->id) === (int)($request->id) && $itemChild->size == $request->size && $itemChild->color== $request->color) {
                         $itemChild->number = (int)($itemChild->number) + (int)$request->numberProduct;
                         if ((int)($itemChild->number) <= 0) {
                             array_splice($cart, $key, 1);
@@ -88,7 +88,7 @@ class CartController extends Controller
                 $cart = json_decode($cartUser->cart);
                 $keyRemove = -1;
                 foreach ($cart as $key => $item) {
-                    if ((int)($item->id) === (int)($request->id)) {
+                    if ((int)($item->id) === (int)($request->id) && $item->size == $request->size && $item->color== $request->color) {
                         $keyRemove = $key;
                     }
                 }

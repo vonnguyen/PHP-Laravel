@@ -1,5 +1,5 @@
 window.addEventListener('load', function () {
-    let icon = document.querySelector('.icon-cart i');
+    let icon = document.querySelector('.icon-cart p');
     let cart = document.querySelector('.main-cart');
     let iconClose = document.querySelector('.close')
     let iconNumber = document.querySelector('.icon-number');
@@ -12,7 +12,7 @@ window.addEventListener('load', function () {
 
 
     //
-    const add_detail = document.querySelector('.detail_add');
+    const add_detail = document.querySelectorAll('.detail_add');
     let number_detail = document.querySelector('.number_detail');
 
     iconAdd?.addEventListener('click', function () {
@@ -26,73 +26,79 @@ window.addEventListener('load', function () {
 
     })
 
+    add_detail.forEach(item=>{
 
-    add_detail?.addEventListener('click', function () {
-        let id = this.dataset.id;
-        let url = this.dataset.url;
-        let color = localStorage.getItem('color');
-        let size = localStorage.getItem('size');
+        item?.addEventListener('click', function () {
+            let id = this.dataset.id;
+            let url = this.dataset.url;
+            let color = localStorage.getItem('color');
+            let size = localStorage.getItem('size');
+    
+            let numberProduct = number_detail.textContent;
+            let urlRemove = this.dataset.remove;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: url,
+                data: JSON.stringify({
+                    id,
+                    numberProduct,
+                    color,
+                    size
+                }),
+                dataType: 'json',
+                success: function (data) {
+    
+                    console.log(data)
+                    let dataNew = JSON.parse(data.cart)
+                    let number = 0;
+                    let sum = 0;
+    
+                    containerCart.innerHTML = "";
+    
+                    dataNew.forEach(item => {
+                        number += +item.number;
+                        renderItemCart(item, urlRemove, url);
+                        sum += +item.total;
+                    })
+                    iconNumber.textContent = number;
+                    sumMoney.textContent = sum;
+    
+                    // Hiển thị thông báo thêm sản phẩm
+                    Swal.fire({
+                        position: 'center-center',
+                        icon: 'success',
+                        title: 'Thêm sản phẩm thành công !',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
 
-        let numberProduct = number_detail.textContent;
-        let urlRemove = this.dataset.remove;
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            url: url,
-            data: JSON.stringify({
-                id,
-                numberProduct,
-                color,
-                size
-            }),
-            dataType: 'json',
-            success: function (data) {
-
-                console.log(data)
-                let dataNew = JSON.parse(data.cart)
-                let number = 0;
-                let sum = 0;
-
-                containerCart.innerHTML = "";
-
-                dataNew.forEach(item => {
-                    number += +item.number;
-                    renderItemCart(item, urlRemove, url);
-                    sum += +item.total;
-                })
-                iconNumber.textContent = number;
-                sumMoney.textContent = sum;
-
-                // Hiển thị thông báo thêm sản phẩm
-                Swal.fire({
-                    position: 'center-center',
-                    icon: 'success',
-                    title: 'Thêm sản phẩm thành công !',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            },
-            error: function (e) {
-                console.log('loi')
-                console.log(e)
-
-            }
-        });
+                    if(item.className.includes("redirect")){
+                        window.location.href = "/infomation"
+                    }
+                },
+                error: function (e) {
+                    console.log('loi')
+                    console.log(e)
+    
+                }
+            });
+        })
     })
     //
-    icon.addEventListener('click', function (e) {
+    icon?.addEventListener('click', function (e) {
         cart.classList.add('active');
     })
-    iconClose.addEventListener('click', function (e) {
+    iconClose?.addEventListener('click', function (e) {
         cart.classList.remove('active');
     })
     cart.addEventListener('click', function (e) {
-        if (!e.target.matches('.icon-cart i') && !modalCart.contains(e.target)) {
+        if (!e.target.matches('.icon-cart p') && !modalCart.contains(e.target)) {
             console.log(e.target);
             cart.classList.remove('active');
         }
@@ -106,6 +112,9 @@ window.addEventListener('load', function () {
             e.stopPropagation();
             let url = e.target.dataset.url;
             let id = e.target.dataset.id;
+            let color = e.target.dataset.color;
+            let size = e.target.dataset.size;
+
 
             // let number =   containerCart.querySelectorAll('.product-cart').length;
             // iconNumber.textContent = number;
@@ -120,7 +129,7 @@ window.addEventListener('load', function () {
                 url: url,
                 data: JSON.stringify(
 
-                    { id }
+                    { id ,color,size}
                 ),
                 dataType: 'json',
                 success: function (data) {
@@ -175,7 +184,7 @@ window.addEventListener('load', function () {
     function renderItemCart(item, urlRemove, url = '') {
         let template = `
         <div class="product-cart">
-        <span data-id="${item.id}" data-url="${urlRemove}"  class="close-item">x</span>
+        <span data-id="${item.id}" data-color="${item.color}" data-size="${item.size}" data-url="${urlRemove}"  class="close-item">x</span>
         <div class="item-img-cart">
             <img src="${item.image}" alt="">
         </div>

@@ -22,6 +22,8 @@
 
                     <div class="border border-2 rounded-lg p-3 mt-4">
                         <p class="flex gap-5 border-b pb-2"><span class="text-gray-500">Liên hệ</span><span
+                            class="font-semibold">{{session('info')['firstName']}} {{session('info')['lastName']}}</span></p>
+                        <p class="flex gap-5 border-b pb-2"><span class="text-gray-500">Liên hệ</span><span
                                 class="font-semibold">{{session('info')['phone']}}</span></p>
                         <p class="flex gap-5 mt-3"><span class="text-gray-500">Địa chỉ người nhận</span><span
                                 class="font-semibold fullAddress"></span></p>
@@ -56,6 +58,8 @@
                                <input type="hidden" name="fee" value="">
                                <input type="hidden" name="phone" value={{session('info')['phone']}}>
                                <input type="hidden" name="address" value="">
+                               <input type="hidden" name="fullName" value="{{session('info')['firstName']}} {{session('info')['lastName']}}">
+
 
                                 <button type="submit" class="dt-sc-btn alert alert-success" role="alert">
                                     Thanh toán ngay
@@ -76,7 +80,7 @@
                             @if ( getCart())
                                 @foreach ( getCart() as $item)
                                     @php
-                                        $sum += $item->total;
+                                        $sum +=(int) $item->total;
                                     @endphp
                                     <div class="flex items-center justify-between ">
                                         <div class="flex gap-3 items-center">
@@ -111,7 +115,7 @@
                         </div>
                         <div class="total py-3">
                             <p class="flex justify-between items-center"><span class="text-xl">Tổng cộng</span><span
-                                   data-price={{number_format($sum,2)}} class="font-semibold text-3xl total_price"> </span></p>
+                                   data-price={{($sum)}} class="font-semibold text-3xl total_price"> </span></p>
                         </div>
                     </div>
                 </div>
@@ -126,6 +130,7 @@
  @section('js')
  <script>
     const fullAddress = document.querySelector('.fullAddress');
+    const vnpay_img = document.querySelector('.vnpay_img');
     const fee = document.querySelector('.fee');
     const total_price = document.querySelector('.total_price');
     const input_address = document.querySelector('input[name="address"]');
@@ -143,7 +148,10 @@
     input_fee.value  =data_payment.fee
 
     fee.textContent = data_payment.fee+" ₫"
-    total_price.textContent = (+total_price.dataset.price + Number(data_payment.fee))+ " ₫"
+  
+    vnpay_img.parentElement.href = vnpay_img.parentElement.href +"?fee="+data_payment.fee;
+
+    total_price.textContent = (parseInt(total_price.dataset.price) + parseInt(data_payment.fee))+ " ₫"
 
  </script>
 @endsection

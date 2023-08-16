@@ -32,6 +32,8 @@ window.addEventListener('load',function(){
     formComment.addEventListener('submit',function(e){
         e.preventDefault();
         let message = this.querySelector('input[name="message"]').value;
+        let reply_id = this.querySelector('input[name="reply_id"]').value;
+
         let product_id = this.querySelector('input[name="product_id"]').value;
         let rating = +this.querySelector('.number-rate').textContent;
         let url = this.getAttribute('action');
@@ -46,10 +48,11 @@ window.addEventListener('load',function(){
             url: url,
             data: JSON.stringify(
 
-                {message,product_id,rating}
+                {message,product_id,rating,reply_id}
             ),
             dataType: 'json',
             success: function (data) {
+            console.log("🚀 ~ file: comment.js:55 ~ formComment.addEventListener ~ data:", data)
 
                 // Thông báo xóa sản phẩm
                 toastr.options = {

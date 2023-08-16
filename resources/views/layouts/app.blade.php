@@ -66,46 +66,12 @@
                                                 <button class="collection-btn">
                                                     <span class="name-shoes">{{ $product->name }}</span>
                                                     <span class="cost-shoes">
-                                                        <span>$</span>{{ number_format($product->gia, 2) }}</span>
+                                                       {{ number_format($product->gia, 0) }} <span>₫</span></span>
                                                 </button>
                                             </a>
                                         </div>
                                     @endforeach
                                 @endif
-
-
-                                {{-- <div class=" col col-3 collection-item">
-                                    <img src="{{asset('client')}}/assets/img/img-header/shoe11.webp" alt="">
-                                    <a href="{{route('product',$product->id)}}">
-                                        <button class="collection-btn">
-                                            <span class="name-shoes">Ballet shoe</span>
-                                            <span class="cost-shoes">
-                                                <span>$</span>532</span>
-                                        </button>
-                                    </a>
-                                </div>
-                                <div class=" col col-3 collection-item">
-                                    <img src="{{asset('client')}}/assets/img/img-header/shoe22_48464579-a7fe-40ba-ad66-8c6aa7ef2bb1.webp"
-                                        alt="">
-                                        <a href="{{route('product',$product->id)}}">
-                                            <button class="collection-btn">
-                                                <span class="name-shoes">Ballet shoe</span>
-                                                <span class="cost-shoes">
-                                                    <span>$</span>300</span>
-                                            </button>
-                                        </a>
-                                </div>
-                                <div class=" col col-3 collection-item">
-                                    <img src="{{asset('client')}}/assets/img/img-header/shoe26_de67b47c-8d95-481f-aa85-268cdc309e4e.webp"
-                                        alt="">
-                                        <a href="{{route('product',$product->id)}}">
-                                            <button class="collection-btn">
-                                                <span class="name-shoes">Ballet shoe</span>
-                                                <span class="cost-shoes">
-                                                    <span>$</span>620</span>
-                                            </button>
-                                        </a>
-                                </div> --}}
                             </div>
                         </div>
 
@@ -119,7 +85,7 @@
                             <li><a href="{{ route('about') }}">Giới thiệu</a></li>
                             <li><a href="{{ route('contact') }}">Liên hệ</a></li>
                             <li><a href="{{ route('blog') }}">Blog</a></li>
-                            <li><a href="{{ route('whish') }}">Giỏ hàng</a></li>
+
                         </ul>
                     </li>
                 </ul>
@@ -150,7 +116,7 @@
                                     d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z">
                                 </path>
                             </svg></span>
-                            {{-- <span
+                        {{-- <span
                             class="cancel-micro absolute top-1/2 -translate-y-1/2 hover:bg-slate-400 rounded-full cursor-pointer hover:text-slate-50 transition-all p-2 text-slate-900 left-0 "><svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">
@@ -218,6 +184,18 @@
                     </ul>
 
                 </span>
+                {{-- <a href="{{ route('whish') }}" class="text-2xl relative ">
+                    <span>
+                    <i class="fa-regular fa-heart"></i>
+                </span>
+                </a> --}}
+                <a href="{{ route('whish') }}" class="block relative ">
+                    <span
+                        class="absolute top-[-8px] right-[-8px] bg-black p-2 w-[20px] h-[20px] rounded-full flex justify-center items-center text-light">{{ getFavorite() }}
+                    </span>
+                    <i class="text-2xl fa-regular fa-heart"></i>
+                </a>
+
                 <span class="icon-cart">
                     @php
                         $number = 0;
@@ -230,7 +208,16 @@
                     <span class="icon-number w-[25px]  h-[25px] p-2 flex justify-center items-center">
                         {{ $number }}
                     </span>
-                    <i class="text-2xl fa-solid fa-briefcase"></i>
+                    <p>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-8 h-8 ">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                        </svg>
+                    </p>
+
+                    {{-- <i class="text-2xl fa-solid fa-briefcase"></i> --}}
                 </span>
             </div>
 
@@ -337,10 +324,10 @@
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-angle-right"></i>
-                                        <span>Mua hàng: 
+                                        <span>Mua hàng:
                                             <strong>
                                                 <a href="tel:+84969400633">0969400633</a>
-                                                </strong> (7h30-22h)
+                                            </strong> (7h30-22h)
 
                                         </span>
                                     </li>
@@ -395,15 +382,15 @@
                                 $sum += $item->total;
                             @endphp
                             <div class="product-cart">
-                                <span data-id="{{ $item->id }}" data-url="{{ route('cart.delete') }}"
+                                <span data-id="{{ $item->id }}" data-size="{{ $item->size }}" data-color="{{ $item->color }}" data-url="{{ route('cart.delete') }}"
                                     class="close-item">x</span>
                                 <div class="item-img-cart">
                                     <img src="{{ $item->image }}" alt="">
                                 </div>
                                 <div class="detais-cart">
                                     <h6>{{ $item->name }}</h6>
-                                    <p>Color: {{$item->color}}  / Size: {{$item->size}}</p>
-                                    <span>{{ $item->gia }} ₫</span>
+                                    <p>Color: {{ $item->color }} / Size: {{ $item->size }}</p>
+                                    <span>{{ number_format($item->gia, 0) }} ₫</span>
                                     <div class="dt-sc-cart">
                                         <span data-url="{{ route('cart.add') }}" data-id="{{ $item->id }}"
                                             class="up-down decre">-</span>
@@ -434,7 +421,7 @@
                     </div>
                     <div class="btn-cart">
                         <a class="block w-full" href="{{ route('whish') }}">
-                            <button>XEM GIỎ HÀNG</button>
+                            <button> SẢN PHẨM YÊU THÍCH </button>
                         </a>
                     </div>
                 </div>
@@ -475,12 +462,13 @@
             const cancel_micro = document.querySelector('.cancel-micro')
             const search_micro = document.querySelector('.search-micro')
 
-            
+
             const result = document.querySelector('#transcript')
+
             function speechToText() {
                 try {
                     recognition = new SpeechRecognition();
-                    recognition.lang ='vi';
+                    recognition.lang = 'vi';
                     recognition.interimResults = true;
                     recordBtn.classList.add("recording");
                     // recordBtn.querySelector("p").innerHTML = "Listening...";
@@ -554,7 +542,7 @@
                 }
             });
         </script>
-         <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
         {{-- <script src="./responesive.js"></script> --}}
         @yield('js')
 

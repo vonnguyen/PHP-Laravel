@@ -45,6 +45,19 @@
         .select2-container {
             width: 100% !important;
         }
+
+        .deleted-user {
+            background-color: #f2dede;
+            /* Màu nền đỏ nhạt */
+            color: #a94442;
+            /* Màu chữ đỏ tương ứng */
+            padding: 5px;
+            /* Thêm padding để tạo khoảng trống xung quanh */
+            display: inline-block;
+            /* Hiển thị như một khối inline */
+            border-radius: 3px;
+            /* Bo tròn góc */
+        }
     </style>
 </head>
 

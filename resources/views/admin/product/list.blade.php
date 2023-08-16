@@ -59,9 +59,9 @@
                                     <td><input type="checkbox" name="" id="" /></td>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>$ {{ $item->gia }}</td>
+                                    <td>{{ number_format($item->gia, 0)}}₫</td>
                                     <td><img style="object-fit:cover;width:200px" src="{{ $item['image'] }}" /></td>
-                                    <td>{{ $item->luotxem }}</td>
+                                    <td>{{ $item->views }}</td>
                                     <td>{{ $item->mota }}</td>
                                     <td>
                                         <a class="btn btn-warning"

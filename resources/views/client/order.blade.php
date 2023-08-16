@@ -41,7 +41,7 @@
                             </td>
                             <td>
                                 <p class="fw-bold">
-                                    Tên: {{ $item->user->name }}
+                                    Tên: {{ $item->fullname ?? $item->user->name }}
                                 </p>
                                 <p>
                                     Sdt: {{ $item->sdt }}

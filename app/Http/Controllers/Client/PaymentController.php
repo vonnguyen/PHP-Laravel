@@ -40,7 +40,6 @@ class PaymentController extends Controller
 
 
     public function postPayment(Request $request){
-        
         $total = 0;
         if ( getCart()) {
             foreach ( getCart() as $item) {
@@ -53,6 +52,7 @@ class PaymentController extends Controller
         $bill = $bill->create([
             'sdt' => $request->phone,
             'address' => $request->address,
+            'fullname' => $request->fullName,
             'total' => $total,
             'user_id' => Auth::user()->id,
             'phuongthucTT'=> $request->method??'Nhận hàng trả tiền',
@@ -96,7 +96,7 @@ class PaymentController extends Controller
 	}
 
     // thanh toan vnpay
-	function vnPay()
+	function vnPay(Request $request)
 	{
 
 		// $sum = $_POST['sum'];
@@ -106,6 +106,8 @@ class PaymentController extends Controller
                 $total += (float)$item->total;
             }
         }
+        // dd($total);
+        $total += $request->query('fee') ?? 0;
 		$vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
 		$vnp_Returnurl = "http://127.0.0.1:8000/vnpay_return";
 		$vnp_TmnCode = "LCP47ECL"; //Mã website tại VNPAY 
@@ -114,7 +116,7 @@ class PaymentController extends Controller
 		$vnp_TxnRef = random_int(0, 9999999999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
 		$vnp_OrderInfo = 'Thanh toán đơn hàng test';
 		$vnp_OrderType = 'billpayment';
-		$vnp_Amount =    $total*1000 * 100;
+		$vnp_Amount =    $total*100 ;
 		$vnp_Locale = 'vn';
 		$vnp_BankCode = 'NCB';
 		$vnp_IpAddr = $_SERVER['REMOTE_ADDR'];

@@ -70,6 +70,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'isAdmin')->group(fun
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/list', [ProductController::class, 'list'])->name('list');
         Route::get('/add', [ProductController::class, 'showadd'])->name('add');
+
         Route::post('/add', [ProductController::class, 'add'])->name('postadd');
         Route::get('/update/{id}', [ProductController::class, 'showupdate'])->name('showupdate');
         Route::post('/update/{id}', [ProductController::class, 'sua'])->name('sua');
@@ -100,8 +101,10 @@ Route::get("/vnpay_return", [PaymentController::class, 'vnPay_return'])->middlew
 Route::get("/payment/vnpay", [PaymentController::class, 'vnPay'])->middleware('auth')->name('vnpay');
 
 Route::get("/home", [HomeController::class, 'index'])->name('home');
-Route::get("/product", [ClientProductController::class, 'index'])->middleware('auth')->name('shoes');
-Route::get("/chitietsp/{id}", [ClientProductController::class, 'detail'])->middleware('auth')->name('product');
+Route::get("/product", [ClientProductController::class, 'index'])->name('shoes');
+Route::get('/favorite/{id}', [ClientProductController::class, 'favorite'])->name('favorite');
+Route::get("/chitietsp/{id}", [ClientProductController::class, 'detail'])->name('product');
+Route::get("/chitietsp", [ChitietController::class, 'index'])->name('chitietsp');
 
 Route::get("/boots", [BootsController::class, 'index'])->middleware('auth')->name('boots');
 Route::get("/collection", [CollectionController::class, 'index'])->middleware('auth')->name('collection');
@@ -110,7 +113,7 @@ Route::get("/whish", [WishController::class, 'index'])->middleware('auth')->name
 Route::get("/contact", [ContactController::class, 'index'])->middleware('auth')->name('contact');
 Route::get("/about", [AboutController::class, 'index'])->middleware('auth')->name('about');
 
-Route::get("/chitietsp", [ChitietController::class, 'index'])->middleware('auth')->name('chitietsp');
+
 Route::get("/infomation", [InfomationController::class, 'index'])->middleware('auth')->name('infomation');
 Route::get("/shipping", [ShippingController::class, 'index'])->middleware('auth')->name('shipping');
 Route::get("/payment/{id}", [PaymentController::class, 'index'])->middleware('auth')->name('payment');

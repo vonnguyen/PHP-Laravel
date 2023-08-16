@@ -52,9 +52,9 @@ class ProductController extends Controller
         $listCate = Category::all();
         $sizes = Size::all();
         $colors = Color::all();
+        $views = Product::all();
 
-
-        return view('admin.product.add', compact("listCate","sizes","colors"));
+        return view('admin.product.add', compact("listCate","sizes","colors","views"));
     }
     function showupdate($id){
         $listCate = Category::all();
@@ -107,4 +107,6 @@ class ProductController extends Controller
        $product->update();
        return redirect()->route('admin.product.list');
     }
+
+    
 }

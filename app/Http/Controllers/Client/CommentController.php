@@ -12,6 +12,8 @@ class CommentController extends Controller
     //
 
     public function add(Request $request){
+        // dd($request->input());
+      
         $product_id = $request->product_id;
         $user_id = Auth::user()->id;
         $message = $request->message;
@@ -22,6 +24,8 @@ class CommentController extends Controller
         $comment->product_id = $product_id;
         $comment->message = $message;
         $comment->rating = $rating;
+        $comment->parent_id = $request->reply_id ?? 0;
+
         $comment->save();
         
         return response()->json([

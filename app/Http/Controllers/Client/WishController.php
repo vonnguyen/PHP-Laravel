@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\favoriteProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WishController extends Controller
 {
     //
-        const  _PER_PAGE = 1;
         function index(){
-            $products = Product::paginate(self::_PER_PAGE)->withQueryString();
+            $products = favoriteProduct::where('user_id',Auth::user()->id)->get();
     
             return view('client.whish',compact('products'));
         }

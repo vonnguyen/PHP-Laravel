@@ -5,7 +5,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css" rel="stylesheet" />
-    
 @endsection
 @section('content')
     <div class="pt-[110px]">
@@ -34,17 +33,18 @@
                         <div class="info-detail">
                             <span class="info-title">Giá:</span>
                             <div class="money">
-                                <span>{{ number_format($product->gia, 2) }}</span>
+                                <span>{{ number_format($product->gia, 0) }}</span>
                                 <span>₫</span>
                             </div>
 
                         </div>
                         <style>
-                            .size{
+                            .size {
                                 padding: 8px;
-                                border:3px solid #ccc;
+                                border: 3px solid #ccc;
                             }
-                            .size.selected{
+
+                            .size.selected {
                                 border: 3px solid blue !important;
                             }
                         </style>
@@ -52,8 +52,10 @@
                             <span class="info-title">Kích thước:</span>
                             <div class="info-border">
                                 @foreach (json_decode($product->property->sizes) as $size)
-                                    <label style="width:45px;height:45px;text-align:center" for="size{{$size}}" data-value={{$size}} class="size">{{ $size }}</label>
-                                    <input id="size{{$size}}" class="invisible" type="radio" name="size" value="{{$size}}">
+                                    <label style="width:45px;height:45px;text-align:center" for="size{{ $size }}"
+                                        data-value={{ $size }} class="size">{{ $size }}</label>
+                                    <input id="size{{ $size }}" class="invisible" type="radio" name="size"
+                                        value="{{ $size }}">
 
                                 @endforeach
 
@@ -61,11 +63,12 @@
 
                         </div>
                         <style>
-                            .color{
+                            .color {
                                 padding: 8px;
-                                border:3px solid #ccc;
+                                border: 3px solid #ccc;
                             }
-                            .color.selected{
+
+                            .color.selected {
                                 border: 3px solid blue !important;
                             }
                         </style>
@@ -73,33 +76,28 @@
                             <span class="info-title">Màu sắc:</span>
                             <div class="info-border">
                                 @foreach (json_decode($product->property->colors) as $color)
-                                   
-                                        <label style="width:45px;height:45px;text-align:center" for="color{{$color}}" data-value={{$color}}  class="d-block color {{ $color == 'white' || $color == 'black' ? "bg-$color" : "bg-$color-400" }}"></label>
-                                        <input id="color{{$color}}" class="invisible" type="radio" name="color" value="{{$color}}">
-                                    @endforeach
+
+                                    <label style="width:45px;height:45px;text-align:center" for="color{{ $color }}"
+                                        data-value={{ $color }}
+                                        class="d-block color {{ $color == 'white' || $color == 'black' ? "bg-$color" : "bg-$color-400" }}"></label>
+                                    <input id="color{{ $color }}" class="invisible" type="radio" name="color"
+                                        value="{{ $color }}">
+                                @endforeach
                             </div>
 
                         </div>
-                        {{-- <div class="info-detail">
-                            <span class="info-title">Material:</span>
-                            <div class="info-border__material">
-                                <span>Leather</span>
-                                <span>Plastics</span>
-                                <span>Leather</span>
-                            </div>
+                        
 
-                        </div> --}}
-                        {{-- <div class="info-detail">
-                            <span class="info-title">Vendor:</span>
-                            <div>
-                                <a href=""><span>Geox</span></a>
-                            </div>
-                        </div> --}}
-                       
                         <div class="info-detail">
                             <span class="info-title">Kho:</span>
 
                             <span style="color: #4f8a10 ;">Còn hàng</span>
+
+                        </div>
+                        <div class="info-detail">
+                            <span class="info-title">Lượt xem:</span>
+
+                            <span style="color: #691064b9 ;">{{$product->views}}</span>
 
                         </div>
                         <div class="info-detail">
@@ -113,15 +111,16 @@
                         </div>
 
                         <div class="btn-detail">
-                            <button><span class="detail_add" data-remove="{{ route('cart.delete') }}"
-                                    data-id="{{ $product->id }}" data-url="{{ route('cart.add') }}">THÊM VÀO GIỎ
+                            <button class="detail_add" data-remove="{{ route('cart.delete') }}"
+                            data-id="{{ $product->id }}" data-url="{{ route('cart.add') }}"><span >THÊM VÀO GIỎ
                                     HÀNG</span></button>
-                            <button> <a href="{{ route('infomation') }}"><span>MUA NGAY</span></a> </button>
+                                    <button class="detail_add redirect" data-remove="{{ route('cart.delete') }}"
+                                    data-id="{{ $product->id }}" data-url="{{ route('cart.add') }}"><span >MUA NGAY </span></button>
                         </div>
 
-                        <div class="btn-detail">
+                        {{-- <div class="btn-detail">
                             <button><a href="{{ route('whish') }} "><span>XEM GIỎ HÀNG</span></a></button>
-                        </div>
+                        </div> --}}
 
 
 
@@ -152,6 +151,7 @@
                             <span class="number-rate">1.5</span>
                         </div>
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="text" class="invisible" name="reply_id" value="">
                         <input class="border form-control mt-3" type="text" name="message" placeholder="comment"
                             id="">
                         <div class="text-end mt-2">
@@ -165,23 +165,42 @@
                     <div class="list_comment">
                         @if ($comments)
                             @foreach ($comments as $comment)
-                                <div class="flex  shadow justify-between p-3 my-3 rounded-xl">
-                                    <div>
-                                        <div class="flex gap-3 items-center">
+                                @if ($comment->parent_id == 0)
+                                    
+                                    @php
+                                        
+                                        $img = $comment->user->img;
+                                        $name = $comment->user->name;
+                                        $id_user = $comment->user->id;
+                                    @endphp
+                                    <div class="flex  shadow justify-between p-3 my-3 rounded-xl">
+                                        <div>
+                                            <div class="flex gap-3 items-center">
 
-                                            <p><img class="w-[50px] h-[50px] rounded-full" src="{{ $comment->user->img }}"
-                                                    alt=""></p>
-                                            <p class="font-bold text-xl">{{ $comment->user->name }}</p>
+                                                <p><img class="w-[50px] h-[50px] rounded-full" src="{{ $img }}"
+                                                        alt=""></p>
+                                                <p class="font-bold text-xl">{{ $name }}</p>
+                                            </div>
+                                            <div class="rateyo2 my-3" data-rateyo-read-only="true"
+                                                data-rateyo-rating="{{ $comment->rating }}" data-rateyo-num-stars="5"
+                                                data-rateyo-score="1">
+                                            </div>
+                                            <div class="message">{{ $comment->message }}</div>
                                         </div>
-                                        <div class="rateyo2 my-3" data-rateyo-read-only="true"
-                                            data-rateyo-rating="{{ $comment->rating }}" data-rateyo-num-stars="5"
-                                            data-rateyo-score="1">
+                                        <div class="flex flex-col gap-3 items-end">
+
+                                            <p>{{ $comment->created_at }}</p>
+                                            @if (Auth::user()->group->id == 1)
+                                                <p data-user="{{ $name }}" data-userid="{{ $id_user }}"
+                                                    class="text-blue-500 hover:underline hover:cursor-pointer reply">Trả lời
+                                                </p>
+                                            @endif
+
                                         </div>
-                                        <div class="message">{{ $comment->message }}</div>
                                     </div>
 
-                                    <p>{{ $comment->created_at }}</p>
-                                </div>
+                                    {{ (renderComment($comments, $comment->id, '-','') )}}
+                                @endif
                             @endforeach
                         @endif
                     </div>
@@ -214,9 +233,10 @@
                                         </div>
                                     </div>
                                     <div class="name-shoe-ctn3 h-2/5 mt-4">
-                                        <h1> <a href="{{ route('product', $product->id) }}">{{ $product->name }}</a> </h1>
+                                        <h1> <a href="{{ route('product', $product->id) }}">{{ $product->name }}</a>
+                                        </h1>
                                         <div class="cost-ctn3">
-                                            <h2>{{ number_format($product->gia, 2) }}<span>₫</span></h2>
+                                            <h2>{{ number_format($product->gia, 0) }}<span>₫</span></h2>
                                         </div>
                                         <div class="icon-ctn3">
                                             <div class="icon-start">
@@ -248,18 +268,25 @@
             }
             const size = document.querySelectorAll('.size');
             const input = document.querySelectorAll('input[name="size"]');
+            const message = document.querySelector('input[name="message"]');
+            console.log("🚀 ~ file: chitietsp.blade.php:259 ~ message:", message)
+
             const color = document.querySelectorAll('.color');
+            const reply = document.querySelector('.reply');
+
             const input_c = document.querySelectorAll('input[name="color"]');
+            const input_reply = document.querySelector('input[name="reply_id"]');
+
             console.log(input);
-            input.forEach((item,index) => {
+            input.forEach((item, index) => {
                 item.addEventListener('change', () => {
-                    
+
                     localStorage.setItem('size', item.value)
 
-                    size.forEach(i=>{
-                        if(i.dataset.value == item.value){
+                    size.forEach(i => {
+                        if (i.dataset.value == item.value) {
                             i.classList.add('selected')
-                        }else{
+                        } else {
                             i.classList.remove('selected')
 
                         }
@@ -268,15 +295,15 @@
                     // item.classList.add('selected')
                 })
             })
-            input_c.forEach((item,index) => {
+            input_c.forEach((item, index) => {
                 item.addEventListener('change', () => {
-                    
+
                     localStorage.setItem('color', item.value)
 
-                    color.forEach(i=>{
-                        if(i.dataset.value == item.value){
+                    color.forEach(i => {
+                        if (i.dataset.value == item.value) {
                             i.classList.add('selected')
-                        }else{
+                        } else {
                             i.classList.remove('selected')
 
                         }
@@ -284,6 +311,16 @@
 
                     // item.classList.add('selected')
                 })
+            })
+
+            reply.addEventListener("click", function() {
+                let name_user = this.dataset.user;
+                let id_user = this.dataset.userid;
+                console.log("🚀 ~ file: chitietsp.blade.php:307 ~ reply.addEventListener ~ id_user:", id_user)
+
+                console.log("🚀 ~ file: chitietsp.blade.php:300 ~ reply.addEventListener ~ name_user:", name_user)
+                message.value = "@" + name_user + " ";
+                input_reply.value = id_user;
             })
         </script>
 

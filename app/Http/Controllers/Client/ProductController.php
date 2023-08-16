@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\favoriteProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -29,7 +31,18 @@ class ProductController extends Controller
         $product = Product::find($id);
         $comments = Comment::where('product_id',$id)->get();
         $products = Product::where('cate',$product->cate)->limit(4)->get();
-
+        $product->views += 1;
+        $product->save();
         return view('client.chitietsp', compact('product','comments','products'));
     }
+    public function favorite($id,Request $request){
+        $check_exits = favoriteProduct::where('user_id',Auth::user()->id)->where('product_id',$id)->first();
+        if(!empty( $check_exits))   return redirect()->back(); 
+        $favorite = new favoriteProduct();
+        $favorite->product_id = $id;
+        $favorite->user_id = Auth::user()->id;
+        $favorite->save();
+        return redirect()->back();
+    }
+   
 }
