@@ -184,11 +184,7 @@
                     </ul>
 
                 </span>
-                {{-- <a href="{{ route('whish') }}" class="text-2xl relative ">
-                    <span>
-                    <i class="fa-regular fa-heart"></i>
-                </span>
-                </a> --}}
+                
                 <a href="{{ route('whish') }}" class="block relative ">
                     <span
                         class="absolute top-[-8px] right-[-8px] bg-black p-2 w-[20px] h-[20px] rounded-full flex justify-center items-center text-light">{{ getFavorite() }}
@@ -219,6 +215,12 @@
 
                     {{-- <i class="text-2xl fa-solid fa-briefcase"></i> --}}
                 </span>
+                @if (!empty(Auth::user()))
+                    <span data-email={{Auth::user()->email ?? ""}} class="icon-face text-2xl register_face">
+                    <i class="fa-regular fa-face-smile"></i>
+                </span>
+                @endif  
+
             </div>
 
         </div>
@@ -409,7 +411,7 @@
                 <div class="bottom-cart">
                     <div class="sub-total">
                         <div class="p-title">Tổng cộng</div>
-                        <span class="money"><span class="sumMoney">{{ $sum }}</span>₫</span>
+                        <span class="money"><span class="sumMoney">{{ number_format($sum , 0)  }}</span>₫</span>
                     </div>
                     <div class="p-main">
                         Vận chuyển, thuế và chiết khấu sẽ được tính khi thanh toán.
@@ -429,6 +431,116 @@
             </div>
 
         </div>
+        <div id="faceio-modal"></div>
+        <script src="https://cdn.faceio.net/fio.js"></script>
+        <script type="text/javascript">
+            /* Instantiate fio.js with your application Public ID */
+            const faceio = new faceIO("fioa2376");
+            const register_face = document.querySelector('.register_face');
+    
+            register_face?.addEventListener('click', enrollNewUser);
+    
+            function enrollNewUser() {
+    
+                let email = this.dataset.email;
+                // Start the facial enrollment process
+                faceio.enroll({
+                    "locale": "auto", // Default user locale
+                    "userConsent": false, // Set to true if you have already collected user consent
+                    "payload": {
+                        /* The payload we want to associate with this user
+                         * which is forwarded back to us upon future
+                         * authentication of this particular user.*/
+                        // Example of dummy ID linked to this particular user
+                        "email": email
+                    }
+                }).then(userInfo => {
+                    // User Successfully Enrolled!
+                    alert(
+                        `User Successfully Enrolled! Details:
+                Unique Facial ID: ${userInfo.facialId}
+                Enrollment Date: ${userInfo.timestamp}
+                Gender: ${userInfo.details.gender}
+                Age Approximation: ${userInfo.details.age}`
+                    );
+                    console.log(userInfo);
+                    // handle success, save the facial ID, redirect to dashboard...
+                }).catch(errCode => {
+                    // handle enrollment failure. Visit:
+                    // https://faceio.net/integration-guide#error-codes
+                    // for the list of all possible error codes
+                    handleError(errCode);
+                });
+            }
+    
+    
+    
+            function handleError(errCode) {
+                // Log all possible error codes during user interaction..
+                // Refer to: https://faceio.net/integration-guide#error-codes
+                // for a detailed overview when these errors are triggered.
+                switch (errCode) {
+                    case fioErrCode.PERMISSION_REFUSED:
+                        console.log("Access to the Camera stream was denied by the end user");
+                        break;
+                    case fioErrCode.NO_FACES_DETECTED:
+                        console.log("No faces were detected during the enroll or authentication process");
+                        break;
+                    case fioErrCode.UNRECOGNIZED_FACE:
+                        console.log("Unrecognized face on this application's Facial Index");
+                        break;
+                    case fioErrCode.MANY_FACES:
+                        console.log("Two or more faces were detected during the scan process");
+                        break;
+                    case fioErrCode.PAD_ATTACK:
+                        console.log("Presentation (Spoof) Attack (PAD) detected during the scan process");
+                        break;
+                    case fioErrCode.FACE_MISMATCH:
+                        console.log("Calculated Facial Vectors of the user being enrolled do not matches");
+                        break;
+                    case fioErrCode.WRONG_PIN_CODE:
+                        console.log("Wrong PIN code supplied by the user being authenticated");
+                        break;
+                    case fioErrCode.PROCESSING_ERR:
+                        console.log("Server side error");
+                        break;
+                    case fioErrCode.UNAUTHORIZED:
+                        console.log("Your application is not allowed to perform the requested operation (eg. Invalid ID, Blocked, Paused, etc.). Refer to the FACEIO Console for additional information");
+                        break;
+                    case fioErrCode.TERMS_NOT_ACCEPTED:
+                        console.log("Terms & Conditions set out by FACEIO/host application rejected by the end user");
+                        break;
+                    case fioErrCode.UI_NOT_READY:
+                        console.log("The FACEIO Widget code could not be (or is being) injected onto the client DOM");
+                        break;
+                    case fioErrCode.SESSION_EXPIRED:
+                        console.log("Client session expired. The first promise was already fulfilled but the host application failed to act accordingly");
+                        break;
+                    case fioErrCode.TIMEOUT:
+                        console.log("Ongoing operation timed out (eg, Camera access permission, ToS accept delay, Face not yet detected, Server Reply, etc.)");
+                        break;
+                    case fioErrCode.TOO_MANY_REQUESTS:
+                        console.log("Widget instantiation requests exceeded for freemium applications. Does not apply for upgraded applications");
+                        break;
+                    case fioErrCode.EMPTY_ORIGIN:
+                        console.log("Origin or Referer HTTP request header is empty or missing");
+                        break;
+                    case fioErrCode.FORBIDDDEN_ORIGIN:
+                        console.log("Domain origin is forbidden from instantiating fio.js");
+                        break;
+                    case fioErrCode.FORBIDDDEN_COUNTRY:
+                        console.log("Country ISO-3166-1 Code is forbidden from instantiating fio.js");
+                        break;
+                    case fioErrCode.SESSION_IN_PROGRESS:
+                        console.log("Another authentication or enrollment session is in progress");
+                        break;
+                    case fioErrCode.NETWORK_IO:
+                    default:
+                        console.log("Error while establishing network connection with the target FACEIO processing node");
+                        break;
+                }
+            }
+        </script>
         <!------------------------------------ End-Cart------------------------------------------------------------->
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

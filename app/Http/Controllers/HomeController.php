@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -30,6 +33,31 @@ class HomeController extends Controller
         $products = Product::limit(4)->get();
 
         return view('home',compact('newThreeProduct','newSixProduct','products'));
+
+    }
+
+
+    function faceidLogin(Request $req){
+        $email = $req->email;
+
+        try{
+           $user = User::where('email',$email)->first();
+           if(empty($user)) return response()->json([
+            'message' =>  'User not found !',
+            'status' => 400
+        ], 400);
+            Auth::login($user);
+            return response()->json([
+                'message' => 'Login success',
+                'status' => 200
+            ], 200);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' =>  $e->getMessage(),
+                'status' => 200
+            ], 500);
+        }
+      
 
     }
 

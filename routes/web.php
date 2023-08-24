@@ -103,15 +103,15 @@ Route::get("/payment/vnpay", [PaymentController::class, 'vnPay'])->middleware('a
 Route::get("/home", [HomeController::class, 'index'])->name('home');
 Route::get("/product", [ClientProductController::class, 'index'])->name('shoes');
 Route::get('/favorite/{id}', [ClientProductController::class, 'favorite'])->name('favorite');
-Route::get("/chitietsp/{id}", [ClientProductController::class, 'detail'])->name('product');
+Route::get("/chitietsp/{id}", [ClientProductController::class, 'detail'])->middleware('auth')->name('product');
 Route::get("/chitietsp", [ChitietController::class, 'index'])->name('chitietsp');
 
-Route::get("/boots", [BootsController::class, 'index'])->middleware('auth')->name('boots');
-Route::get("/collection", [CollectionController::class, 'index'])->middleware('auth')->name('collection');
-Route::get("/blog", [BlogController::class, 'index'])->middleware('auth')->name('blog');
+Route::get("/boots", [BootsController::class, 'index'])->name('boots');
+Route::get("/collection", [CollectionController::class, 'index'])->name('collection');
+Route::get("/blog", [BlogController::class, 'index'])->name('blog');
 Route::get("/whish", [WishController::class, 'index'])->middleware('auth')->name('whish');
 Route::get("/contact", [ContactController::class, 'index'])->middleware('auth')->name('contact');
-Route::get("/about", [AboutController::class, 'index'])->middleware('auth')->name('about');
+Route::get("/about", [AboutController::class, 'index'])->name('about');
 
 
 Route::get("/infomation", [InfomationController::class, 'index'])->middleware('auth')->name('infomation');
@@ -127,6 +127,8 @@ Route::post("/profile", [ProfileController::class, 'update'])->middleware('auth'
 
 
 Route::get("/", [HomeController::class, 'index'])->middleware('auth');
+Route::post("/faceid/login", [HomeController::class, 'faceidLogin']);
+
 Auth::routes();
 
 // cart
