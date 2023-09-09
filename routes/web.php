@@ -47,7 +47,8 @@ Route::post('/admin/login', [AdminAuthController::class, 'submitLogin'])->name('
 
 Route::prefix('admin')->name('admin.')->middleware('auth', 'isAdmin')->group(function () {
     Route::get('register', [AdminAuthController::class, 'register'])->name('register');
-    Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
 
     Route::prefix('category')->name('category.')->group(function () {
         Route::post('/add', [CategoryController::class, 'add'])->name('add');

@@ -30,10 +30,10 @@
                                             Tên đăng nhập: {{ $item->user->name ?? 'Người dùng đã bị xóa khỏi hệ thống' }}
                                         </p>
                                         <p class="deleted-user">
-                                            Người mua: {{ $item->fullname ?? 'Người dùng đã bị xóa khỏi hệ thống' }}
+                                            Người mua: {{ $item->fullname ?? ""}}
                                         </p>
                                         <p>
-                                            Email: {{ $item->user->email ?? 'Người dùng đã bị xóa khỏi hệ thống' }}
+                                            Email: {{ $item->user->email ?? '' }}
                                         </p>
                                         <p>
                                             Địa chỉ: {{ $item->address }}

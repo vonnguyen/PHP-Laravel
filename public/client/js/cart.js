@@ -53,7 +53,17 @@ window.addEventListener('load', function () {
                 }),
                 dataType: 'json',
                 success: function (data) {
-    
+                    if(data.status  == 500){
+                        Swal.fire({
+                            position: 'center-center',
+                            icon: 'error',
+                            title: 'Sản phẩm hết hàng',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+
+                        return;
+                    }
                     console.log(data)
                     let dataNew = JSON.parse(data.cart)
                     let number = 0;

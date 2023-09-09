@@ -25,7 +25,7 @@ class AdminAuthController extends Controller
                 if($user->group_id == 1){
 
                     Auth::login($user);
-                    return redirect()->route('admin.index');
+                    return redirect()->route('admin.dashboard');
                 }else{
                     return back()->with('msg','Không phải admin !!');
                 }

@@ -17,10 +17,13 @@
     <link href="{{ asset('https://fonts.gstatic.com') }}" rel="preconnect">
     {{-- <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('assets/css/main_admin.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link
         href="{{ asset('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i') }}"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
+    {{-- link biểu đồ --}}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     @yield('link')
 
     <!-- Vendor CSS Files -->
@@ -36,6 +39,7 @@
     <link href="{{ asset('assets/css/style1.css') }}" rel="stylesheet">
     {{-- <link href="{{ asset('assets/css/jquery-ui.min.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('vendor/select2') }}/select2.min.css" rel="stylesheet" />
+    
     <style>
         .select2-selection__choice {
             background-color: #000 !important;
@@ -105,6 +109,11 @@
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
     @yield('script')
     {{-- <script pt src="{{ asset('assets/js/jquery-ui.min.js') }}"></script> --}}
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    {{-- scrip biểu đồ --}}
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </body>
 
 </html>

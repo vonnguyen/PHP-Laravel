@@ -435,7 +435,7 @@
         <script src="https://cdn.faceio.net/fio.js"></script>
         <script type="text/javascript">
             /* Instantiate fio.js with your application Public ID */
-            const faceio = new faceIO("fioa2376");
+            const faceio = new faceIO("fioa2880");
             const register_face = document.querySelector('.register_face');
     
             register_face?.addEventListener('click', enrollNewUser);

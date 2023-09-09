@@ -90,8 +90,12 @@
 
                         <div class="info-detail">
                             <span class="info-title">Kho:</span>
-
-                            <span style="color: #4f8a10 ;">Còn hàng</span>
+                        @if ($product->number == 0)
+                            <span class="text-danger">Sản phẩm hết hàng</span>
+                        @else
+                        <span class="text-success">{{$product->number}}</span>
+                        @endif
+                           
 
                         </div>
                         <div class="info-detail">

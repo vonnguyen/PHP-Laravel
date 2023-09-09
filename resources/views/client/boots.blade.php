@@ -27,15 +27,7 @@
                         <i class="fa-solid fa-list"></i>
                         <i class="fa-solid fa-list-check"></i>
                     </div>
-                    {{-- <div class="collection-items-per">
-                        <p>Paginate by</p>
-                        <select name="" id="">
-                            <option value="">9</option>
-                            <option value="">12</option>
-                            <option value="">14</option>
-                            <option value="">16</option>
-                        </select>
-                    </div> --}}
+                   
 
                 </div>
 

@@ -15,6 +15,11 @@ class CartController extends Controller
     function add(Request $request){
 
         $item = Product::find($request->id);
+        if($item->number < $request->numberProduct ) return  response()->json([
+            "message"=>"So luong k du",
+            "status" => 500
+
+        ]);
         $cartUser =user_cart::where('user_id', Auth::user()->id)->first();
         if (empty($cartUser)) {
             $cartUser = new user_cart();
