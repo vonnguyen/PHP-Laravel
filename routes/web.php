@@ -18,6 +18,7 @@ use App\Http\Controllers\Client\CollectionController;
 use App\Http\Controllers\Client\CommentController;
 use App\Http\Controllers\Client\ContactController;
 use App\Http\Controllers\Client\InfomationController;
+use App\Http\Controllers\Client\NotiController;
 use App\Http\Controllers\Client\PaymentController;
 use App\Http\Controllers\Client\ProductController as ClientProductController;
 use App\Http\Controllers\Client\ProfileController;
@@ -90,6 +91,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'isAdmin')->group(fun
     Route::prefix('bill')->name('bill.')->group(function () {
         Route::get('/list', [BillController::class, 'list'])->name('list');
     });
+
+
     Route::prefix('comments')->name('comments.')->group(function () {
         Route::get('/list', [AdminCommentController::class, 'list'])->name('list');
         Route::get('/delete/{id}', [AdminCommentController::class, 'delete'])->name('delete');
@@ -97,6 +100,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'isAdmin')->group(fun
 });
 
 //client
+Route::get("/getNoti/{id}", [NotiController::class, 'getNoti'])->middleware('auth')->name('getNoti');
+Route::get("/readAll/{id}", [NotiController::class, 'readAll'])->middleware('auth')->name('readAll');
 
 Route::get("/vnpay_return", [PaymentController::class, 'vnPay_return'])->middleware('auth')->name('vnpay_return');
 Route::get("/payment/vnpay", [PaymentController::class, 'vnPay'])->middleware('auth')->name('vnpay');

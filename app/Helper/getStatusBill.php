@@ -3,6 +3,7 @@
 <?php
 
 use App\Models\favoriteProduct;
+use App\Models\notification;
 use App\Models\user_cart;
 use Illuminate\Support\Facades\Auth;
 
@@ -82,4 +83,21 @@ function renderComment($data,$parent_id,$sub_string,$html){
 
 
 
+}
+
+
+function getNotification(){
+    $data = [];
+    $data['notis_all'] =[];
+    $data['notis_no_readed'] = [];
+
+    if(empty(Auth::user())) return $data;
+    $notis_no_readed = notification::where("user_id",Auth::user()->id)->where("readed" , 0)->orderBy("created_at","desc")->get();
+    $notis_all = notification::where("user_id",Auth::user()->id)->orderBy("created_at","desc")->get();
+
+    $data['notis_all'] = $notis_all;
+
+    $data['notis_no_readed'] = $notis_no_readed;
+
+    return $data;
 }

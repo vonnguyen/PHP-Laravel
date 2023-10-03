@@ -178,3 +178,12 @@
 .main-cart.active .about-cart{
     transform: translateX(0);
 }
+.list_noti {
+    opacity: 0;
+    visibility: hidden;
+
+}
+.bell.active .list_noti{
+    opacity: 1;
+    visibility: visible;
+}

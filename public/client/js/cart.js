@@ -78,15 +78,20 @@ window.addEventListener('load', function () {
                     })
                     iconNumber.textContent = number;
                     sumMoney.textContent = sum;
-    
+                    //socket 
+
+                    axios({
+                        method:"GET",
+                        url:"http://localhost:4000/socker_mua_hang?status='mua_thanh_cong'"
+                    });
                     // Hiển thị thông báo thêm sản phẩm
-                    Swal.fire({
-                        position: 'center-center',
-                        icon: 'success',
-                        title: 'Thêm sản phẩm thành công !',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    // Swal.fire({
+                    //     position: 'center-center',
+                    //     icon: 'success',
+                    //     title: 'Thêm sản phẩm thành công !',
+                    //     showConfirmButton: false,
+                    //     timer: 1500
+                    // })
 
                     if(item.className.includes("redirect")){
                         window.location.href = "/infomation"

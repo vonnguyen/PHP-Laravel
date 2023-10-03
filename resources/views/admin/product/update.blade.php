@@ -42,6 +42,10 @@
                 <input type="file" value="{{$product->img}}" name="img">
             </div>
             <div class="mb10">
+                Hình chi tiết<br>
+                <input type="file" value="{{$product->img_detail}}" name="img_detail">
+            </div>
+            <div class="mb10">
                 Mô tả<br>
                 <textarea class="form-control" name="mota" cols="30" rows="5">{{$product->mota}}</textarea>
             </div>

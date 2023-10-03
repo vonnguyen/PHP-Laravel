@@ -43,6 +43,10 @@
                     <input type="file" name="img">
                 </div>
                 <div class="mb10">
+                    Hình chi tiết<br>
+                    <input type="file" name="img_detail">
+                </div>
+                <div class="mb10">
                     Mô tả<br>
                     <textarea class="form-control" name="mota" cols="30" rows="5"></textarea>
                 </div>
@@ -78,20 +82,24 @@
         </div>
     </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
-        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-    <script src="{{ asset('vendor/select2') }}/select2.min.js"></script>
-    <script>
-        $(function() {
-            $(".tag_select2_choose").select2({
-                tags: true,
-                tokenSeparators: [',']
-            });
-            $(".tag_select2_colors").select2({
-                tags: true,
-                tokenSeparators: [',']
-            });
+  
+@endsection
 
-        });
-    </script>
+@section("script")
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+<script src="{{ asset('vendor/select2') }}/select2.min.js"></script>
+<script>
+$(function() {
+    $(".tag_select2_choose").select2({
+        tags: true,
+        tokenSeparators: [',']
+    });
+    $(".tag_select2_colors").select2({
+        tags: true,
+        tokenSeparators: [',']
+    });
+
+});
+</script>
 @endsection

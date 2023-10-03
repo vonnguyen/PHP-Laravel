@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{{ asset('client') }}/assets/style.css">
     <link rel="stylesheet" href="{{ asset('client') }}/assets/cart.css">
     <link rel="stylesheet" href="{{ asset('client') }}/assets/reponsive.css">
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
     @yield('css')
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
@@ -66,7 +67,7 @@
                                                 <button class="collection-btn">
                                                     <span class="name-shoes">{{ $product->name }}</span>
                                                     <span class="cost-shoes">
-                                                       {{ number_format($product->gia, 0) }} <span>₫</span></span>
+                                                        {{ number_format($product->gia, 0) }} <span>₫</span></span>
                                                 </button>
                                             </a>
                                         </div>
@@ -97,6 +98,7 @@
             </div>
             <!-- end -->
             {{-- Tìm kiếm sản phẩm --}}
+
             <div class="icon-header">
                 <form action="{{ route('boots') }}" method="GET" class="d-flex search-micro" role="search">
                     @csrf
@@ -130,16 +132,42 @@
                             class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 {{-- End Tìm kiếm sản phẩm --}}
-                <div class="relative ml-4">
+                
+                <div class="relative bell ml-4">
                     <span
-                        class="absolute top-[-8px] right-0 bg-black p-2 w-[20px] h-[20px] rounded-full flex justify-center items-center text-light">0
+                        class="absolute top-[-8px] right-0 bg-black p-2 w-[20px] h-[20px] rounded-full flex justify-center items-center text-light count_noti">{{ count(getNotification()['notis_no_readed']) }}
                     </span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-8 h-8 cursor-pointer">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0">
-                        </path>
-                    </svg>
+                    <span class="icon_bell">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-8 h-8 cursor-pointer">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0">
+                            </path>
+                        </svg>
+                    </span>
+                    @if (count(getNotification()['notis_all']) > 0)
+                        
+                    <div class="flex list_noti flex-col bg-white absolute right-0 top-full w-[400px] rounded-lg shadow-lg">
+                        <div class="flex gap-3">
+                            <button>
+                                <a href="">Cap nhat</a>
+                            </button>
+                            <button><a href="{{ route('readAll', Auth::user()->id) }}">Doc all</a></button>
+                        </div>
+                        <ul class="p-3 flex flex-col gap-3 ">
+                            @foreach (getNotification()['notis_all'] as $noti)
+                                <li class="flex flex-col"
+                                    style={{ $noti->readed == 0 ? 'background-color:#ccc' : '' }}>
+                                    <div class="p-1">
+                                        <h3 class="font-bold">{{ $noti->title }}</h3>
+                                        <p>{{ $noti->description }}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                 </div>
                 <span class="icon-user text-2xl relative  ">
                     <span class="info-user">
@@ -184,7 +212,7 @@
                     </ul>
 
                 </span>
-                
+
                 <a href="{{ route('whish') }}" class="block relative ">
                     <span
                         class="absolute top-[-8px] right-[-8px] bg-black p-2 w-[20px] h-[20px] rounded-full flex justify-center items-center text-light">{{ getFavorite() }}
@@ -216,10 +244,10 @@
                     {{-- <i class="text-2xl fa-solid fa-briefcase"></i> --}}
                 </span>
                 @if (!empty(Auth::user()))
-                    <span data-email={{Auth::user()->email ?? ""}} class="icon-face text-2xl register_face">
-                    <i class="fa-regular fa-face-smile"></i>
-                </span>
-                @endif  
+                    <span data-email={{ Auth::user()->email ?? '' }} class="icon-face text-2xl register_face">
+                        <i class="fa-regular fa-face-smile"></i>
+                    </span>
+                @endif
 
             </div>
 
@@ -384,7 +412,8 @@
                                 $sum += $item->total;
                             @endphp
                             <div class="product-cart">
-                                <span data-id="{{ $item->id }}" data-size="{{ $item->size }}" data-color="{{ $item->color }}" data-url="{{ route('cart.delete') }}"
+                                <span data-id="{{ $item->id }}" data-size="{{ $item->size }}"
+                                    data-color="{{ $item->color }}" data-url="{{ route('cart.delete') }}"
                                     class="close-item">x</span>
                                 <div class="item-img-cart">
                                     <img src="{{ $item->image }}" alt="">
@@ -411,7 +440,7 @@
                 <div class="bottom-cart">
                     <div class="sub-total">
                         <div class="p-title">Tổng cộng</div>
-                        <span class="money"><span class="sumMoney">{{ number_format($sum , 0)  }}</span>₫</span>
+                        <span class="money"><span class="sumMoney">{{ number_format($sum, 0) }}</span>₫</span>
                     </div>
                     <div class="p-main">
                         Vận chuyển, thuế và chiết khấu sẽ được tính khi thanh toán.
@@ -432,16 +461,19 @@
 
         </div>
         <div id="faceio-modal"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"
+            integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.faceio.net/fio.js"></script>
         <script type="text/javascript">
             /* Instantiate fio.js with your application Public ID */
             const faceio = new faceIO("fioa2880");
             const register_face = document.querySelector('.register_face');
-    
+
             register_face?.addEventListener('click', enrollNewUser);
-    
+
             function enrollNewUser() {
-    
+
                 let email = this.dataset.email;
                 // Start the facial enrollment process
                 faceio.enroll({
@@ -472,9 +504,9 @@
                     handleError(errCode);
                 });
             }
-    
-    
-    
+
+
+
             function handleError(errCode) {
                 // Log all possible error codes during user interaction..
                 // Refer to: https://faceio.net/integration-guide#error-codes
@@ -505,7 +537,9 @@
                         console.log("Server side error");
                         break;
                     case fioErrCode.UNAUTHORIZED:
-                        console.log("Your application is not allowed to perform the requested operation (eg. Invalid ID, Blocked, Paused, etc.). Refer to the FACEIO Console for additional information");
+                        console.log(
+                            "Your application is not allowed to perform the requested operation (eg. Invalid ID, Blocked, Paused, etc.). Refer to the FACEIO Console for additional information"
+                        );
                         break;
                     case fioErrCode.TERMS_NOT_ACCEPTED:
                         console.log("Terms & Conditions set out by FACEIO/host application rejected by the end user");
@@ -514,13 +548,19 @@
                         console.log("The FACEIO Widget code could not be (or is being) injected onto the client DOM");
                         break;
                     case fioErrCode.SESSION_EXPIRED:
-                        console.log("Client session expired. The first promise was already fulfilled but the host application failed to act accordingly");
+                        console.log(
+                            "Client session expired. The first promise was already fulfilled but the host application failed to act accordingly"
+                        );
                         break;
                     case fioErrCode.TIMEOUT:
-                        console.log("Ongoing operation timed out (eg, Camera access permission, ToS accept delay, Face not yet detected, Server Reply, etc.)");
+                        console.log(
+                            "Ongoing operation timed out (eg, Camera access permission, ToS accept delay, Face not yet detected, Server Reply, etc.)"
+                        );
                         break;
                     case fioErrCode.TOO_MANY_REQUESTS:
-                        console.log("Widget instantiation requests exceeded for freemium applications. Does not apply for upgraded applications");
+                        console.log(
+                            "Widget instantiation requests exceeded for freemium applications. Does not apply for upgraded applications"
+                        );
                         break;
                     case fioErrCode.EMPTY_ORIGIN:
                         console.log("Origin or Referer HTTP request header is empty or missing");
@@ -563,6 +603,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.1/toastr.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+        <script>
+            var splide = new Splide('.splide', {
+                perPage: 3,
+                rewind: true,
+                perMove: 1,
+            });
+
+            splide.mount();
+        </script>
         <script src="{{ asset('client/js') }}/main.js"></script>
         <script src="{{ asset('client/js') }}/cart.js"></script>
         <script>
@@ -655,6 +705,22 @@
             });
         </script>
         <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+        <script>
+    let icon = document.querySelector('.bell');
+    let bell = document.querySelector('.icon_bell');
+
+
+    bell?.addEventListener('click', function (e) {
+                icon.classList.toggle('active');
+    })
+    document.addEventListener('click', function (e) {
+        if (!e.target.matches('.bell') && !icon.contains(e.target)) {
+            console.log(e.target);
+            icon.classList.remove('active');
+        }
+
+    })
+        </script>
         {{-- <script src="./responesive.js"></script> --}}
         @yield('js')
 

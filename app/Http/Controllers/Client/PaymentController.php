@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\bill;
 use App\Models\detail_bill;
+use App\Models\notification;
 use App\Models\Product;
 use App\Models\user_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Http;
 class PaymentController extends Controller
 {
     //
@@ -25,6 +26,7 @@ class PaymentController extends Controller
     function detail_bill($id, Request $request)
     {
 
+        $data = bill::find($id);
 
         if ($request->status > -1) {
             $bill = bill::find($id);
@@ -40,9 +42,17 @@ class PaymentController extends Controller
                     $product->update();
                 }
             }
+            Http::get('http://localhost:4000/change_status_order');
+            $noti = notification::create([
+                "user_id"=>$data->user_id,
+                "title"=>"Trang thai don hang cua ban da duoc cap nhat!!",
+                "description"=>"asdkjhasfjkjakfhashfdjkasfkjhjk",
+                "href"=>"/order",
+                "readed" => 0
+            ]);
 
         }
-        $data = bill::find($id);
+     
         $detail_bill = detail_bill::where('id_bill', $id)->get();
         return view('admin.bill.detail', compact('data', 'detail_bill'));
     }

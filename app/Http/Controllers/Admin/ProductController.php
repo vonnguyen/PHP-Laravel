@@ -23,6 +23,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->gia = $request->gia;
         $product->image =  cloudinary()->upload($request->file('img')->getRealPath())->getSecurePath();
+        $product->img_detail =  cloudinary()->upload($request->file('img_detail')->getRealPath())->getSecurePath();
         $product->mota = $request->mota;
         $product->cate = $request->cate;
          
@@ -100,6 +101,10 @@ class ProductController extends Controller
 
            $product->image =  cloudinary()->upload($request->file('img')->getRealPath())->getSecurePath();
        }
+       if($request->hasFile('img_detail')){ 
+
+        $product->img_detail =  cloudinary()->upload($request->file('img_detail')->getRealPath())->getSecurePath();
+    }
        
        if($request->mota){
            $product->mota = $request->mota;

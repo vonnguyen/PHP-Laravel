@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
     {{-- link biểu đồ --}}
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+
     @yield('link')
 
     <!-- Vendor CSS Files -->
@@ -107,6 +109,17 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+
+    <script>
+         $(function () {
+        $(".rateyo2").rateYo().on("rateyo.change", function (e, data) {
+          var rating = data.rating;
+          $(this).parent().find('.score').text('score :'+ $(this).attr('data-rateyo-score'));
+          $(this).parent().find('.result').text('rating :'+ rating);
+         });
+      });
+    </script>
     @yield('script')
     {{-- <script pt src="{{ asset('assets/js/jquery-ui.min.js') }}"></script> --}}
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>

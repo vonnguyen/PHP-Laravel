@@ -56,7 +56,6 @@
                                         data-value={{ $size }} class="size">{{ $size }}</label>
                                     <input id="size{{ $size }}" class="invisible" type="radio" name="size"
                                         value="{{ $size }}">
-
                                 @endforeach
 
                             </div>
@@ -76,7 +75,6 @@
                             <span class="info-title">Màu sắc:</span>
                             <div class="info-border">
                                 @foreach (json_decode($product->property->colors) as $color)
-
                                     <label style="width:45px;height:45px;text-align:center" for="color{{ $color }}"
                                         data-value={{ $color }}
                                         class="d-block color {{ $color == 'white' || $color == 'black' ? "bg-$color" : "bg-$color-400" }}"></label>
@@ -86,22 +84,22 @@
                             </div>
 
                         </div>
-                        
+
 
                         <div class="info-detail">
                             <span class="info-title">Kho:</span>
-                        @if ($product->number == 0)
-                            <span class="text-danger">Sản phẩm hết hàng</span>
-                        @else
-                        <span class="text-success">{{$product->number}}</span>
-                        @endif
-                           
+                            @if ($product->number == 0)
+                                <span class="text-danger">Sản phẩm hết hàng</span>
+                            @else
+                                <span class="text-success">{{ $product->number }}</span>
+                            @endif
+
 
                         </div>
                         <div class="info-detail">
                             <span class="info-title">Lượt xem:</span>
 
-                            <span style="color: #691064b9 ;">{{$product->views}}</span>
+                            <span style="color: #691064b9 ;">{{ $product->views }}</span>
 
                         </div>
                         <div class="info-detail">
@@ -116,10 +114,11 @@
 
                         <div class="btn-detail">
                             <button class="detail_add" data-remove="{{ route('cart.delete') }}"
-                            data-id="{{ $product->id }}" data-url="{{ route('cart.add') }}"><span >THÊM VÀO GIỎ
+                                data-id="{{ $product->id }}" data-url="{{ route('cart.add') }}"><span>THÊM VÀO GIỎ
                                     HÀNG</span></button>
-                                    <button class="detail_add redirect" data-remove="{{ route('cart.delete') }}"
-                                    data-id="{{ $product->id }}" data-url="{{ route('cart.add') }}"><span >MUA NGAY </span></button>
+                            <button class="detail_add redirect" data-remove="{{ route('cart.delete') }}"
+                                data-id="{{ $product->id }}" data-url="{{ route('cart.add') }}"><span>MUA NGAY
+                                </span></button>
                         </div>
 
                         {{-- <div class="btn-detail">
@@ -169,15 +168,17 @@
                     <div class="list_comment">
                         @if ($comments)
                             @foreach ($comments as $comment)
-                                @if ($comment->parent_id == 0)
-                                    
-                                    @php
-                                        
+                                {{-- @if ($comment->parent_id == 0) --}}
+                                    @php                                       
                                         $img = $comment->user->img;
                                         $name = $comment->user->name;
                                         $id_user = $comment->user->id;
+                                        $classNameRe = "";
+                                        if($comment->parent_id != 0){
+                                            $classNameRe .= "margin-left: 30px !important";
+                                        }
                                     @endphp
-                                    <div class="flex  shadow justify-between p-3 my-3 rounded-xl">
+                                    <div style="{{$classNameRe}}" class="flex  shadow justify-between p-3 my-3 rounded-xl">
                                         <div>
                                             <div class="flex gap-3 items-center">
 
@@ -194,17 +195,18 @@
                                         <div class="flex flex-col gap-3 items-end">
 
                                             <p>{{ $comment->created_at }}</p>
-                                            @if (Auth::user()->group->id == 1)
+                                            @if (Auth::user()->group->id == 1 && $comment->parent_id == 0)
                                                 <p data-user="{{ $name }}" data-userid="{{ $id_user }}"
-                                                    class="text-blue-500 hover:underline hover:cursor-pointer reply">Trả lời
+                                                    class="text-blue-500 hover:underline hover:cursor-pointer reply">Trả
+                                                    lời
                                                 </p>
                                             @endif
 
                                         </div>
                                     </div>
 
-                                    {{ (renderComment($comments, $comment->id, '-','') )}}
-                                @endif
+                                    {{-- {{ (renderComment($comments, $comment->id, '-','') )}} --}}
+                                {{-- @endif --}}
                             @endforeach
                         @endif
                     </div>

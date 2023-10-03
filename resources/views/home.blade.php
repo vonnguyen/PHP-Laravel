@@ -24,7 +24,7 @@
                             <div class="contain-1-text">
                                 <h1 class="title">ZEN VIVID 15</h1>
                                 <p>Bán chạy nhất từ ​​42.00₫</p>
-                                <a href="{{route('boots')}}">
+                                <a href="{{ route('boots') }}">
                                     <button class="contain-btn">Mua Ngay</button>
                                 </a>
                             </div>
@@ -55,7 +55,7 @@
                                 <a href="{{ route('boots') }}">
                                     <button class="contain-btn">Mua Ngay</button>
                                 </a>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -84,8 +84,7 @@
                     <div class="row gy-3">
                         <div class="col-sm-6">
                             <div class="product">
-                                <div class="ctn2-img"><img
-                                        src="{{ asset('client') }}/assets/img/img-ctn2/adidas5-1.webp"
+                                <div class="ctn2-img"><img src="{{ asset('client') }}/assets/img/img-ctn2/adidas5-1.webp"
                                         alt="">
                                 </div>
                                 <p class="picture">ADIDASS</p>
@@ -93,24 +92,21 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="product">
-                                <div class="ctn2-img"><img
-                                        src="{{ asset('client') }}/assets/img/img-ctn2/nike3.jpg"
+                                <div class="ctn2-img"><img src="{{ asset('client') }}/assets/img/img-ctn2/nike3.jpg"
                                         alt=""></div>
                                 <p class="picture">NIKE</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="product">
-                                <div class="ctn2-img"><img
-                                        src="{{ asset('client') }}/assets/img/img-ctn2/convers5-1.jpg"
+                                <div class="ctn2-img"><img src="{{ asset('client') }}/assets/img/img-ctn2/convers5-1.jpg"
                                         alt=""></div>
                                 <p class="picture">CONVERS</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="product">
-                                <div class="ctn2-img"><img
-                                        src="{{ asset('client') }}/assets/img/img-ctn2/bitis3-1.webp"
+                                <div class="ctn2-img"><img src="{{ asset('client') }}/assets/img/img-ctn2/bitis3-1.webp"
                                         alt=""></div>
                                 <p class="picture">BITI'S</p>
                             </div>
@@ -202,20 +198,22 @@
                                             <div class="groups-img h-full">
                                                 <img class="w-full h-full object-cover" src="{{ $product->image }}"
                                                     alt="">
-                                                <img class="w-full h-full object-cover"
-                                                    src="{{ asset('client') }}/assets/img/img-ctn3/shoe12_968efbaa-1956-4621-93d2-1f1f8fdc3d11_600x.webp"
+                                                <img class="w-full h-full object-cover" src="{{ $product->img_detail }}"
                                                     alt="">
                                             </div>
                                             <div class="icon-ctn3">
-                                                <a href="{{route('product',$product->id)}}"><i class="fa-solid fa-message"></i></a>
+                                                <a href="{{ route('product', $product->id) }}"><i
+                                                        class="fa-solid fa-message"></i></a>
                                                 <a href=""><i class="fa-brands fa-gratipay"></i></a>
-                                                <a href="{{route('product',$product->id)}}"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <a href="{{ route('product', $product->id) }}"><i
+                                                        class="fa-solid fa-magnifying-glass"></i></a>
                                             </div>
                                         </div>
                                         <div class="name-shoe-ctn3 h-2/5 mt-4">
-                                            <h1> <a href="{{route('product',$product->id)}}">{{ $product->name}}</a> </h1>
+                                            <h1> <a href="{{ route('product', $product->id) }}">{{ $product->name }}</a>
+                                            </h1>
                                             <div class="cost-ctn3">
-                                                <h2> {{number_format($product->gia,2)}}<span>₫</span></h2>
+                                                <h2> {{ number_format($product->gia, 2) }}<span>₫</span></h2>
                                             </div>
                                             <div class="icon-ctn3">
                                                 <div class="icon-start">
@@ -223,8 +221,9 @@
                                                         class="fa-solid fa-star">
                                                     </i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                                                 </div>
-                                                <div class="bag-ctn3" data-urlremove="{{route('cart.delete')}}"
-                                                    data-url="{{route('cart.add')}}" data-id="{{$product->id}}"><i class="cursor-pointer fa-solid fa-bag-shopping"></i>
+                                                <div class="bag-ctn3" data-urlremove="{{ route('cart.delete') }}"
+                                                    data-url="{{ route('cart.add') }}" data-id="{{ $product->id }}"><i
+                                                        class="cursor-pointer fa-solid fa-bag-shopping"></i>
                                                 </div>
 
                                             </div>
@@ -255,65 +254,72 @@
                 </div>
             </div>
 
-            
+
             <div class="contain-3">
                 <div class="head-cnt3">
                     <div class="title-ctn3" data-aos="fade-up-right">
                         <h1>Sản phẩm đang sale </h1>
                         <p>Hiện tại</p>
                     </div>
-                    <div class="icon-ctn3">
-                        <span><i class="fa-solid fa-chevron-left"></i></span>
-                        <span><i class="fa-solid fa-chevron-right"></i></span>
-                    </div>
+
 
                 </div>
 
-                <div class="about-ctn3">
+                <div class="about-ctn3 splide">
+                    <div class="splide__track">
 
-                    <div class="row">
-                        @if ($newThreeProduct->count() > 0)
-                            @foreach ($newThreeProduct as $product)
-                                <div class="col-md-4 picture-3" data-aos-duration="500" data-aos="fade-up-right">
-                                    <div class="item h-full">
+                        <ul class="splide__list">
+                            @if ($newThreeProduct->count() > 0)
+                                @foreach ($newThreeProduct as $product)
+                                    <li class="col-md-4 splide__slide picture-3" data-aos-duration="500"
+                                        data-aos="fade-up-right">
+                                        <div class="item h-full">
 
-                                        <div class="img-ctn3 h-3/5">
-                                            <div class="groups-img h-full">
-                                                <img class="w-full h-full object-cover" src="{{ $product->image }}"
-                                                    alt="">
-                                                <img class="w-full h-full object-cover"
-                                                    src="{{ asset('client') }}/assets/img/img-ctn3/shoe12_968efbaa-1956-4621-93d2-1f1f8fdc3d11_600x.webp"
-                                                    alt="">
-                                            </div>
-                                            <div class="icon-ctn3">
-                                                <a href="{{route('product',$product->id)}}"><i class="fa-solid fa-message"></i></a>
-                                                <a href=""><i class="fa-brands fa-gratipay"></i></a>
-                                                <a href="{{route('product',$product->id)}}"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="name-shoe-ctn3 h-2/5 mt-4">
-                                            <h1> <a href="{{route('product',$product->id)}}">{{ $product->name}}</a> </h1>
-                                            <div class="cost-ctn3">
-                                                <h2> {{number_format($product->gia,0)}} <span>₫</span></h2>
-                                            </div>
-                                            <div class="icon-ctn3">
-                                                <div class="icon-start">
-                                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                                        class="fa-solid fa-star">
-                                                    </i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                            <div class="img-ctn3 h-3/5">
+                                                <div class="groups-img h-full">
+                                                    <img class="w-full h-full object-cover" src="{{ $product->image }}"
+                                                        alt="">
+                                                    <img class="w-full h-full object-cover"
+                                                        src="{{ asset('client') }}/assets/img/img-ctn3/shoe12_968efbaa-1956-4621-93d2-1f1f8fdc3d11_600x.webp"
+                                                        alt="">
                                                 </div>
-                                                <a   href="{{route('product',$product->id)}}" ><i class="cursor-pointer fa-solid fa-bag-shopping"></i>
-                                                </a>
+                                                <div class="icon-ctn3">
+                                                    <a href="{{ route('product', $product->id) }}"><i
+                                                            class="fa-solid fa-message"></i></a>
+                                                    <a href=""><i class="fa-brands fa-gratipay"></i></a>
+                                                    <a href="{{ route('product', $product->id) }}"><i
+                                                            class="fa-solid fa-magnifying-glass"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="name-shoe-ctn3 h-2/5 mt-4">
+                                                <h1> <a
+                                                        href="{{ route('product', $product->id) }}">{{ $product->name }}</a>
+                                                </h1>
+                                                <div class="cost-ctn3">
+                                                    <h2> {{ number_format($product->gia, 0) }} <span>₫</span></h2>
+                                                </div>
+                                                <div class="icon-ctn3">
+                                                    <div class="icon-start">
+                                                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                                            class="fa-solid fa-star">
+                                                        </i><i class="fa-solid fa-star"></i><i
+                                                            class="fa-solid fa-star"></i>
+                                                    </div>
+                                                    <a href="{{ route('product', $product->id) }}"><i
+                                                            class="cursor-pointer fa-solid fa-bag-shopping"></i>
+                                                    </a>
 
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                </div>
-                            @endforeach
-                        @endif
+                                    </li>
+                                @endforeach
+                            @endif
 
+                        </ul>
                     </div>
+
                 </div>
 
             </div>
@@ -325,14 +331,6 @@
                         <h4>Bán Chạy Nhất</h4>
                         <p>Hiện tại</p>
                     </div>
-                    <div class="list-ctn5">
-                        <ul>
-                            <li><a href="">Tất cả</a></li>
-                            <li><a href="">SALE</a></li>
-                            {{-- <li><a href="">BEST</a></li>
-                            <li><a href="">NEW</a></li> --}}
-                        </ul>
-                    </div>
 
                 </div>
 
@@ -341,15 +339,17 @@
                         <div class="row">
                             @if ($newSixProduct->count() > 0)
                                 @foreach ($newSixProduct as $product)
-                                    <div class="col-md-6 picture-3" data-aos-duration="400" data-aos="fade-right"
+                                    @if ((!empty($product->product)))
+                                        <div class="col-md-6 picture-3" data-aos-duration="400" data-aos="fade-right"
                                         data-aos-delay="200" data-aos-anchor-placement="center-bottom">
                                         <div class="item h-full">
 
                                             <div class="img-ctn3 h-3/4">
                                                 <div class="groups-img h-full">
-                                                    <img class="h-full w-full object-cover" src="{{ $product->image }}"
-                                                        alt="">
-                                                    <img class="h-full w-full object-cover" src="{{ asset('client') }}/assets/img/img-ctn5/shoe27.webp"
+                                                    <img class="h-full w-full object-cover"
+                                                        src="{{ $product->product->image ?? '' }}" alt="">
+                                                    <img class="h-full w-full object-cover"
+                                                        src="{{ asset('client') }}/assets/img/img-ctn5/shoe27.webp"
                                                         alt="">
                                                 </div>
                                                 <div class="icon-ctn3">
@@ -359,9 +359,11 @@
                                                 </div>
                                             </div>
                                             <div class="name-shoe-ctn3 h-1/4 mt-4">
-                                                <h1> <a href="{{route('product',$product->id)}}">{{ $product->name }}</a> </h1>
+                                                <h1> <a
+                                                        href="{{ route('product', $product->product->id) }}">{{ $product->product->name }}</a>
+                                                </h1>
                                                 <div class="cost-ctn3">
-                                                    <h2> {{number_format($product->gia,2)}}<span>₫</span></h2>
+                                                    <h2> {{ number_format($product->product->gia, 2) }}<span>₫</span></h2>
                                                 </div>
                                                 <div class="icon-ctn3">
                                                     <div class="icon-start">
@@ -370,7 +372,8 @@
                                                         </i><i class="fa-solid fa-star"></i><i
                                                             class="fa-solid fa-star"></i>
                                                     </div>
-                                                    <a href="{{route('product',$product->id)}}"  ><i class="cursor-pointer fa-solid fa-bag-shopping"></i>
+                                                    <a href="{{ route('product', $product->product->id) }}"><i
+                                                            class="cursor-pointer fa-solid fa-bag-shopping"></i>
                                                     </a>
 
                                                 </div>
@@ -378,10 +381,12 @@
                                         </div>
 
                                     </div>
+                                    @endif
+                                    
                                 @endforeach
                             @endif
 
-                            
+
                         </div>
                     </div>
 
@@ -389,7 +394,7 @@
 
             </div>
 
-           
+
 
         </div>
     </div>
@@ -419,6 +424,65 @@
                 </div>
             </div>
         </div>
+        <div class="user_id" data-id={{Auth()->user()->id}}></div>
 
     </div>
+@endsection
+
+@section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"
+        integrity="sha512-zoJXRvW2gC8Z0Xo3lBbao5+AS3g6YWr5ztKqaicua11xHo+AvE1b0lT9ODgrHTmNUxeCw0Ry4BGRYZfXu70weg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const user_id = document.querySelector(".user_id").dataset.id;
+        console.log(user_id);
+        const socket = io("http://localhost:4000")
+        socket.on("connect", () => {
+            console.log("connected socket");
+        })
+
+        socket.emit("addUser", user_id)
+
+        socket.on("mua_hang_thanh_cong", (data) => {
+            Swal.fire({
+                position: 'center-center',
+                icon: 'success',
+                title: 'Thêm sản phẩm thành công !',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        })
+
+
+        socket.on("change_status_order", (data) => {
+            const count_noti = document.querySelector(".count_noti");
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: "http://127.0.0.1:8000/getNoti/"+user_id,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    count_noti.textContent = data?.notis_no_readed.length;
+                },
+                error: function (e) {
+                    console.log('loi')
+                    console.log(e)
+    
+                }
+            });
+            Swal.fire({
+                position: 'center-center',
+                icon: 'success',
+                title: 'Đơn hàng của bạn đã dc thay đổi trạng thái!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        })
+    </script>
 @endsection
