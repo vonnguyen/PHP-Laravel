@@ -43,14 +43,19 @@
                                             <div class="groups-img h-full">
                                                 <img class="h-full w-full object-cover" src="{{ $product->image }}"
                                                     alt="">
-                                                <img class="h-full w-full object-cover"
-                                                    src="{{ asset('client') }}/assets/img/img-header/shoe26_de67b47c-8d95-481f-aa85-268cdc309e4e.webp"
-                                                    alt="">
+                                                 <img class="w-full h-full object-cover" src="{{ $product->img_detail }}"
+                                                        alt="">
                                                 <span class="save">Save 16%</span>
                                             </div>
                                             <div class="icon-ctn3">
                                                 <a href=""><i class="fa-solid fa-message"></i></a>
+                                                @if (empty(Auth()->user()) || empty(Auth()->user()->id))
+                                                <a class="none_favorite"><i class="fa-brands fa-gratipay"></i></a>
+
+                                                @else
                                                 <a href="{{route('favorite',$product->id)}}"><i class="fa-brands fa-gratipay"></i></a>
+
+                                                @endif
                                                 <a href="{{route('product', $product->id)}}"><i class="fa-solid fa-magnifying-glass"></i></a>
                                             </div>
                                         </div>

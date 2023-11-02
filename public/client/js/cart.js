@@ -85,13 +85,13 @@ window.addEventListener('load', function () {
                         url:"http://localhost:4000/socker_mua_hang?status='mua_thanh_cong'"
                     });
                     // Hiển thị thông báo thêm sản phẩm
-                    // Swal.fire({
-                    //     position: 'center-center',
-                    //     icon: 'success',
-                    //     title: 'Thêm sản phẩm thành công !',
-                    //     showConfirmButton: false,
-                    //     timer: 1500
-                    // })
+                    Swal.fire({
+                        position: 'center-center',
+                        icon: 'success',
+                        title: 'Thêm sản phẩm thành công !',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
 
                     if(item.className.includes("redirect")){
                         window.location.href = "/infomation"
@@ -208,9 +208,9 @@ window.addEventListener('load', function () {
             <p>${item.color} / ${item.size}</p>
             <span>${item.gia} ₫</span>
             <div class="dt-sc-cart">
-                <span data-url="${url}" data-id="${item.id}" class="up-down decre">-</span>
+                <span data-url="${url}" data-id="${item.id}" data-color="${item.color}"  data-size="${item.size}" class="up-down decre">-</span>
                 <input type="text" value="${item.number}">
-                <span data-url="${url}" data-id="${item.id}" class="up-down incre">+</span>
+                <span data-url="${url}" data-id="${item.id}" data-color="${item.color}"  data-size="${item.size}" class="up-down incre">+</span>
             </div>
         </div>
 
@@ -303,7 +303,8 @@ window.addEventListener('load', function () {
             e.target.previousElementSibling.value = quality;
             let url = e.target.dataset.url;
             let id = e.target.dataset.id;
-
+            let color = e.target.dataset.color;
+            let size = e.target.dataset.size;
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -316,7 +317,9 @@ window.addEventListener('load', function () {
                 data: JSON.stringify(
                     {
                         id: id,
-                        numberProduct: 1
+                        numberProduct: 1,
+                        color:color,
+                            size:size,
                     }
                 ),
                 dataType: 'json',
@@ -355,6 +358,9 @@ window.addEventListener('load', function () {
                 e.target.nextElementSibling.value = quality;
                 let url = e.target.dataset.url;
                 let id = e.target.dataset.id;
+                let color = e.target.dataset.color;
+                let size = e.target.dataset.size;
+
 
                 $.ajaxSetup({
                     headers: {
@@ -368,6 +374,8 @@ window.addEventListener('load', function () {
                     data: JSON.stringify(
                         {
                             id: id,
+                            color:color,
+                            size:size,
                             numberProduct: -1
                         }
                     ),

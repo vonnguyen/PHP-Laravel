@@ -86,6 +86,7 @@ class ProductController extends Controller
         $product_property->sizes = json_encode($request->input('sizes'));
         $product_property->colors =  json_encode($request->input('colors'));
         $product_property->save();
+
        }
         if($request->name){
             $product->name= $request->name;
@@ -94,6 +95,9 @@ class ProductController extends Controller
         if($request->gia){
              $product->gia = $request->gia;
         }
+        if($request->soluong){
+            $product->number = $request->soluong;
+       }
         if($request->cate){
             $product->cate = $request->cate;
        }

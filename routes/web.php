@@ -102,6 +102,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'isAdmin')->group(fun
 //client
 Route::get("/getNoti/{id}", [NotiController::class, 'getNoti'])->middleware('auth')->name('getNoti');
 Route::get("/readAll/{id}", [NotiController::class, 'readAll'])->middleware('auth')->name('readAll');
+// Route::get("/readOne/{id}", [NotiController::class, 'readOne'])->middleware('auth')->name('readOne');
 
 Route::get("/vnpay_return", [PaymentController::class, 'vnPay_return'])->middleware('auth')->name('vnpay_return');
 Route::get("/payment/vnpay", [PaymentController::class, 'vnPay'])->middleware('auth')->name('vnpay');

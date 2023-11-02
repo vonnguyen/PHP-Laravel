@@ -31,4 +31,5 @@ class NotiController extends Controller
         return redirect()->back();
 
     }
+    
 }

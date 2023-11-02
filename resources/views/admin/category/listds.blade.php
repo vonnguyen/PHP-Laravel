@@ -7,7 +7,7 @@
         </div>
 
         <div class="pt-5">
-            <a href="{{ route('admin.category.add') }}"><button class="btn bg-info">Nhập thêm</button></a>
+            <a href="{{ route('admin.category.add') }}"><button class="btn bg-primary text-light">Thêm Mới</button></a>
         </div>
 
         <div class="frmcontent">

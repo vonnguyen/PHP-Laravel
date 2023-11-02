@@ -48,9 +48,9 @@
         </div>
         <div>
              <div class="mb10">
-                <input type="button" value="Chọn tất cả" />
-                <input type="button" value="Bỏ chọn tất cả" />
-                <a href="{{route('admin.user.add')}}"><input type="button" value="Thêm" /></a>
+                <input class="btn bg-primary text-light" type="button" value="Chọn tất cả" />
+                <input class="btn bg-primary text-light" type="button" value="Bỏ chọn tất cả" />
+                <a href="{{route('admin.user.add')}}"><input type="button" class="btn bg-primary text-light" value="Thêm" /></a>
             </div>
         </div>
 

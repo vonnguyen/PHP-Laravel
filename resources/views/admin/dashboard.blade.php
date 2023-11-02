@@ -170,6 +170,143 @@
 
     {{-- *************************************** --}}
 
+    <div class="row">
+
+        <div class="col-xl-4 col-lg-4 col-md-4  grid-margin stretch-card">
+            <div class="card card-statistics">
+                <div class="card-body">
+                    <div
+                        class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
+                        <div class="float-start">
+                            <i class="mdi mdi-cube text-danger icon-lg" style="font-size: 50px"></i>
+                        </div>
+                        <div class="float-end">
+                            <p class="mb-0 text-end fs-5">Tổng Doanh Thu</p>
+                            <div class="fluid-container">
+                                <h3 class="fw-bold text-end mb-0">
+                                    {{number_format($TongDoanhThu, 2)}}<span class="fs-3">₫</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted mt-3 mb-0 text-start text-md-center text-xl-start">
+                        <i class="mdi mdi-alert-octagon mr-1" style="font-size: 15px" aria-hidden="true"></i> Theo sản phẩm giao thành công
+                    </p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-xl-4 col-lg-4 col-md-4  grid-margin stretch-card">
+            <div class="card card-statistics">
+                <div class="card-body">
+                    <div
+                        class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
+                        <div class="float-start">
+                            <i class="mdi mdi-receipt-text-check-outline text-success icon-lg" style="font-size: 50px"></i>
+                        </div>
+                        <div class="float-end">
+                            <p class="mb-0 text-end fs-5">Đơn Hàng Đã Bán</p>
+                            <div class="fluid-container">
+                                <h3 class="fw-bold text-end mb-0">
+                                    {{$TongDonHang}}
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted mt-3 mb-0 text-start text-md-center text-xl-start">
+                        <i class="mdi mdi-alert-octagon mr-1" style="font-size: 15px" aria-hidden="true"></i> Theo số đơn
+                    </p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-xl-4 col-lg-4 col-md-4  grid-margin stretch-card">
+            <div class="card card-statistics">
+                <div class="card-body">
+                    <div
+                        class="d-flex flex-md-column flex-xl-row flex-wrap justify-content-between align-items-md-center justify-content-xl-between">
+                        <div class="float-start">
+                            <i class="mdi mdi-chart-box-outline text-warning icon-lg" style="font-size: 50px"></i>
+                        </div>
+                        <div class="float-end">
+                            <p class="mb-0 text-end fs-5">Số sản phẩm bán</p>
+                            <div class="fluid-container">
+                                <h3 class="fw-bold text-end mb-0">
+                                    {{$TongSoHang}}
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted mt-3 mb-0 text-start text-md-center text-xl-start">
+                        <i class="mdi mdi-alert-octagon mr-1" style="font-size: 15px" aria-hidden="true"></i> Theo số sản phẩm
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row py-5">
+        <div class="col-6">
+            <div>
+                <h5 class="border rounded-pill text-center border-none bg-primary text-white py-3">
+                    TOP 3 SẢN PHẨM BÁN CHẠY NHẤT</h5>
+                <table class="table">
+                    <thead class="text-center">
+                        <tr class="table-primary">
+                            <th class="w-35" scope="col">Tên SP</th>
+                            <th class="w-15" scope="col">Giá</th>
+                            <th class="w-25" scope="col">Số lượng</th>
+                            <th class="w-25" scope="col">Hình ảnh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($topThreeProductRating as $item)
+                            <tr class="table-secondary">
+                                <td>{{ $item->info_product->name }}</td>
+                                <td>{{ number_format($item->info_product->gia, 2)}}<span>₫</span></td>
+                                <td>{{ $item->total }}</td>
+                                <td><img class="w-50" src="{{ $item->info_product->image }}" alt=""></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @if (count($topThreeProductRatingShort) > 0)
+        <div class="col-6">
+            <div>
+                <h5 class="border rounded-pill text-center border-none bg-primary text-white py-3">
+                    TOP 3 SẢN PHẨM BÁN THẤP NHẤT</h5>
+                <table class="table">
+                    <thead class="text-center">
+                        <tr class="table-primary">
+                            <th class="w-35" scope="col">Tên SP</th>
+                            <th class="w-15" scope="col">Giá</th>
+                            <th class="w-25" scope="col">Số lượng</th>
+                            <th class="w-25" scope="col">Hình ảnh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($topThreeProductRatingShort as $item)
+                        @if ($item->info_product)
+                        <tr class="table-secondary">
+                            <td>{{ $item->info_product->name }}
+                            </td>
+                            <td>{{ number_format($item->info_product->gia, 2)}}<span>₫</span></td>
+                            <td>{{ $item->total }}</td>
+                            <td><img class="w-50" src="{{ $item->info_product->image }}" alt=""></td>
+                        </tr>
+                                
+                        @endif
+                          
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            
+        @endif
+
+
+    </div>
+
    
 
     <div class="container-fluid">
@@ -217,74 +354,65 @@
         </div>
     </div>
 
-    <div class="row py-5">
-        <div class="col-6">
-            <div>
-                <h5 class="border rounded-pill text-center border-danger bg-success text-white py-3">
-                    TOP 3 SẢN PHẨM BÁN CHẠY NHẤT</h5>
-                <table class="table">
-                    <thead class="text-center">
-                        <tr class="table-primary">
-                            <th class="w-35" scope="col">Tên SP</th>
-                            <th class="w-15" scope="col">Giá</th>
-                            <th class="w-25" scope="col">Số lượng</th>
-                            <th class="w-25" scope="col">Hình ảnh</th>
+    <div class="">
+        <div class="pt-3">
+            <p class="title_thongke pt-3">THỐNG KÊ DANH SÁCH NGƯỜI MUA</p>
+        </div>
+        <div class="frmcontent">
+            <div class="table">
+                <table class="display" id="table_products">
+                    <thead class="table-info">
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">THÔNG TIN CÁ NHÂN</th>
+                            <th class="text-center">TỔNG TIỀN</th>
+                            <th class="text-center">TRẠNG THÁI</th>
+                            <th class="text-center">NGÀY</th>
+                            <th class="text-center">THAO TÁC</th>
                         </tr>
+
                     </thead>
-                    <tbody>
-                        @foreach ($topThreeProductRating as $item)
-                            <tr class="table-success">
-                                <td>{{ $item->info_product->name }}</td>
-                                <td>{{ number_format($item->info_product->gia, 2)}}<span>₫</span></td>
-                                <td>{{ $item->total }}</td>
-                                <td><img class="w-50" src="{{ $item->info_product->image }}" alt=""></td>
+                    @if (!empty($bills))
+                        @foreach ($bills as $item)
+                            <tr>
+                                <td>{{ $item->id }} </td>
+                                <td>
+                                    <p>
+                                        Tên: {{ $item->user->name ?? 'Người dùng đã bị xóa khỏi hệ thống' }}
+                                    </p>
+                                    <p>
+                                        Email: {{ $item->user->email ?? 'Người dùng đã bị xóa khỏi hệ thống' }}
+                                    </p>
+                                    <p>
+                                        Địa chỉ: {{ $item->address }}
+                                    </p>
+                                    <p>
+                                        SĐT: {{ $item->sdt }}
+                                    </p>
+
+
+                                </td>
+                                <td> <span>{{ $item->total }}₫ </span></td>
+                                <td><span class="text-{{ getStatusBill($item->statuss)['color'] }}">
+                                        {{ getStatusBill($item->statuss)['message'] }}
+                                    </span> </td>
+                                <td>{{ $item->created_at }} </td>
+                                <td> <a class="btn btn-primary" href="{{ route('detail_bill', $item->id) }}">Chi tiết</a>
+                                </td>
+
+                                </td>
                             </tr>
                         @endforeach
-                    </tbody>
+                    @endif
+
+
                 </table>
+
             </div>
         </div>
-        {{-- @if (count($topThreeProductRatingShort) > 0)
-        <div class="col-6">
-            <div>
-                <h5 class="border rounded-pill text-center border-danger bg-warning text-white py-3">
-                    TOP 3 SẢN PHẨM BÁN THẤP NHẤT</h5>
-                <table class="table">
-                    <thead class="text-center">
-                        <tr class="table-primary">
-                            <th class="w-35" scope="col">Tên SP</th>
-                            <th class="w-15" scope="col">Giá</th>
-                            <th class="w-25" scope="col">Số lượng</th>
-                            <th class="w-25" scope="col">Hình ảnh</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($topThreeProductRatingShort as $item)
-                            <tr class="table-danger">
-                                <td>{{ $item->info_product->name }}</td>
-                                <td>{{ number_format($item->info_product->gia, 2)}}<span>₫</span></td>
-                                <td>{{ $item->total }}</td>
-                                <td><img class="w-50" src="{{ $item->info_product->image }}" alt=""></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-            
-        @endif --}}
+    </div> 
 
-         <div class="col-4">
-            <ul>
-                <li class="fw-bold fs-4" style="padding-top:150px">Tổng doanh thu: {{number_format($TongDoanhThu, 2)}}<span class="fs-3">₫</span> </li>
-                <li class="fw-bold fs-4 py-3">Tổng SL hàng đã bán:  {{$TongSoHang}}</li>
-                <li class="fw-bold fs-4">SL đơn hàng xuất kho:  {{$TongDonHang}} </li>
-            </ul>
-              
-        </div>
-
-
-    </div>
+    
 @endsection
 
 @section('script')
@@ -363,14 +491,14 @@
             },
             options: {
 
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            min: 0,
-                            max: 2000
-                        }
-                    }],
-                }
+                // scales: {
+                //     yAxes: [{
+                //         ticks: {
+                //             min: 0,
+                //             max: 2000
+                //         }
+                //     }],
+                // }
             }
         });
         new Chart("myChart2", {
@@ -404,14 +532,14 @@
             },
             options: {
 
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            min: 0,
-                            max: 2000
-                        }
-                    }],
-                }
+                // scales: {
+                //     yAxes: [{
+                //         ticks: {
+                //             min: 0,
+                //             max: 2000
+                //         }
+                //     }],
+                // }
             }
         });
     </script>

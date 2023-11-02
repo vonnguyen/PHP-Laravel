@@ -36,7 +36,7 @@
     <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.3.67/css/materialdesignicons.min.css" integrity="sha512-nRzny9w0V2Y1/APe+iEhKAwGAc+K8QYCw4vJek3zXhdn92HtKt226zHs9id8eUq+uYJKaH2gPyuLcaG/dE5c7A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style1.css') }}" rel="stylesheet">
     {{-- <link href="{{ asset('assets/css/jquery-ui.min.css') }}" rel="stylesheet"> --}}
@@ -70,12 +70,12 @@
 <body>
 
     <!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top d-flex align-items-center">
+    <header id="header" class="header fixed-top d-flex align-items-center bg-info ">
         <div class="d-flex align-items-center justify-content-between">
             <a href="{{ url('/admin') }}" class="logo d-flex align-items-center">
                 {{-- <img src="assets/img/logo/logo.png" alt=""> --}}
                 <span class="d-none d-lg-block" style="margin-top: 10px">
-                    <h5><b>Shoes Zone</b></h5>
+                    <h5><b class="text-light">Shoes Zone</b></h5>
                 </span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>

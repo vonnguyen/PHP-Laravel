@@ -45,8 +45,8 @@ class PaymentController extends Controller
             Http::get('http://localhost:4000/change_status_order');
             $noti = notification::create([
                 "user_id"=>$data->user_id,
-                "title"=>"Trang thai don hang cua ban da duoc cap nhat!!",
-                "description"=>"asdkjhasfjkjakfhashfdjkasfkjhjk",
+                "title"=>"Trạng thái đơn hàng đã được cập nhật !",
+                "description"=>"MDKSTPUTJ",
                 "href"=>"/order",
                 "readed" => 0
             ]);

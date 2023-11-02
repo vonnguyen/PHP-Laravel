@@ -210,7 +210,9 @@
                                             </div>
                                         </div>
                                         <div class="name-shoe-ctn3 h-2/5 mt-4">
-                                            <h1> <a href="{{ route('product', $product->id) }}">{{ $product->name }}</a>
+                                            <h1 style="min-height: 80px;display: flex;
+                                            align-items: center; padding:0"> <a style="display: block; padding:0"
+                                                    href="{{ route('product', $product->id) }}">{{ $product->name }}</a>
                                             </h1>
                                             <div class="cost-ctn3">
                                                 <h2> {{ number_format($product->gia, 2) }}<span>₫</span></h2>
@@ -279,8 +281,7 @@
                                                 <div class="groups-img h-full">
                                                     <img class="w-full h-full object-cover" src="{{ $product->image }}"
                                                         alt="">
-                                                    <img class="w-full h-full object-cover"
-                                                        src="{{ asset('client') }}/assets/img/img-ctn3/shoe12_968efbaa-1956-4621-93d2-1f1f8fdc3d11_600x.webp"
+                                                    <img class="w-full h-full object-cover" src="{{ $product->img_detail }}"
                                                         alt="">
                                                 </div>
                                                 <div class="icon-ctn3">
@@ -292,7 +293,8 @@
                                                 </div>
                                             </div>
                                             <div class="name-shoe-ctn3 h-2/5 mt-4">
-                                                <h1> <a
+                                                <h1 style="min-height: 80px;display: flex;
+                                                align-items: center; padding:0"> <a style="display: block; padding:0"
                                                         href="{{ route('product', $product->id) }}">{{ $product->name }}</a>
                                                 </h1>
                                                 <div class="cost-ctn3">
@@ -348,8 +350,7 @@
                                                 <div class="groups-img h-full">
                                                     <img class="h-full w-full object-cover"
                                                         src="{{ $product->product->image ?? '' }}" alt="">
-                                                    <img class="h-full w-full object-cover"
-                                                        src="{{ asset('client') }}/assets/img/img-ctn5/shoe27.webp"
+                                                        <img class="w-full h-full object-cover" src="{{ $product->product->img_detail }}"
                                                         alt="">
                                                 </div>
                                                 <div class="icon-ctn3">
@@ -424,7 +425,7 @@
                 </div>
             </div>
         </div>
-        <div class="user_id" data-id={{Auth()->user()->id}}></div>
+        {{-- <div class="user_id" data-id={{Auth()->user()->id}}></div> --}}
 
     </div>
 @endsection

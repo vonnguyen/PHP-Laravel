@@ -8,11 +8,11 @@
     <div class="pt-[110px]">
         <div class="slide-header">
             <div class="contain-slide">
-                <p>Giỏ Hàng</p>
+                <p>Sản phẩm yêu thích</p>
                 <ul>
                     <li><a href="{{route('home')}}">Trang chủ</a> </li>
                     <li>/</li>
-                    <li>Giỏ hàng</li>
+                    <li>Sản phẩm yêu thích</li>
                 </ul>
             </div>
         </div>

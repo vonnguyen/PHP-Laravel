@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -38,7 +38,15 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+
+    <style>
+        .scrollable-content {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+    </style>
 </head>
+
 
 <body>
     <div id="main">
@@ -132,7 +140,7 @@
                             class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 {{-- End Tìm kiếm sản phẩm --}}
-                
+
                 <div class="relative bell ml-4">
                     <span
                         class="absolute top-[-8px] right-0 bg-black p-2 w-[20px] h-[20px] rounded-full flex justify-center items-center text-light count_noti">{{ count(getNotification()['notis_no_readed']) }}
@@ -147,26 +155,31 @@
                         </svg>
                     </span>
                     @if (count(getNotification()['notis_all']) > 0)
-                        
-                    <div class="flex list_noti flex-col bg-white absolute right-0 top-full w-[400px] rounded-lg shadow-lg">
-                        <div class="flex gap-3">
-                            <button>
-                                <a href="">Cap nhat</a>
-                            </button>
-                            <button><a href="{{ route('readAll', Auth::user()->id) }}">Doc all</a></button>
+
+                        <div
+                            class="flex list_noti flex-col bg-white absolute right-0 top-full w-[400px] rounded-lg shadow-lg">
+                            <div class="flex gap-3">
+                                <button class="mt-3 ms-3 text-primary">
+                                    <a class="text-decoration-underline" href="">Cập nhật</a>
+                                </button>
+                                <button class="mt-3 ms-3 text-primary"><a class="text-decoration-underline"
+                                        href="{{ route('readAll', Auth::user()->id) }}">Xem tất cả</a></button>
+                            </div>
+                            <ul class="scrollable-content p-3 flex flex-col gap-3 ">
+                                @foreach (getNotification()['notis_all'] as $noti)
+                                    <li class="flex flex-col"
+                                        style={{ $noti->readed == 0 ? 'background-color:#ccc' : '' }}>
+                                        <a href="{{ $noti->href }}">
+                                            <div class="p-1">
+                                                <h3 class="font-bold">{{ $noti->title }}</h3>
+                                                <p>{{ $noti->description }}</p>
+                                            </div>
+                                        </a>
+
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
-                        <ul class="p-3 flex flex-col gap-3 ">
-                            @foreach (getNotification()['notis_all'] as $noti)
-                                <li class="flex flex-col"
-                                    style={{ $noti->readed == 0 ? 'background-color:#ccc' : '' }}>
-                                    <div class="p-1">
-                                        <h3 class="font-bold">{{ $noti->title }}</h3>
-                                        <p>{{ $noti->description }}</p>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
                     @endif
                 </div>
                 <span class="icon-user text-2xl relative  ">
@@ -423,10 +436,10 @@
                                     <p>Color: {{ $item->color }} / Size: {{ $item->size }}</p>
                                     <span>{{ number_format($item->gia, 0) }} ₫</span>
                                     <div class="dt-sc-cart">
-                                        <span data-url="{{ route('cart.add') }}" data-id="{{ $item->id }}"
+                                        <span data-url="{{ route('cart.add') }}" data-id="{{ $item->id }}" data-color="{{ $item->color}}"  data-size="{{ $item->size}}"
                                             class="up-down decre">-</span>
                                         <input type="text" value="{{ $item->number }}">
-                                        <span data-url="{{ route('cart.add') }}" data-id="{{ $item->id }}"
+                                        <span data-url="{{ route('cart.add') }}" data-id="{{ $item->id }}"  data-color="{{ $item->color}}"  data-size="{{ $item->size}}"
                                             class="up-down incre">+</span>
                                     </div>
                                 </div>
@@ -706,20 +719,37 @@
         </script>
         <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
         <script>
-    let icon = document.querySelector('.bell');
-    let bell = document.querySelector('.icon_bell');
+            let icon = document.querySelector('.bell');
+            let bell = document.querySelector('.icon_bell');
 
 
-    bell?.addEventListener('click', function (e) {
+            bell?.addEventListener('click', function(e) {
                 icon.classList.toggle('active');
-    })
-    document.addEventListener('click', function (e) {
-        if (!e.target.matches('.bell') && !icon.contains(e.target)) {
-            console.log(e.target);
-            icon.classList.remove('active');
-        }
+            })
+            document.addEventListener('click', function(e) {
+                if (!e.target.matches('.bell') && !icon.contains(e.target)) {
+                    console.log(e.target);
+                    icon.classList.remove('active');
+                }
 
-    })
+            })
+        </script>
+        <script>
+            const none_favorite = document.querySelectorAll(".none_favorite");
+            console.log({none_favorite});
+            none_favorite.forEach(item=>{
+                item.addEventListener("click",(e)=>{
+                    e.preventDefault();
+                    Swal.fire({
+                            position: 'center-center',
+                            icon: 'warning',
+                            title: 'Vui long dang nhap!',
+                            showConfirmButton: false,
+                            timer: 1300
+                        })
+                })
+
+            })
         </script>
         {{-- <script src="./responesive.js"></script> --}}
         @yield('js')

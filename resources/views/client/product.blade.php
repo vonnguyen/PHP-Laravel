@@ -42,8 +42,7 @@
                                             <div class="groups-img h-full">
                                                 <img class="h-full w-full object-cover" src="{{ $product->image }}"
                                                     alt="">
-                                                <img class="h-full w-full object-cover"
-                                                    src="{{ asset('client') }}/assets/img/img-header/shoe26_de67b47c-8d95-481f-aa85-268cdc309e4e.webp"
+                                                    <img class="w-full h-full object-cover" src="{{ $product->img_detail }}"
                                                     alt="">
                                             </div>
                                             <div class="icon-ctn3">
@@ -53,7 +52,10 @@
                                             </div>
                                         </div>
                                         <div class="name-shoe-ctn3 h-2/5 mt-4">
-                                            <h1> <a href="{{ route('product', $product->id) }}">{{ $product->name }}</a>
+                                            <h1 style="min-height: 80px;display: flex;
+                                            align-items: center; padding:0"> <a style="display: block; padding:0"
+                                                    href="{{ route('product', $product->id) }}">{{ $product->name }}</a>
+                                            </h1>
                                             </h1>
                                             <div class="cost-ctn3">
                                                 <h2>{{ number_format($product->gia, 0) }}<span>₫</span></h2>
