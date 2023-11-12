@@ -90,7 +90,11 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'isAdmin')->group(fun
 
     Route::prefix('bill')->name('bill.')->group(function () {
         Route::get('/list', [BillController::class, 'list'])->name('list');
+        Route::get('/viewbill/{id}', [BillController::class, 'view'])->name('view');
+        Route::get('/invoice/{id}/generate', [BillController::class, 'generate_invoice'])->name('generate_invoice');
     });
+
+
 
 
     Route::prefix('comments')->name('comments.')->group(function () {

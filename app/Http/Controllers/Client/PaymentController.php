@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Mail\MailOrder;
 use App\Models\bill;
 use App\Models\detail_bill;
 use App\Models\notification;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\user_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+
 class PaymentController extends Controller
 {
     //
@@ -34,9 +38,9 @@ class PaymentController extends Controller
             $bill->update();
 
             //
-            if($request->status == 2){
-                $detail_bill = detail_bill::where('id_bill',$bill->id)->get();
-                foreach($detail_bill as $d_bill){
+            if ($request->status == 2) {
+                $detail_bill = detail_bill::where('id_bill', $bill->id)->get();
+                foreach ($detail_bill as $d_bill) {
                     $product = Product::where('id', $d_bill->id_pro)->first();
                     $product->number = $product->number - $d_bill->number;
                     $product->update();
@@ -44,15 +48,14 @@ class PaymentController extends Controller
             }
             Http::get('http://localhost:4000/change_status_order');
             $noti = notification::create([
-                "user_id"=>$data->user_id,
-                "title"=>"Trạng thái đơn hàng đã được cập nhật !",
-                "description"=>"MDKSTPUTJ",
-                "href"=>"/order",
+                "user_id" => $data->user_id,
+                "title" => "Trạng thái đơn hàng đã được cập nhật !",
+                "description" => "MDKSTPUTJ",
+                "href" => "/order",
                 "readed" => 0
             ]);
-
         }
-     
+
         $detail_bill = detail_bill::where('id_bill', $id)->get();
         return view('admin.bill.detail', compact('data', 'detail_bill'));
     }
@@ -92,6 +95,8 @@ class PaymentController extends Controller
                 $detailBill->number = (int)($item->number);
                 $detailBill->total = $item->total;
                 $detailBill->price = $item->gia;
+                $detailBill->color = $item->color;
+                $detailBill->size = $item->size;
                 $detailBill->image = $item->image;
                 $detailBill->name_pro = $item->name;
                 $detailBill->save();
@@ -101,6 +106,9 @@ class PaymentController extends Controller
         $cart_user = user_cart::where('user_id', Auth::user()->id)->first();
         $cart_user->cart = json_encode([]);
         $cart_user->save();
+        $user = User::where('id', Auth()->user()->id)->first();
+        $linkOrder ="http://127.0.0.1:8000/payment/".$bill->id;
+        Mail::to($user->email)->send(new MailOrder($user, $linkOrder));
         return redirect()->route('payment', $bill->id);
     }
     function order()

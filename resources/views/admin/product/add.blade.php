@@ -73,9 +73,9 @@
                     </select>
                 </div>
                 <div class="mb10">
-                    <input type="submit" name="themmoi" value="THÊM MỚI">
-                    <input type="reset" value="NHẬP LẠI">
-                    <a href="{{ route('admin.product.list') }}"><input type="button" value="DANH SÁCH"></a>
+                    <input class="btn bg-primary text-light" type="submit" name="capnhat" value="CẬP NHẬT">
+                    <input class="btn bg-primary text-light" type="reset" value="NHẬP LẠI">
+                    <a href="{{ route('admin.product.list') }}"><input class="btn bg-primary text-light" type="button" value="DANH SÁCH"></a>
                 </div>
 
             </form>
