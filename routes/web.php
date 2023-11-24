@@ -71,6 +71,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'isAdmin')->group(fun
 
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/list', [ProductController::class, 'list'])->name('list');
+        Route::get('/trash', [ProductController::class, 'trash'])->name('trash');
+
         Route::get('/add', [ProductController::class, 'showadd'])->name('add');
 
         Route::post('/add', [ProductController::class, 'add'])->name('postadd');

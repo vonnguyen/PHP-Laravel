@@ -26,6 +26,8 @@ class ProductController extends Controller
         $product->img_detail =  cloudinary()->upload($request->file('img_detail')->getRealPath())->getSecurePath();
         $product->mota = $request->mota;
         $product->cate = $request->cate;
+        $product->number = $request->so_luong;
+
          
         $product->save();
 
@@ -48,6 +50,17 @@ class ProductController extends Controller
         $listProduct = $listProduct->get();
         return view('admin.product.list',compact("listProduct","listCate"));  // truyen du lieu vao danh muc
     }
+
+    function trash(Request $request){
+        $listCate = Category::all();
+
+        $listProduct = Product::onlyTrashed()->orderBy('created_at', 'desc');
+        if($request->cate){
+            $listProduct = $listProduct->where('cate',$request->cate);
+        }
+        $listProduct = $listProduct->get();
+        return view('admin.product.trash',compact("listProduct","listCate"));  // truyen du lieu vao danh muc
+    }
     // Hien thi add
     function showadd(){
         $listCate = Category::all();
@@ -66,7 +79,8 @@ class ProductController extends Controller
     }
     // xoa
     function delete($id){
-        $deleted =Product::where('id', $id)->delete();
+        $pro =Product::where('id', $id)->first();
+        $pro->delete();
         $listProduct = Product::get();
         return redirect()->route('admin.product.list',compact("listProduct"));  // truyen du lieu vao danh muc
     }

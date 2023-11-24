@@ -16,15 +16,44 @@ class ProductController extends Controller
     const  _PER_PAGE = 12;
     function index(Request $request){
     
-        $products = Product:: orderBy('created_at', 'desc');
+        // $products = Product:: orderBy('created_at', 'desc');
+        // if( $request -> query('keyword')){
+        //     $products = $products->where('name', "like", "%" . $request->query('keyword') . "%");
+        // }
+        // $product_test = $products;
+        // $products = $products->paginate(4)->withQueryString();
+        // $productshow = $product_test->paginate(self::_PER_PAGE)->withQueryString();
+        // $listCate = Category::all();
+
+
+        //
+
+        $products = null;
+        if( $request -> query('sort')){
+            if( $request -> query('sort') == 'desc'){
+                $products =Product::orderBy('name', 'desc'  );
+
+            }else{
+                $products =Product::orderBy('name', 'asc'  );
+
+            }
+        }else{
+            $products =Product::orderBy('name', 'desc'  );
+        }
         if( $request -> query('keyword')){
             $products = $products->where('name', "like", "%" . $request->query('keyword') . "%");
         }
-        $product_test = $products;
-        $products = $products->paginate(4)->withQueryString();
-        $productshow = $product_test->paginate(self::_PER_PAGE)->withQueryString();
+        if( $request -> query('cate') && $request -> query('cate') != "all"){
+            $products = $products->where('cate',  $request->query('cate') );
+        }
+      
+        if( $request -> query('from') &&  $request -> query('to')){
+            $products =   $products->whereBetween('gia', [ $request -> query('from'),$request -> query('to')]);
+        }
+        
+        $products = $products->paginate(self::_PER_PAGE)->withQueryString();
         $listCate = Category::all();
-        return view('client.product',compact('products', 'productshow','listCate'));
+        return view('client.product',compact('products','listCate'));
     }
 
     function detail($id){

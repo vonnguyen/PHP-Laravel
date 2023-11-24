@@ -32,7 +32,14 @@
                             <td>{{$item->phone}}</td>
                             <td>{{$item->address}}</td>
                             <td>{{$item->group_id}}</td>
-                            <td><img src="{{$item['img']}}" /></td>
+                            <td>
+                                @if (!empty($item['img']))
+                                <img src="{{$item['img']}}" />
+                                    @else
+                                    <img src="{{asset('/client/assets/img/th.jfif')}}" />
+                                @endif
+                                
+                            </td>
                             <td>
                                 <a class="btn btn-warning" href="{{route('admin.user.showupdate',$item['id'])}}">Sửa</a>
                                 <a class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa !!')" href="{{route('admin.user.delete',$item['id'])}}">Xóa</a>

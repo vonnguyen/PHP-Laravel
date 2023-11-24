@@ -28,7 +28,11 @@
             <div class="row">
                  <div class="col-4">
                     <div class="">
+                        @if (!empty(Auth::user()->img))
                         <img style="width:450px; height:450px;border-radius:50%; object-fit: cover; object-position: center; " src="{{ Auth::user()->img }}"alt="">
+                            @else
+                            <img style="width:450px; height:450px;border-radius:50%; object-fit: cover; object-position: center; " src="{{asset('/client/assets/img/th.jfif')}}" />
+                        @endif
 
                     <div class="text-center py-4">
                         <p class="fs-3 mb-2"> Update Avatar</p>

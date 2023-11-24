@@ -425,7 +425,7 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="user_id" data-id={{Auth()->user()->id}}></div> --}}
+        <div class="user_id" data-id={{Auth()->user()->id}}></div>
 
     </div>
 @endsection
@@ -454,6 +454,26 @@
             })
         })
 
+        const listNoti = document.querySelector(".list_noti_item");
+
+        const renderNoti = (noti)=>{
+            let template = `
+
+            <li class="flex flex-col"
+                                        style=${ noti.readed == 0 ? 'background-color:#ccc' : '' }>
+                                        <a href="${ noti.href }">
+                                            <div class="p-1">
+                                                <h3 class="font-bold">${ noti.title }</h3>
+                                                <p>${ noti.description }</p>
+                                            </div>
+                                        </a>
+
+                                    </li>
+            `;
+
+
+            listNoti.innerHTML += template;
+        }
 
         socket.on("change_status_order", (data) => {
             const count_noti = document.querySelector(".count_noti");
@@ -469,6 +489,8 @@
                 dataType: 'json',
                 success: function (data) {
                     console.log(data);
+                    listNoti.innerHTML = '';
+                    data.notis_all.reverse().forEach(noti => renderNoti(noti));
                     count_noti.textContent = data?.notis_no_readed.length;
                 },
                 error: function (e) {

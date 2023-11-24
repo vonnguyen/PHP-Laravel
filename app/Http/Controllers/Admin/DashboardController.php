@@ -33,8 +33,9 @@ class DashboardController extends Controller
             ->limit(3)
             ->orderBy('total', 'desc')
             ->get();
+        // dd($topThreeProductRating);
         foreach ($topThreeProductRating as $item) {
-            $item->info_product = Product::where('id', $item->id_pro)->first();
+            $item->info_product = Product::withoutTrashed()->where('id', $item->id_pro)->first();
         }
         //sp yeu thich nhat
         $billsLove = DB::table('bills')
@@ -54,7 +55,7 @@ class DashboardController extends Controller
             ->orderBy('total', 'asc')
             ->get();
         foreach ($topThreeProductRatingShort as $item) {
-            $item->info_product = Product::where('id', $item->id_pro)->first();
+            $item->info_product = Product::withTrashed()->where('id', $item->id_pro)->first();
         }
         $billStatusTwo = bill::where('statuss', 2)->get();
         foreach ($billStatusTwo as $item) {
@@ -83,6 +84,7 @@ class DashboardController extends Controller
         //
          $data_month = $this->getBillMonth($year);  
         //
+
         return view('admin.dashboard', compact(
             "bills",
             "topThreeProductRating",

@@ -182,8 +182,14 @@
                                         <div>
                                             <div class="flex gap-3 items-center">
 
-                                                <p><img class="w-[50px] h-[50px] rounded-full" src="{{ $img }}"
+                                                <p>
+                                                    @if (!empty($img))
+                                                    <img class="w-[50px] h-[50px] rounded-full" src="{{ $img }}"
                                                         alt=""></p>
+                                                        
+                                                    @else 
+                                                        <img class="w-[50px] h-[50px] rounded-full" src="{{asset('/client/assets/img/th.jfif')}}">
+                                                    @endif
                                                 <p class="font-bold text-xl">{{ $name }}</p>
                                             </div>
                                             <div class="rateyo2 my-3" data-rateyo-read-only="true"

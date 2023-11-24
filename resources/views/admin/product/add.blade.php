@@ -39,6 +39,10 @@
                     <input type="text" name="gia">
                 </div>
                 <div class="mb10">
+                    Số Lượng<br>
+                    <input type="text" name="so_luong">
+                </div>
+                <div class="mb10">
                     Hình<br>
                     <input type="file" name="img">
                 </div>

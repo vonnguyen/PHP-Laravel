@@ -285,7 +285,7 @@
                     </thead>
                     <tbody>
                         @foreach ($topThreeProductRatingShort as $item)
-                        @if ($item->info_product)
+                       
                         <tr class="table-secondary">
                             <td>{{ $item->info_product->name }}
                             </td>
@@ -294,7 +294,7 @@
                             <td><img class="w-50" src="{{ $item->info_product->image }}" alt=""></td>
                         </tr>
                                 
-                        @endif
+                       
                           
                         @endforeach
                     </tbody>

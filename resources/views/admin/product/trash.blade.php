@@ -3,7 +3,7 @@
 @section('main')
     <div class="">
         <div class="frmtitle py-3 bg-info">
-            <h1 class="m-0 py-2 fs-5 text-center fw-bold text-white">DANH SÁCH SẢN PHẨM</h1>
+            <h1 class="m-0 py-2 fs-5 text-center fw-bold text-white">DANH SÁCH SẢN PHẨM ĐÃ XÓA</h1>
         </div>
         <div class="frmcontent">
             <form action="{{ route('admin.product.list') }}">
@@ -47,14 +47,15 @@
                 <table class="display" id="table_products">
                     <thead class="table-info">
                         <tr>
+                            <th class="text-center" width="1%"></th>
                             <th class="text-center" width="3%">MSP</th>
                             <th class="text-center" width="25%">TÊN SẢN PHẨM</th>
-                            <th class="text-center" width="8%">GIÁ</th>
+                            <th class="text-center" width="10%">GIÁ</th>
                             <th class="text-center" width="10%">HÌNH</th>
                             <th class="text-center" width="1%">LƯỢT XEM</th>
-                            <th class="text-center" width="30%">MÔ TẢ</th>
-                            <th class="text-center" width="2%">SỐ LƯỢNG</th>
-                            <th class="text-center" width="21%">THAO TÁC</th>
+                            <th class="text-center" width="31%">THỜI GIAN</th>
+                            {{-- <th class="text-center" width="2%">SỐ LƯỢNG</th> --}}
+                            {{-- <th class="text-center" width="17%">THAO TÁC</th> --}}
                         </tr>
                     </thead>
 
@@ -62,13 +63,14 @@
                         @if (!empty($listProduct))
                             @foreach ($listProduct as $item)
                                 <tr>
+                                    <td><input type="checkbox" name="" id="" /></td>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ number_format($item->gia, 0) }}₫</td>
                                     <td><img style="object-fit:cover;width:200px" src="{{ $item['image'] }}" /></td>
                                     <td>{{ $item->views }}</td>
-                                    <td>{{ $item->mota }}</td>
-                                    <td>
+                                    <td>{{ $item->deleted_at }}</td>
+                                    {{-- <td>
                                         @if ($item->number == 0)
                                             <span class="text-danger">Sản phẩm hết hàng</span>
                                         @elseif ($item->number < 10)
@@ -76,13 +78,8 @@
                                         @else
                                             {{ $item->number }}
                                         @endif
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-warning"
-                                            href="{{ route('admin.product.showupdate', $item['id']) }}">Sửa</a>
-                                        <a onclick="return confirm('Bạn có muốn xóa không ?')" class="btn btn-danger"
-                                            href="{{ route('admin.product.delete', $item['id']) }}">Xóa</a>
-                                    </td>
+                                    </td> --}}
+                                    
                                 </tr>
                             @endforeach
                         @endif

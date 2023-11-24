@@ -33,8 +33,8 @@
                 <div class="about-ctn-product">
                     <div class="row">
 
-                        @if ($productshow->count() > 0)
-                            @foreach ($productshow as $product)
+                        @if ($products->count() > 0)
+                            @foreach ($products as $product)
                                 <div class="col-4 picture-3" data-aos="zoom-out-right" data-aos-duration="1000">
                                     <div class="item h-full">
 
@@ -100,7 +100,7 @@
                 <div class="flex justify-center my-5">
 
 
-                    {{ $productshow->links() }}
+                    {{ $products->links() }}
                 </div>
 
 

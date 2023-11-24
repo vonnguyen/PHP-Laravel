@@ -165,7 +165,7 @@
                                 <button class="mt-3 ms-3 text-primary"><a class="text-decoration-underline"
                                         href="{{ route('readAll', Auth::user()->id) }}">Xem tất cả</a></button>
                             </div>
-                            <ul class="scrollable-content p-3 flex flex-col gap-3 ">
+                            <ul class="scrollable-content list_noti_item p-3 flex flex-col gap-3 ">
                                 @foreach (getNotification()['notis_all'] as $noti)
                                     <li class="flex flex-col"
                                         style={{ $noti->readed == 0 ? 'background-color:#ccc' : '' }}>
