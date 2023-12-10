@@ -17,4 +17,15 @@ class WishController extends Controller
             return view('client.whish',compact('products'));
         }
 
+
+        function deleteWish($id){
+            $product = favoriteProduct::where('id',$id)->first();
+            $product->delete();
+            $products = favoriteProduct::where('user_id',Auth::user()->id)->get();
+
+            return redirect()->back();
+        }
+
+        
+
 }

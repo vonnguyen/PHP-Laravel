@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class bill extends Model
 {
+    use SoftDeletes;
     use HasFactory;
     protected $guarded = [];//nếu muốn chặn không insert cột nào lên thì để vào đây, nếu không để là tất cả đều có quyền insert
     protected $table = 'bills';

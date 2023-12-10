@@ -56,10 +56,10 @@
                                     </a>
                                 </td>
                                 <td class="remove">
-                                        <div class="item-remove" data-urlremove="{{route('cart.delete')}}"
-                                            data-url="{{route('cart.add')}}" data-id="{{$item->product->id}}">
+                                        <a  href="{{route('deleteWish',$item->id)}}"
+                                           >
                                             <i class="cursor-pointer fa-solid fa-trash-can" style="color: red"></i>
-                                        </div>
+                                        </a>
                                 </td>
                             
 
@@ -78,13 +78,7 @@
                             </button>
                         </a>
                     </div>
-                    <div class="product-wishlist-cart">
-                        <a href="{{route('infomation')}}">
-                            <button class="dt-sc-btn">
-                                tiến hành kiểm tra
-                            </button>
-                        </a>
-                    </div>
+                    
 
                 </div>
         </div>

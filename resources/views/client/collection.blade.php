@@ -9,11 +9,11 @@
     <div class="pt-[110px]">
         <div class="slide-header">
             <div class="contain-slide">
-                <p>ALL COLLECTIONS</p>
+                <p>TẤT CẢ SẢN PHẨM</p>
                 <ul>
-                    <li><a href="{{ route('home') }}">HOME</a> </li>
+                    <li><a href="{{ route('home') }}">Trang chủ</a> </li>
                     <li>/</li>
-                    <li>Account</li>
+                    <li>Tất cả sản phẩm</li>
                 </ul>
             </div>
         </div>
@@ -27,7 +27,7 @@
                     @foreach ($products as $product)
                         <div class="col-4" data-aos-duration="1000" data-aos="zoom-in-down">
                             <div class="collection-text-center">
-                                <img class="h-full w-full object-cover" src="{{ $product->image }}" alt="">
+                                <img class="h-[350px] w-full object-cover" src="{{ $product->image }}" alt="">
                                 <div class="collection-detail">
                                     <h5><a href="{{ route('product', $product->id) }}">{{ $product->name }}</a></h5>
                                     <p class="collection-count">

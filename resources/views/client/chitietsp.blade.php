@@ -106,7 +106,8 @@
                             <span class="info-title">Số lượng:</span>
                             <div class="info-border quantity">
                                 <span class="iconMinus">-</span>
-                                <span class="number_detail">1</span>
+
+                                    <input name="number" class="number_detail text-center border py-1 w-[50px]" value="1" type="number" min="1">
                                 <span class="iconAdd">+</span>
                             </div>
 

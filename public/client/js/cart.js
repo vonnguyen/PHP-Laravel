@@ -16,12 +16,15 @@ window.addEventListener('load', function () {
     let number_detail = document.querySelector('.number_detail');
 
     iconAdd?.addEventListener('click', function () {
-        number_detail.textContent++;
+        const new_value = parseInt(number_detail.value) +1
+        number_detail.value = new_value
 
     })
     iconMinus?.addEventListener('click', function () {
-        if (number_detail.textContent > 1) {
-            number_detail.textContent--;
+        const new_value = parseInt(number_detail.value) - 1
+        if (new_value >= 1) {
+            number_detail.value = new_value
+
         }
 
     })
@@ -34,7 +37,7 @@ window.addEventListener('load', function () {
             let color = localStorage.getItem('color');
             let size = localStorage.getItem('size');
     
-            let numberProduct = number_detail.textContent;
+            let numberProduct = number_detail.value;
             let urlRemove = this.dataset.remove;
             $.ajaxSetup({
                 headers: {
@@ -57,7 +60,7 @@ window.addEventListener('load', function () {
                         Swal.fire({
                             position: 'center-center',
                             icon: 'error',
-                            title: 'Sản phẩm hết hàng',
+                            title: 'Sản phẩm không đủ số lượng',
                             showConfirmButton: false,
                             timer: 1500
                         })

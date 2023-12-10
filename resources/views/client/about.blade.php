@@ -1,30 +1,29 @@
 @extends('layouts.app')
 @section('css')
-    <link rel="stylesheet" href="{{asset('client')}}/assets/product.css">
-    <link rel="stylesheet" href="{{asset('client')}}/assets/login.css">
-    <link rel="stylesheet" href="{{asset('client')}}/assets/about.css">
-
+    <link rel="stylesheet" href="{{ asset('client') }}/assets/product.css">
+    <link rel="stylesheet" href="{{ asset('client') }}/assets/login.css">
+    <link rel="stylesheet" href="{{ asset('client') }}/assets/about.css">
 @endsection
 
 @section('content')
     <div class="pt-[110px]">
         <div class="slide-header">
             <div class="contain-slide">
-                <p>ABOUT</p>
+                <p>Giới Thiệu</p>
                 <ul>
-                    <li><a href="index.html">HOME</a> </li>
+                    <li><a href="{{route('home')}}">Trang chủ</a> </li>
                     <li>/</li>
-                    <li>About</li>
+                    <li>Giới thiệu</li>
                 </ul>
             </div>
         </div>
     </div>
 
-        <!-- Contain -->
+    <!-- Contain -->
     <div>
         <div class="container">
             <div class="heading-about" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500">
-                <h2>STUNNING COLLECTION</h2>
+                <h2>BỘ SƯU TẬP TUYỆT VỜI</h2>
             </div>
 
             <div class="ctn-about">
@@ -33,7 +32,7 @@
                         <div class="dt-sc-img-section">
                             <div class="dt-sc-img">
                                 <div class="img-about">
-                                    <img src="{{asset ('client')}}/assets/img/img-about/about001_600x.webp" alt="">
+                                    <img src="{{ asset('client') }}/assets/img/img-about/about001_600x.webp" alt="">
                                 </div>
                             </div>
                         </div>
@@ -42,15 +41,17 @@
                         <div class="main-img">
 
                             <div class="heading-main-title">
-                                <h3>SOAR INTO THE SKY</h3>
+                                <h3>BAY VÀO BẦU TRỜI</h3>
                             </div>
                             <div class="p-main">
-                                <p>Quisque volutpat mattis eros. Nullam malesuada erat ut ki diaml ka dhuddu pochu
-                                    turpis. Suspendisse urna nibh, viverra non,
-                                    semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum.
-                                    Morbi in sem quis dui placerat ornare.
-                                    Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras
-                                    consequat</p>
+                                <p>“Muốn thoát lỗ, trụ lại được trên thị trường, doanh nghiệp phải nhanh chóng chuyển đổi số
+                                    thành công”
+                                    Bizfly - thừa hưởng thế mạnh từ công nghệ - truyền thông của công ty mẹ là VCCorp. Chúng
+                                    tôi chọn làm những thứ mình giỏi. Đó là công nghệ - truyền thông, marketing và bán hàng.
+                                    Vậy Bizfly bán các công cụ về bán hàng và marketing là phù hợp bậc nhất trên thị trường.
+                                    Chúng tôi cũng có khả năng tiếp cận đối tượng khách hàng khá rộng. Công cụ của chúng tôi
+                                    khi đưa ra cho khách hàng có thể ngay lập tức áp dụng trong vòng 1 tháng hoặc từ 3 tháng
+                                    trở đi và chắc chắn sẽ có hiệu quả nhất định đối với doanh nghiệp.</p>
                             </div>
 
                         </div>
@@ -65,14 +66,17 @@
                         <div class="main-img-2">
 
                             <div class="heading-main-title">
-                                <h3>LEARN TO ENJOY</h3>
+                                <h3>HỌC ĐỂ THƯỞNG THỨC</h3>
                             </div>
                             <div class="p-main">
-                                <p>Orci sagittis eu volutpat odio facilisis mauris sit amet. Lectus mauris ultrices eros
-                                    in cursus turpis massa tincidunt.
-                                    Sit amet purus gravida quis. Cras adipiscing enim eu turpis egestas pretium aenean.
-                                    Faucibus a pellentesque sit amet porttitor eget dolor.
-                                    Nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper faucibus in ornare</p>
+                                <p>Bizfly đã tìm hiểu các giải pháp trong nước và nước ngoài nhưng không hài lòng. Do đó
+                                    chúng tôi tự giải quyết các vấn đề của mình trước (chuyển đổi số nội bộ), rồi quyết định
+                                    đóng gói thành giải pháp triển khai cho doanh nghiệp bên ngoài, đặc biệt là các SMEs. Do
+                                    đã trải qua các nỗi đau của doanh nghiệp nên chúng tôi thấu hiểu doanh nghiệp và giải
+                                    quyết triệt để các nỗi đau đó. Tôi cho rằng nếu các công ty muốn thích ứng trong xã hội
+                                    hiện tại và phải làm việc online/hybrid, cần xây dựng hệ thống công nghệ làm việc linh
+                                    hoạt mọi lúc - mọi nơi, đơn giản và dành cho tất cả mọi người. Đây cũng là một trong
+                                    những nhu cầu cấp thiết thúc đẩy quá trình chuyển đổi số cho doanh nghiệp.</p>
                             </div>
 
                         </div>
@@ -93,14 +97,14 @@
 
         <div class="container">
             <div class="heading-about" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500">
-                <h2>LIVE LIFE TO THE FULLEST</h2>
+                <h2>HÃY SỐNG TRỌN VẸN TỪNG PHÚT GIÂY</h2>
                 <div class="p-title-2">
-                    <p>Quisque volutpat mattis eros. Nullam malesuada erat ut ki diaml ka dhuddu pochn, semper suscipit,
-                        pos</p>
+                    <p>Cuộc sống của mọi người đều dành cho bất động sản. Không hề mong đợi rằng ki diaml ka dhuddu pochn,
+                        anh ấy luôn chấp nhận.</p>
                 </div>
             </div>
 
-            <div class="ctn-about"  data-aos="zoom-in-down" data-aos-duration="1000">
+            <div class="ctn-about" data-aos="zoom-in-down" data-aos-duration="1000">
                 <div class="row">
                     <div class="col-6">
                         <div class="center-about">
@@ -111,12 +115,13 @@
                                     </span>
                                     <div class="main-about-hp">
                                         <div class="heading-main-title">
-                                            <h3>ENVIRONMENT-FRIENDLY</h3>
+                                            <h3>THÂN THIỆN VỚI MÔI TRƯỜNG</h3>
                                         </div>
                                         <div class="p-main">
-                                            <p>Sed vestibulum nulla elementum auctor tincidunt. Aliquam sit amet cursus
-                                                mauris. Sed vitae mattis ipsum.
-                                                Vestibulum enim nulla, sollicitudin ac hendrerit nec, tempor quis nisl
+                                            <p>Tuy nhiên, không có yếu tố phát triển của nhà sản xuất. Điều quan trọng là
+                                                phải có một khóa học tốt. Nhưng bản thân bất động sản của cuộc sống. Vì
+                                                không có công nghiệp, không có mối quan tâm và cũng không có ai quan tâm đến
+                                                thời gian
                                             </p>
                                         </div>
                                     </div>
@@ -127,12 +132,12 @@
                                     </span>
                                     <div class="main-about-hp">
                                         <div class="heading-main-title">
-                                            <h3>EASY EXCHANGE OPTION</h3>
+                                            <h3>LỰA CHỌN TRAO ĐỔI DỄ DÀNG</h3>
                                         </div>
                                         <div class="p-main">
-                                            <p>Tempus iaculis urna id volutpat. Mauris cursus mattis molestie a iaculis.
-                                                Etiam non quam lacus suspendisse faucibus interdum posuere lorem vitae
-                                                ultricies leo marques</p>
+                                            <p>Đã đến lúc nhắm vào pot vào cuối tuần đó. Tỷ lệ của các đại lý bất động sản
+                                                đã được nhắm mục tiêu. Thậm chí không phải cái hồ treo cổ có khi cướp đi
+                                                sinh mạng của Ultricies Leo marques</p>
                                         </div>
                                     </div>
                                 </div>
@@ -142,12 +147,12 @@
                                     </span>
                                     <div class="main-about-hp">
                                         <div class="heading-main-title">
-                                            <h3>PERFECT RATING</h3>
+                                            <h3>ĐÁNH GIÁ HOÀN HẢO</h3>
                                         </div>
                                         <div class="p-main">
-                                            <p>Netus et malesuada fames ac turpis egestas maecenas pharetra.
-                                                Eleifend donec pretium vulputate sapien nec sagittis.
-                                                Nisi vitae suscipit tellus mauris anques isum</p>
+                                            <p>Netus và những con đực đang đói, và sự khốn khổ của những con maecenas là một
+                                                sự run rẩy. Eleifend cho đến cái giá của trí tuệ cũng không phải mũi tên.
+                                                Trừ khi cuộc sống của bạn đưa bạn đến với nội dung trái tim bạn</p>
                                         </div>
                                     </div>
                                 </div>
@@ -172,20 +177,19 @@
         <div class="slide-header-about">
             <div class="container">
                 <div class="title-heading">
-                    <h2>STYLE YOUR LIFE</h2>
-                    <p>Get committed to a new lifestyle </p>
+                    <h2>PHONG CÁCH CUỘC SỐNG CỦA BẠN</h2>
+                    <p>Hãy cam kết với một lối sống mới</p>
                 </div>
                 <div class="dt-sc-custom">
                     <div class="dt-sc-custom-ifobox">
                         <h6 class="dt-sc-main-title">
                             Join Us :
-                            <span class="dt-sc-sub-title">Let's Create Our Own Style</span>
+                            <span class="dt-sc-sub-title">Hãy tạo phong cách riêng của chúng tôi</span>
 
                         </h6>
-                        <span class="dt-sc-span">Aenean dignissim pellentesque felis.
-                            There are many variations of passages
-                            of Lorem Ipsum available, but the majority have suffered alteration in some form, by
-                            injected humour.</span>
+                        <span class="dt-sc-span">Aenean dignissim trẻ hạnh phúc. Có rất nhiều biến thể của các đoạn Lorem
+                            Ipsum, nhưng phần lớn đã được thay đổi dưới một hình thức nào đó, bằng cách thêm vào sự hài
+                            hước.</span>
                     </div>
 
                     <div class="dt-sc-btn">
@@ -198,13 +202,11 @@
 
         </div>
 
-        <div class="container" >
+        <div class="container">
             <div class="dc-st-footer" data-aos="zoom-in-down" data-aos-duration="1000">
-                <h2>WE BRING THE LATEST TRENDY WEAR</h2>
+                <h2>CHÚNG TÔI MANG THEO THỜI TRANG MỚI NHẤT</h2>
                 <img src="{{ asset('client') }}/assets/img/img-about/shoe-imh_800x.webp" alt="">
             </div>
         </div>
     </div>
-
 @endsection
-

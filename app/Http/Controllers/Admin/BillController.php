@@ -47,4 +47,10 @@ class BillController extends Controller
         $todayDate = Carbon::now()->format('d-m-Y');
         return $pdf->download('Phiếu_Hàng_' . $order->id . '_' . $todayDate . '.pdf');
     }
+
+    public function trashBill(){
+        $bills = bill::onlyTrashed()->orderBy("id", "desc")->where('statuss',4)->get();
+        return view('admin.bill.trashbill', compact("bills")); 
+
+    }
 }

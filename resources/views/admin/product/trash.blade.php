@@ -39,7 +39,9 @@
                     <button class="btn bg-primary" style="color: white">Thêm mới sản phẩm</button>
                 </a>
                 <a href="{{ route('admin.product.trash') }}">
-                    <button class="btn bg-primary" style="color: white">Thùng rác</button>
+                    <button class="btn bg-primary" style="color: white">
+                        <img style="width:23px" src="{{asset('client/assets/trash.png')}}" alt="">
+                    </button>
                 </a>
             </div>
 

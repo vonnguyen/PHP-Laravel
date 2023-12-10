@@ -190,7 +190,7 @@ button.collection-btn {
 .contain-1 {
   width: 92%;
   margin: 0 auto;
-  height: 100vh;
+  /* height: 100vh; */
   margin-bottom: -30px;
 }
 .slide-1,

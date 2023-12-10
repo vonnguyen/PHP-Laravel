@@ -92,6 +92,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'isAdmin')->group(fun
 
     Route::prefix('bill')->name('bill.')->group(function () {
         Route::get('/list', [BillController::class, 'list'])->name('list');
+        Route::get('/trashBill', [BillController::class, 'trashBill'])->name('trashBill');
         Route::get('/viewbill/{id}', [BillController::class, 'view'])->name('view');
         Route::get('/invoice/{id}/generate', [BillController::class, 'generate_invoice'])->name('generate_invoice');
     });
@@ -137,6 +138,7 @@ Route::get('/delete/{id}', [PaymentController::class, 'delete'])->middleware('au
 
 Route::get("/profile", [ProfileController::class, 'index'])->middleware('auth')->name('profile');
 Route::post("/profile", [ProfileController::class, 'update'])->middleware('auth')->name('update');
+Route::get("/wish/{id}", [WishController::class, 'deleteWish'])->middleware('auth')->name('deleteWish');
 
 
 Route::get("/", [HomeController::class, 'index'])->middleware('auth');

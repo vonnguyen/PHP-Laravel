@@ -9,11 +9,11 @@
 
         <div class="slide-header">
             <div class="contain-slide">
-                <p>CONTACT</p>
+                <p>Liên Hệ</p>
                 <ul>
-                    <li><a href="index.html">HOME</a> </li>
+                    <li><a href="{{route('home')}}">Trang chủ</a> </li>
                     <li>/</li>
-                    <li>Contact</li>
+                    <li>Liên hệ</li>
                 </ul>
             </div>
         </div>

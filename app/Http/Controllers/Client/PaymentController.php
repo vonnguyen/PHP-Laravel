@@ -30,10 +30,10 @@ class PaymentController extends Controller
     function detail_bill($id, Request $request)
     {
 
-        $data = bill::find($id);
+        $data = bill::withTrashed()->find($id);
 
         if ($request->status > -1) {
-            $bill = bill::find($id);
+            $bill = bill::withTrashed()->find($id);
             $bill->statuss = $request->status;
             $bill->update();
 
@@ -120,7 +120,17 @@ class PaymentController extends Controller
 
     function delete($id)
     {
-        $deleted = bill::where('id', $id)->delete();
+        $bill = bill::where('id', $id)->first();
+        $bill->statuss = 4;
+        $bill->save();
+        $bill->delete();
+
+        $detail_bill = detail_bill::where('id_bill', $bill->id)->get();
+        foreach($detail_bill as $detail){
+            $product = Product::where("id",$detail->id_pro)->first();
+            $product->number = (int)$product->number + (int)$detail->number;
+            $product->save();
+        }
         return redirect()->back()->with('msg', 'Xóa don hang thành công');
     }
 

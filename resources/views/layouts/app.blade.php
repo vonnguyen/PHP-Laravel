@@ -70,7 +70,7 @@
                                 @if (!empty($product))
                                     @foreach ($products as $product)
                                         <div class="col col-3 collection-item">
-                                            <img src="{{ $product->image }}" alt="">
+                                            <img class="h-[500px]" src="{{ $product->image }}" alt="">
                                             <a href="{{ route('product', $product->id) }}">
                                                 <button class="collection-btn">
                                                     <span class="name-shoes">{{ $product->name }}</span>

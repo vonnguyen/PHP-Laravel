@@ -204,7 +204,13 @@
                                             <div class="icon-ctn3">
                                                 <a href="{{ route('product', $product->id) }}"><i
                                                         class="fa-solid fa-message"></i></a>
-                                                <a href=""><i class="fa-brands fa-gratipay"></i></a>
+                                                        @if (empty(Auth()->user()) || empty(Auth()->user()->id))
+                                                        <a class="none_favorite"><i class="fa-brands fa-gratipay"></i></a>
+        
+                                                        @else
+                                                        <a href="{{route('favorite',$product->id)}}"><i class="fa-brands fa-gratipay"></i></a>
+        
+                                                        @endif
                                                 <a href="{{ route('product', $product->id) }}"><i
                                                         class="fa-solid fa-magnifying-glass"></i></a>
                                             </div>
