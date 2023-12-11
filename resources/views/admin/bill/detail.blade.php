@@ -6,7 +6,7 @@
 @section('main')
 
     <div class="text-end">
-        <a href="{{ route('admin.bill.view',['id'=> $data->id]) }}">
+        <a href="{{ route('admin.bill.view', ['id' => $new_data->id]) }}">
 
             <button type="submit"
                 class="px-4 hover:bg-gray-400 transition-all py-2 
@@ -23,13 +23,13 @@
 
                     <div class="border border-2 rounded-lg p-3 mt-4">
                         <p class="flex gap-5 border-b pb-2"><span class="text-gray-500">Liên hệ</span><span
-                                class="font-semibold">{{ $data->sdt }}</span></p>
+                                class="font-semibold">{{ $new_data->sdt }}</span></p>
                         <p class="flex gap-5 m-0"><span class="text-gray-500">Địa chỉ người nhận</span><span
-                                class="font-semibold">{{ $data->address }}</span></p>
+                                class="font-semibold">{{ $new_data->address }}</span></p>
                         <p class="flex  gap-5 py-2 m-0 border-b py-2"><span class="text-gray-500">Phương thức</span><span
-                                class="font-semibold">Phí vận chuyển</span><span>${{ $data->priceship }}</span></p>
+                                class="font-semibold">Phí vận chuyển</span><span>{{ number_format($new_data->priceship, 2) }}₫</span></p>
                         <p class="flex gap-5 py-2 m-0"><span class="text-gray-500">Phương thức thanh toán</span><span
-                                class="font-semibold">{{ $data->phuongthucTT }}</span></p>
+                                class="font-semibold">{{ $new_data->phuongthucTT }}</span></p>
                     </div>
 
                     <div class="method">
@@ -38,12 +38,12 @@
                             <p class="m-0 flex gap-3 items-center"><span
                                     class="p-[10px] flex justify-center items-center block w-[5px] h-[5px] max-w-[5px] max-h-[5px] bg-blue-600 rounded-full"><span
                                         class="p-[3px] block w-[3px] h-[3px] max-w-[3px] max-h-[3px] rounded-full leading-none bg-white"></span></span><span>
-                                    Phí vận chuyển</span></p><span class="font-semibold">${{ $data->priceship }}</span>
+                                    Phí vận chuyển</span></p><span class="font-semibold">{{ number_format($new_data->priceship, 2) }}₫</span>
                         </div>
                     </div>
 
                     {{-- Cập nhật trạng thái giao hàng --}}
-                    @if ($data->statuss == 2)
+                    @if ($new_data->statuss == 2)
                         <br>
                         <h3 class="text-success">ĐƠN HÀNG ĐÃ HOÀN THÀNH</h3>
                     @else
@@ -51,15 +51,17 @@
                             @csrf
 
                             <select name="status" class="form-control mt-3" id="" method="post">
-                                <option value="0" {{ (int) $data->statuss == 0 ? 'selected' : '' }}>Đang chuẩn bị hàng
+                                <option value="0" {{ (int) $new_data->statuss == 0 ? 'selected' : '' }}>Đang chuẩn bị hàng
                                 </option>
-                                <option value="1" {{ (int) $data->statuss == 1 ? 'selected' : '' }}>Đang giao hàng
+                                <option value="1" {{ (int) $new_data->statuss == 1 ? 'selected' : '' }}>Đang giao hàng
                                 </option>
-                                <option value="2" {{ (int) $data->statuss == 2 ? 'selected' : '' }}>Giao hàng thành công
+                                <option value="2" {{ (int) $new_data->statuss == 2 ? 'selected' : '' }}>Giao hàng thành
+                                    công
                                 </option>
 
                             </select>
                             <div class="text-end">
+                              
 
                                 <button type="submit"
                                     class="px-4 hover:bg-gray-400 transition-all py-2 
@@ -67,6 +69,13 @@
                                     nhật</button>
                             </div>
                         </form>
+                        @if ($new_data->statuss < 2)
+                        <a href="{{ route('delete', ['id' => $new_data->id, 'redirect' => 'admin_bill'] ) }}">
+                            <button class="px-4 hover:bg-gray-400 transition-all py-2 
+                             rounded-lg text-white bg-red-500" style="color: white">
+                                Hủy đơn</button>
+                        </a>
+                        @endif
                     @endif
                 </div>
 
@@ -97,23 +106,23 @@
                                                     {{ $item->size }}</p>
                                             </div>
                                         </div>
-                                        <p class="flex-end font-semibold"> $ {{ number_format($item->price, 2) }}</p>
+                                        <p class="flex-end font-semibold"> {{ number_format($item->price, 2) }}₫</p>
                                     </div>
                                 @endforeach
                             @endif
                         </div>
                         <div class="subtotal py-3 border-b m-0">
                             <p class="flex justify-between"><span class="text-gray-600">Tổng phụ thu</span><span
-                                    class="font-semibold"> {{ number_format($data->total, 2) }}₫</span></p>
+                                    class="font-semibold"> {{ number_format($new_data->total, 2) }}₫</span></p>
                             <p class="flex justify-between items-center m-0"><span class="text-gray-600">Phí
-                                    Ship</span><span class="text-xs">{{ number_format($data->priceship, 2) }}₫
+                                    Ship</span><span class="text-xs">{{ number_format($new_data->priceship, 2) }}₫
                                 </span></p>
                             <p class="flex justify-between items-center m-0"><span class="text-gray-600">Đang chuyển
                                     hàng</span><span class="text-xs">Tính toán ở bước tiếp theo</span></p>
                         </div>
                         <div class="total py-3">
                             <p class="flex justify-between items-center"><span class="text-xl">Tổng cộng</span><span
-                                    class="font-semibold text-3xl">{{ number_format($data->total + $data->priceship, 2) }}₫</span>
+                                    class="font-semibold text-3xl">{{ number_format($new_data->total + $new_data->priceship, 2) }}₫</span>
                             </p>
                         </div>
 

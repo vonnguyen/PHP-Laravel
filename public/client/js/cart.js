@@ -38,6 +38,10 @@ window.addEventListener('load', function () {
             let size = localStorage.getItem('size');
     
             let numberProduct = number_detail.value;
+            if(+numberProduct <= 0){
+                alert("So luong phai lon hon 0");
+                return;
+            }
             let urlRemove = this.dataset.remove;
             $.ajaxSetup({
                 headers: {
@@ -101,6 +105,7 @@ window.addEventListener('load', function () {
                     }
                 },
                 error: function (e) {
+                    alert("ban phai dang nhap")
                     console.log('loi')
                     console.log(e)
     

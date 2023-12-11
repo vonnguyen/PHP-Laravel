@@ -431,7 +431,7 @@
                 </div>
             </div>
         </div>
-        <div class="user_id" data-id={{Auth()->user()->id}}></div>
+        <div class="user_id" data-id={{Auth()->user()->id ?? 0}}></div>
 
     </div>
 @endsection

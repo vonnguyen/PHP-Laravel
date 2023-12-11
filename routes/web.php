@@ -117,7 +117,7 @@ Route::get("/payment/vnpay", [PaymentController::class, 'vnPay'])->middleware('a
 Route::get("/home", [HomeController::class, 'index'])->name('home');
 Route::get("/product", [ClientProductController::class, 'index'])->name('shoes');
 Route::get('/favorite/{id}', [ClientProductController::class, 'favorite'])->name('favorite');
-Route::get("/chitietsp/{id}", [ClientProductController::class, 'detail'])->middleware('auth')->name('product');
+Route::get("/chitietsp/{id}", [ClientProductController::class, 'detail'])->name('product');
 Route::get("/chitietsp", [ChitietController::class, 'index'])->name('chitietsp');
 
 Route::get("/boots", [BootsController::class, 'index'])->name('boots');

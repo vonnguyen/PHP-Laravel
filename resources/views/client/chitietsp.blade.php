@@ -147,6 +147,7 @@
                     {{ $product->mota }}
                 </div>
                 <div class="container-pd30 container_comment">
+                    @if (!empty(Auth::user()))
                     <form action="{{ route('comment.add') }}" class="comment">
                         @csrf
                         <div class="flex gap-2">
@@ -163,6 +164,8 @@
                             <button onclick="reload()" type="submit" class="btn btn-primary bg-primary p-2">submit</button>
                         </div>
                     </form>
+                    @endif
+                   
 
 
 
@@ -202,7 +205,7 @@
                                         <div class="flex flex-col gap-3 items-end">
 
                                             <p>{{ $comment->created_at }}</p>
-                                            @if (Auth::user()->group->id == 1 && $comment->parent_id == 0)
+                                            @if (Auth::user()->group->id ?? 0 == 1 && $comment->parent_id == 0)
                                                 <p data-user="{{ $name }}" data-userid="{{ $id_user }}"
                                                     class="text-blue-500 hover:underline hover:cursor-pointer reply">Trả
                                                     lời

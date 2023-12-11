@@ -35,7 +35,7 @@
                             <p class="m-0 flex gap-3 items-center"><span
                                     class="p-[10px] flex justify-center items-center block w-[5px] h-[5px] max-w-[5px] max-h-[5px] bg-blue-600 rounded-full"><span
                                         class="p-[3px] block w-[3px] h-[3px] max-w-[3px] max-h-[3px] rounded-full leading-none bg-white"></span></span><span>
-                                    Phí vận chuyển</span></p><span class="font-semibold">0₫</span>
+                                    Phí vận chuyển</span></p><span class="font-semibold fee"></span>
                         </div>
                     </div>
 
@@ -131,7 +131,7 @@
  <script>
     const fullAddress = document.querySelector('.fullAddress');
     const vnpay_img = document.querySelector('.vnpay_img');
-    const fee = document.querySelector('.fee');
+    const fees = document.querySelectorAll('.fee');
     const total_price = document.querySelector('.total_price');
     const input_address = document.querySelector('input[name="address"]');
     const input_fee= document.querySelector('input[name="fee"]');
@@ -147,7 +147,10 @@
     input_address.value  = data_payment.address.replaceAll("\"","");
     input_fee.value  =data_payment.fee
 
-    fee.textContent = data_payment.fee+" ₫"
+    fees.forEach(fee=>{
+
+        fee.textContent = data_payment.fee+" ₫"
+    })
   
     vnpay_img.parentElement.href = vnpay_img.parentElement.href +"?fee="+data_payment.fee;
 

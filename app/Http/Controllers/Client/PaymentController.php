@@ -31,7 +31,7 @@ class PaymentController extends Controller
     {
 
         $data = bill::withTrashed()->find($id);
-
+        $bill= null;
         if ($request->status > -1) {
             $bill = bill::withTrashed()->find($id);
             $bill->statuss = $request->status;
@@ -54,10 +54,12 @@ class PaymentController extends Controller
                 "href" => "/order",
                 "readed" => 0
             ]);
+            // return redirect()->back();
         }
 
         $detail_bill = detail_bill::where('id_bill', $id)->get();
-        return view('admin.bill.detail', compact('data', 'detail_bill'));
+        $new_data = $bill ?? $data;
+        return view('admin.bill.detail', compact('new_data', 'detail_bill'));
     }
     public function saveInfo(Request $request)
     {
@@ -118,8 +120,9 @@ class PaymentController extends Controller
         return view('client.order', compact('bill', 'products'));
     }
 
-    function delete($id)
+    function delete($id,Request $req)
     {
+
         $bill = bill::where('id', $id)->first();
         $bill->statuss = 4;
         $bill->save();
@@ -131,7 +134,14 @@ class PaymentController extends Controller
             $product->number = (int)$product->number + (int)$detail->number;
             $product->save();
         }
-        return redirect()->back()->with('msg', 'Xóa don hang thành công');
+        if(!empty($req->query("redirect")) && $req->query("redirect") == 'admin_bill'){
+            return redirect('admin/bill/list')->with('msg', 'Xóa don hang thành công');
+
+        }else{
+            return redirect('')->back()->with('msg', 'Xóa don hang thành công');
+
+        }
+        
     }
 
     function vnPay_return()
